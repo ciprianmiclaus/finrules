@@ -1,0 +1,3889 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.2.6">
+    
+    
+      
+        <title>API Reference - Finrules</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.9d5733d3.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#finrules" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Finrules" class="md-header__button md-logo" aria-label="Finrules" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Finrules
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ciprianmiclaus/finrules" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    finrules
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../installation/" class="md-tabs__link">
+      Installation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../usage/" class="md-tabs__link">
+      Usage
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      API Reference
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../contributing/" class="md-tabs__link">
+      Contributing
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../authors/" class="md-tabs__link">
+      Authors
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../history/" class="md-tabs__link">
+      History
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Finrules" class="md-nav__button md-logo" aria-label="Finrules" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Finrules
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ciprianmiclaus/finrules" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    finrules
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        API Reference
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finrules" class="md-nav__link">
+    finrules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finrules.backends" class="md-nav__link">
+    backends
+  </a>
+  
+    <nav class="md-nav" aria-label="backends">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.common" class="md-nav__link">
+    common
+  </a>
+  
+    <nav class="md-nav" aria-label="common">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.common.basic" class="md-nav__link">
+    basic
+  </a>
+  
+    <nav class="md-nav" aria-label="basic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.common.basic.RulesBlock" class="md-nav__link">
+    RulesBlock
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas" class="md-nav__link">
+    pandas
+  </a>
+  
+    <nav class="md-nav" aria-label="pandas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic" class="md-nav__link">
+    basic
+  </a>
+  
+    <nav class="md-nav" aria-label="basic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.DedupeRule" class="md-nav__link">
+    DedupeRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.ProjectRule" class="md-nav__link">
+    ProjectRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.RenameRule" class="md-nav__link">
+    RenameRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.SortRule" class="md-nav__link">
+    SortRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.fill" class="md-nav__link">
+    fill
+  </a>
+  
+    <nav class="md-nav" aria-label="fill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.fill.BackFillRule" class="md-nav__link">
+    BackFillRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.fill.ForwardFillRule" class="md-nav__link">
+    ForwardFillRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins" class="md-nav__link">
+    joins
+  </a>
+  
+    <nav class="md-nav" aria-label="joins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.InnerJoinRule" class="md-nav__link">
+    InnerJoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.LeftJoinRule" class="md-nav__link">
+    LeftJoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.OuterJoinRule" class="md-nav__link">
+    OuterJoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.RightJoinRule" class="md-nav__link">
+    RightJoinRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.types" class="md-nav__link">
+    types
+  </a>
+  
+    <nav class="md-nav" aria-label="types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.types.TypeConversionRule" class="md-nav__link">
+    TypeConversionRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finrules.exceptions" class="md-nav__link">
+    exceptions
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.exceptions.MissingColumn" class="md-nav__link">
+    MissingColumn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.exceptions.UnsupportedType" class="md-nav__link">
+    UnsupportedType
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finrules.rule" class="md-nav__link">
+    rule
+  </a>
+  
+    <nav class="md-nav" aria-label="rule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.rule.BinaryOpBaseRule" class="md-nav__link">
+    BinaryOpBaseRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.rule.UnaryOpBaseRule" class="md-nav__link">
+    UnaryOpBaseRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../history/" class="md-nav__link">
+        History
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finrules" class="md-nav__link">
+    finrules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finrules.backends" class="md-nav__link">
+    backends
+  </a>
+  
+    <nav class="md-nav" aria-label="backends">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.common" class="md-nav__link">
+    common
+  </a>
+  
+    <nav class="md-nav" aria-label="common">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.common.basic" class="md-nav__link">
+    basic
+  </a>
+  
+    <nav class="md-nav" aria-label="basic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.common.basic.RulesBlock" class="md-nav__link">
+    RulesBlock
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas" class="md-nav__link">
+    pandas
+  </a>
+  
+    <nav class="md-nav" aria-label="pandas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic" class="md-nav__link">
+    basic
+  </a>
+  
+    <nav class="md-nav" aria-label="basic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.DedupeRule" class="md-nav__link">
+    DedupeRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.ProjectRule" class="md-nav__link">
+    ProjectRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.RenameRule" class="md-nav__link">
+    RenameRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.basic.SortRule" class="md-nav__link">
+    SortRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.fill" class="md-nav__link">
+    fill
+  </a>
+  
+    <nav class="md-nav" aria-label="fill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.fill.BackFillRule" class="md-nav__link">
+    BackFillRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.fill.ForwardFillRule" class="md-nav__link">
+    ForwardFillRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins" class="md-nav__link">
+    joins
+  </a>
+  
+    <nav class="md-nav" aria-label="joins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.InnerJoinRule" class="md-nav__link">
+    InnerJoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.LeftJoinRule" class="md-nav__link">
+    LeftJoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.OuterJoinRule" class="md-nav__link">
+    OuterJoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.joins.RightJoinRule" class="md-nav__link">
+    RightJoinRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.types" class="md-nav__link">
+    types
+  </a>
+  
+    <nav class="md-nav" aria-label="types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.types.TypeConversionRule" class="md-nav__link">
+    TypeConversionRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finrules.exceptions" class="md-nav__link">
+    exceptions
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.exceptions.MissingColumn" class="md-nav__link">
+    MissingColumn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.exceptions.UnsupportedType" class="md-nav__link">
+    UnsupportedType
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finrules.rule" class="md-nav__link">
+    rule
+  </a>
+  
+    <nav class="md-nav" aria-label="rule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.rule.BinaryOpBaseRule" class="md-nav__link">
+    BinaryOpBaseRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.rule.UnaryOpBaseRule" class="md-nav__link">
+    UnaryOpBaseRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/ciprianmiclaus/finrules/edit/master/docs/api.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+  <h1>API Reference</h1>
+
+<div class="doc doc-object doc-module">
+
+<a id="finrules"></a>
+    <div class="doc doc-contents first">
+
+      <p>Top-level package for Finrules.</p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="finrules.backends" class="doc doc-heading">
+        <code>backends</code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#finrules.backends" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h3 id="finrules.backends.common" class="doc doc-heading">
+        <code>common</code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#finrules.backends.common" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.common.basic" class="doc doc-heading">
+        <code>basic</code>
+
+
+
+<a href="#finrules.backends.common.basic" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.common.basic.RulesBlock" class="doc doc-heading">
+        <code>
+RulesBlock            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.common.basic.RulesBlock" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Groups rules into encapsulated blocks or units of rules that achieve one thing.
+Blocks are reusable and encapsulated to reduce complexity.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>rules</code></td>
+        <td></td>
+        <td><p>An iterable of rules which are part of this block.
+The first rule in the block will take its input from the named_input of the RulesBlock (if any, if not from the main output of the previous rule).
+The last rule in the block will publish the output as the named_output of the RulesBlock (if any, or the main output of the block).
+Any named outputs in the block are not exposed to the rules outside of the block (proper encapsulation).</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>      <p>Common params:
+    !!! named_input "Which dataframe to use as the input. Optional."
+        When not set, the input is taken from the main output.
+        Set it to a string value, the name of an output dataframe of a previous rule.
+    !!! named_output "Give the output of this rule a name so it can be used by another rule as a named input. Optional."
+        When not set, the result of this rule will be available as the main output.
+        When set to a name (string), the result will be available as that named output.
+    !!! name "Give the rule a name. Optional."
+        Named rules are more descriptive as to what they're trying to do/the intent.
+    !!! description "Describe in detail what the rules does, how it does it. Optional."
+        Together with the name, the description acts as the documentation of the rule.
+    strict: When set to True, the rule does a stricter valiation. Default: True</p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/common/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RulesBlock</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Groups rules into encapsulated blocks or units of rules that achieve one thing.</span>
+<span class="sd">    Blocks are reusable and encapsulated to reduce complexity.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        rules: An iterable of rules which are part of this block.</span>
+<span class="sd">            The first rule in the block will take its input from the named_input of the RulesBlock (if any, if not from the main output of the previous rule).</span>
+<span class="sd">            The last rule in the block will publish the output as the named_output of the RulesBlock (if any, or the main output of the block).</span>
+<span class="sd">            Any named outputs in the block are not exposed to the rules outside of the block (proper encapsulation).</span>
+
+<span class="sd">    Common params:</span>
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span><span class="p">,</span> <span class="s2">&quot;RulesBlock: Empty rules set provided.&quot;</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">BaseRule</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span><span class="p">),</span> <span class="p">[</span><span class="n">rule</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">BaseRule</span><span class="p">)]</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">named_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;First rule in a RulesBlock must consume the main input/output&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">named_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Last rule in a RulesBlock must produce the main output&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">RuleData</span><span class="p">(</span>
+            <span class="n">main_input</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+            <span class="n">named_inputs</span><span class="o">=</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_outputs</span><span class="p">()},</span>
+            <span class="n">strict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strict</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span><span class="p">:</span>
+            <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data2</span><span class="o">.</span><span class="n">get_main_output</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dct</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">dct</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">][</span><span class="s2">&quot;rules&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rules</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">dct</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dct</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
+        <span class="n">dct</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;RulesBlock&quot;</span><span class="p">]</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="p">[</span><span class="n">BaseRule</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="p">())]</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dct</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;rules&quot;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h3 id="finrules.backends.pandas" class="doc doc-heading">
+        <code>pandas</code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#finrules.backends.pandas" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.pandas.basic" class="doc doc-heading">
+        <code>basic</code>
+
+
+
+<a href="#finrules.backends.pandas.basic" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.basic.DedupeRule" class="doc doc-heading">
+        <code>
+DedupeRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.basic.DedupeRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>De-duplicates by dropping duplicates using a set of columns to determine the duplicates.</p>
+<p>It has logic to keep the first, last or none of the duplicate in a set of duplicates.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>A subset of columns in the data frame which are used to determine the set of duplicates.
+Any rows that have the same values in these columns are considered to be duplicates.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>keep</code></td>
+        <td></td>
+        <td><p>What to keep in the de-duplication process. One of:
+first: keeps the first row in the duplicate set
+last: keeps the last row in the duplicate set
+none: drops all the duplicates</p></td>
+        <td><code>&#39;first&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MissingColumn is raised in both strict and non-strict modes. This is because the rule cannot operate reliably without a correct set of columns.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DedupeRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; De-duplicates by dropping duplicates using a set of columns to determine the duplicates.</span>
+
+<span class="sd">    It has logic to keep the first, last or none of the duplicate in a set of duplicates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: A subset of columns in the data frame which are used to determine the set of duplicates.</span>
+<span class="sd">            Any rows that have the same values in these columns are considered to be duplicates.</span>
+<span class="sd">        keep: What to keep in the de-duplication process. One of:</span>
+<span class="sd">            first: keeps the first row in the duplicate set</span>
+<span class="sd">            last: keeps the last row in the duplicate set</span>
+<span class="sd">            none: drops all the duplicates</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised when a column specified to deduplicate on doesn&#39;t exist in the input data frame.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        MissingColumn is raised in both strict and non-strict modes. This is because the rule cannot operate reliably without a correct set of columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">KEEP_FIRST</span> <span class="o">=</span> <span class="s1">&#39;first&#39;</span>
+    <span class="n">KEEP_LAST</span> <span class="o">=</span> <span class="s1">&#39;last&#39;</span>
+    <span class="n">KEEP_NONE</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+
+    <span class="n">ALL_KEEPS</span> <span class="o">=</span> <span class="p">(</span><span class="n">KEEP_FIRST</span><span class="p">,</span> <span class="n">KEEP_LAST</span><span class="p">,</span> <span class="n">KEEP_NONE</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="n">KEEP_FIRST</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+        <span class="p">),</span> <span class="s2">&quot;DedupeRule: columns must be strings&quot;</span>
+        <span class="k">assert</span> <span class="n">keep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ALL_KEEPS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;DedupeRule: keep must be one of: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ALL_KEEPS</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">keep</span> <span class="o">==</span> <span class="n">DedupeRule</span><span class="o">.</span><span class="n">KEEP_NONE</span> <span class="k">else</span> <span class="n">keep</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">MissingColumn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing column(s) to dedupe on: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.basic.ProjectRule" class="doc doc-heading">
+        <code>
+ProjectRule            (<span title="finrules.backends.common.basic.BaseProjectRule">BaseProjectRule</span>, <span title="finrules.backends.pandas.validation.PandasRuleValidationMixin">PandasRuleValidationMixin</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.basic.ProjectRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Reshapes the data frame to keep, eliminate or re-order the set of columns.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>The list of columns to keep or eliminate from the data frame.
+The order of column names will be reflected in the result data frame, so this rule can be used to re-order columns.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>exclude</code></td>
+        <td></td>
+        <td><p>When set to True, the columns in the columns arg will be excluded from the data frame. Boolean. Default: False
+In strict mode, if any column specified in the columns arg doesn't exist in the input data frame, a MissingColumn exception is raised.
+In non strict mode, the missing columns are ignored.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProjectRule</span><span class="p">(</span><span class="n">BaseProjectRule</span><span class="p">,</span> <span class="n">PandasRuleValidationMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Reshapes the data frame to keep, eliminate or re-order the set of columns.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: The list of columns to keep or eliminate from the data frame.</span>
+<span class="sd">            The order of column names will be reflected in the result data frame, so this rule can be used to re-order columns.</span>
+<span class="sd">        exclude: When set to True, the columns in the columns arg will be excluded from the data frame. Boolean. Default: False</span>
+<span class="sd">            In strict mode, if any column specified in the columns arg doesn&#39;t exist in the input data frame, a MissingColumn exception is raised.</span>
+<span class="sd">            In non strict mode, the missing columns are ignored.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised in strict mode only, if any columns are missing from the input data frame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">remaining_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_remaining_columns</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">remaining_columns</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.basic.RenameRule" class="doc doc-heading">
+        <code>
+RenameRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.basic.RenameRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Renames a set of columns in the data frame.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mapper</code></td>
+        <td></td>
+        <td><p>A dictionary of old names (keys) and new names (values) to be used for the rename operation
+The order of column names will be reflected in the result data frame, so this rule can be used to re-order columns.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RenameRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Renames a set of columns in the data frame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mapper: A dictionary of old names (keys) and new names (values) to be used for the rename operation</span>
+<span class="sd">            The order of column names will be reflected in the result data frame, so this rule can be used to re-order columns.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised in strict mode only, if any columns (keys) are missing from the input data frame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;mapper needs to be a dict {old_name:new_name}&quot;</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="s2">&quot;mapper needs to be a dict {old_name:new_name} where the names are str&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">MissingColumn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing columns to rename: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.basic.SortRule" class="doc doc-heading">
+        <code>
+SortRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.basic.SortRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Sort the input dataframe by the given columns, either ascending or descending.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>sort_by</code></td>
+        <td></td>
+        <td><p>Either a single column speified as a string or a list or tuple of columns to sort by</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>ascending</code></td>
+        <td></td>
+        <td><p>Whether to sort ascending or descending. Boolean. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When multiple columns are specified, the first column decides the sort order.
+For any rows that have the same value in the first column, the second column is used to decide the sort order within that group and so on.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SortRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Sort the input dataframe by the given columns, either ascending or descending.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sort_by: Either a single column speified as a string or a list or tuple of columns to sort by</span>
+<span class="sd">        ascending: Whether to sort ascending or descending. Boolean. Default: True</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        When multiple columns are specified, the first column decides the sort order.</span>
+<span class="sd">        For any rows that have the same value in the first column, the second column is used to decide the sort order within that group and so on.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort_by</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">sort_by</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sort_by</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sort_by</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">))),</span> <span class="s2">&quot;sort_by must be a str (single column) or a list of str (multiple columns)&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span> <span class="o">=</span> <span class="n">sort_by</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ascending</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ascending</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">ascending</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ascending</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">)),</span> <span class="s2">&quot;ascending must be a bool or a list of bool of the same len as sort_by&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ascending</span> <span class="o">=</span> <span class="n">ascending</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ascending</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.pandas.fill" class="doc doc-heading">
+        <code>fill</code>
+
+
+
+<a href="#finrules.backends.pandas.fill" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.fill.BackFillRule" class="doc doc-heading">
+        <code>
+BackFillRule            (<span title="finrules.backends.pandas.fill.BaseFillRule">BaseFillRule</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.fill.BackFillRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Replaces NAs/missing values with the next non-NA value, optionally sorting and grouping the data.</p>
+<p>Example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | NA |
+| b   | 2  |
+| a   | NA |
+</code></pre></div></td></tr></table></div>
+<p>After a fill forward::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | 2  |
+| b   | 2  |
+| a   | NA |
+</code></pre></div></td></tr></table></div>
+<p>After a fill forward with group_by=["A"]::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | NA |
+| b   | 2  |
+| a   | NA |
+</code></pre></div></td></tr></table></div>
+<p>The "a" group has no non-NA value, so it is not filled.
+The "b" group has a non-NA value of 2 but not other NA values, so nothing to fill.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>The list of columns to replaces NAs for.
+The rest of the columns in the dataframe are not affected.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sort_by</code></td>
+        <td></td>
+        <td><p>The list of columns to sort by before the fill operation. Optional.
+Given the previous non-NA values are used, sorting can make a difference in the values uses.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sort_ascending</code></td>
+        <td></td>
+        <td><p>When sort_by is specified, True means sort ascending, False sort descending.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>group_by</code></td>
+        <td></td>
+        <td><p>The list of columns to group by before the fill operation. Optional.
+The fill values are only used within a group, other adjacent groups are not filled.
+Useful when you want to copy(fill) data at a certain group level.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/fill.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BackFillRule</span><span class="p">(</span><span class="n">BaseFillRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Replaces NAs/missing values with the next non-NA value, optionally sorting and grouping the data.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | NA |</span>
+<span class="sd">        | b   | 2  |</span>
+<span class="sd">        | a   | NA |</span>
+
+<span class="sd">    After a fill forward::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | 2  |</span>
+<span class="sd">        | b   | 2  |</span>
+<span class="sd">        | a   | NA |  </span>
+
+<span class="sd">    After a fill forward with group_by=[&quot;A&quot;]::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | NA |</span>
+<span class="sd">        | b   | 2  |</span>
+<span class="sd">        | a   | NA |</span>
+
+<span class="sd">    The &quot;a&quot; group has no non-NA value, so it is not filled.</span>
+<span class="sd">    The &quot;b&quot; group has a non-NA value of 2 but not other NA values, so nothing to fill.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: The list of columns to replaces NAs for.</span>
+<span class="sd">            The rest of the columns in the dataframe are not affected.</span>
+<span class="sd">        sort_by: The list of columns to sort by before the fill operation. Optional.</span>
+<span class="sd">            Given the previous non-NA values are used, sorting can make a difference in the values uses.</span>
+<span class="sd">        sort_ascending: When sort_by is specified, True means sort ascending, False sort descending.</span>
+<span class="sd">        group_by: The list of columns to group by before the fill operation. Optional.</span>
+<span class="sd">            The fill values are only used within a group, other adjacent groups are not filled.</span>
+<span class="sd">            Useful when you want to copy(fill) data at a certain group level.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FILL_METHOD</span> <span class="o">=</span> <span class="s2">&quot;bfill&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.fill.ForwardFillRule" class="doc doc-heading">
+        <code>
+ForwardFillRule            (<span title="finrules.backends.pandas.fill.BaseFillRule">BaseFillRule</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.fill.ForwardFillRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Replaces NAs/missing values with the next non-NA value, optionally sorting and grouping the data.</p>
+<p>Example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | 1  |
+| b   | NA |
+| a   | NA |
+</code></pre></div></td></tr></table></div>
+<p>After a fill forward::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | 1  |
+| b   | 1  |
+| a   | 1  |
+</code></pre></div></td></tr></table></div>
+<p>After a fill forward with group_by=["A"]::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | 1  |
+| b   | NA |
+| a   | 1  |
+</code></pre></div></td></tr></table></div>
+<p>The "a" group has the first non-NA value as 1 and that is used "forward" to fill the 3rd row.
+The "b" group has no non-NA values, so nothing to fill.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>The list of columns to replaces NAs for.
+The rest of the columns in the dataframe are not affected.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sort_by</code></td>
+        <td></td>
+        <td><p>The list of columns to sort by before the fill operation. Optional.
+Given the previous non-NA values are used, sorting can make a difference in the values uses.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sort_ascending</code></td>
+        <td></td>
+        <td><p>When sort_by is specified, True means sort ascending, False sort descending.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>group_by</code></td>
+        <td></td>
+        <td><p>The list of columns to group by before the fill operation. Optional.
+The fill values are only used within a group, other adjacent groups are not filled.
+Useful when you want to copy(fill) data at a certain group level.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/fill.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ForwardFillRule</span><span class="p">(</span><span class="n">BaseFillRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Replaces NAs/missing values with the next non-NA value, optionally sorting and grouping the data.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | 1  |</span>
+<span class="sd">        | b   | NA |</span>
+<span class="sd">        | a   | NA |</span>
+
+<span class="sd">    After a fill forward::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | 1  |</span>
+<span class="sd">        | b   | 1  |</span>
+<span class="sd">        | a   | 1  |  </span>
+
+<span class="sd">    After a fill forward with group_by=[&quot;A&quot;]::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | 1  |</span>
+<span class="sd">        | b   | NA |</span>
+<span class="sd">        | a   | 1  |</span>
+
+<span class="sd">    The &quot;a&quot; group has the first non-NA value as 1 and that is used &quot;forward&quot; to fill the 3rd row.</span>
+<span class="sd">    The &quot;b&quot; group has no non-NA values, so nothing to fill.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: The list of columns to replaces NAs for.</span>
+<span class="sd">            The rest of the columns in the dataframe are not affected.</span>
+<span class="sd">        sort_by: The list of columns to sort by before the fill operation. Optional.</span>
+<span class="sd">            Given the previous non-NA values are used, sorting can make a difference in the values uses.</span>
+<span class="sd">        sort_ascending: When sort_by is specified, True means sort ascending, False sort descending.</span>
+<span class="sd">        group_by: The list of columns to group by before the fill operation. Optional.</span>
+<span class="sd">            The fill values are only used within a group, other adjacent groups are not filled.</span>
+<span class="sd">            Useful when you want to copy(fill) data at a certain group level.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FILL_METHOD</span> <span class="o">=</span> <span class="s2">&quot;ffill&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.pandas.joins" class="doc doc-heading">
+        <code>joins</code>
+
+
+
+<a href="#finrules.backends.pandas.joins" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.joins.InnerJoinRule" class="doc doc-heading">
+        <code>
+InnerJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.joins.InnerJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Performs a database-style inner join operation on two data frames.</p>
+<p>A join involves two data frames left_df <join> right_df with the result performing a
+database style join or a merge of the two, with the resulting columns coming from both
+dataframes.
+For example, if the left dataframe has two columns A, B and the right dataframe has two
+column A, C, and assuming A is the key column the result will have three columns A, B, C.
+The rows that have the same value in the key column A will be merged on the same row in the
+result dataframe.</p>
+<p>An inner join specifies that only those rows that have key values in both left and right
+will be copied over and merged into the result data frame. Any rows without corresponding
+values on the other side (be it left or right) will be dropped from the result.</p>
+
+<p><strong>Examples:</strong></p>
+    
+      <p>left dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  |
+| 1  | a  |
+| 2  | b  |
+</code></pre></div></td></tr></table></div>
+<p>right dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | C  |
+| 1  | c  |
+| 3  | d  |
+</code></pre></div></td></tr></table></div>
+<p>result (key columns=["A"])::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  | C  |
+| 1  | a  | c  |
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>named_input_left</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the left side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input_right</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the right side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_left</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_right</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the right data frame).
+If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>suffixes</code></td>
+        <td></td>
+        <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
+result data frame for those columns that have the same name (and are not key columns).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">InnerJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style inner join operation on two data frames.</span>
+
+<span class="sd">    A join involves two data frames left_df &lt;join&gt; right_df with the result performing a</span>
+<span class="sd">    database style join or a merge of the two, with the resulting columns coming from both</span>
+<span class="sd">    dataframes.</span>
+<span class="sd">    For example, if the left dataframe has two columns A, B and the right dataframe has two</span>
+<span class="sd">    column A, C, and assuming A is the key column the result will have three columns A, B, C.</span>
+<span class="sd">    The rows that have the same value in the key column A will be merged on the same row in the</span>
+<span class="sd">    result dataframe.</span>
+
+<span class="sd">    An inner join specifies that only those rows that have key values in both left and right</span>
+<span class="sd">    will be copied over and merged into the result data frame. Any rows without corresponding</span>
+<span class="sd">    values on the other side (be it left or right) will be dropped from the result.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    left dataframe::</span>
+
+<span class="sd">        | A  | B  |</span>
+<span class="sd">        | 1  | a  |</span>
+<span class="sd">        | 2  | b  |</span>
+
+<span class="sd">    right dataframe::</span>
+
+<span class="sd">        | A  | C  |</span>
+<span class="sd">        | 1  | c  |</span>
+<span class="sd">        | 3  | d  |</span>
+
+<span class="sd">    result (key columns=[&quot;A&quot;])::</span>
+
+<span class="sd">        | A  | B  | C  |</span>
+<span class="sd">        | 1  | a  | c  |</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
+<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
+
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.joins.LeftJoinRule" class="doc doc-heading">
+        <code>
+LeftJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.joins.LeftJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Performs a database-style left join operation on two data frames.</p>
+<p>A join involves two data frames left_df <join> right_df with the result performing a
+database style join or a merge of the two, with the resulting columns coming from both
+dataframes.
+For example, if the left dataframe has two columns A, B and the right dataframe has two
+column A, C, and assuming A is the key column the result will have three columns A, B, C.
+The rows that have the same value in the key column A will be merged on the same row in the
+result dataframe.</p>
+<p>A left join specifies that all the rows in the left dataframe will be present in the result,
+irrespective of whether there's a corresponding row with the same values in the key columns in
+the right dataframe. The right columns will be populated with NaNs/None when there is no
+corresponding row on the right.</p>
+
+<p><strong>Examples:</strong></p>
+    
+      <p>left dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  |
+| 1  | a  |
+| 2  | b  |
+</code></pre></div></td></tr></table></div>
+<p>right dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | C  |
+| 1  | c  |
+| 3  | d  |
+</code></pre></div></td></tr></table></div>
+<p>result (key columns=["A"])::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  | C  |
+| 1  | a  | c  |
+| 2  | b  | NA |
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>named_input_left</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the left side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input_right</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the right side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_left</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_right</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the right data frame).
+If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>suffixes</code></td>
+        <td></td>
+        <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
+result data frame for those columns that have the same name (and are not key columns).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">LeftJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style left join operation on two data frames.</span>
+
+<span class="sd">    A join involves two data frames left_df &lt;join&gt; right_df with the result performing a</span>
+<span class="sd">    database style join or a merge of the two, with the resulting columns coming from both</span>
+<span class="sd">    dataframes.</span>
+<span class="sd">    For example, if the left dataframe has two columns A, B and the right dataframe has two</span>
+<span class="sd">    column A, C, and assuming A is the key column the result will have three columns A, B, C.</span>
+<span class="sd">    The rows that have the same value in the key column A will be merged on the same row in the</span>
+<span class="sd">    result dataframe.</span>
+
+<span class="sd">    A left join specifies that all the rows in the left dataframe will be present in the result,</span>
+<span class="sd">    irrespective of whether there&#39;s a corresponding row with the same values in the key columns in</span>
+<span class="sd">    the right dataframe. The right columns will be populated with NaNs/None when there is no</span>
+<span class="sd">    corresponding row on the right.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    left dataframe::</span>
+
+<span class="sd">        | A  | B  |</span>
+<span class="sd">        | 1  | a  |</span>
+<span class="sd">        | 2  | b  |</span>
+
+<span class="sd">    right dataframe::</span>
+
+<span class="sd">        | A  | C  |</span>
+<span class="sd">        | 1  | c  |</span>
+<span class="sd">        | 3  | d  |</span>
+
+<span class="sd">    result (key columns=[&quot;A&quot;])::</span>
+
+<span class="sd">        | A  | B  | C  |</span>
+<span class="sd">        | 1  | a  | c  |</span>
+<span class="sd">        | 2  | b  | NA |</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
+<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
+
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.joins.OuterJoinRule" class="doc doc-heading">
+        <code>
+OuterJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.joins.OuterJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Performs a database-style left join operation on two data frames.</p>
+<p>A join involves two data frames left_df <join> right_df with the result performing a
+database style join or a merge of the two, with the resulting columns coming from both
+dataframes.
+For example, if the left dataframe has two columns A, B and the right dataframe has two
+column A, C, and assuming A is the key column the result will have three columns A, B, C.
+The rows that have the same value in the key column A will be merged on the same row in the
+result dataframe.</p>
+<p>An outer join specifies that all the rows in the both left and right dataframes will be present
+in the result, irrespective of whether there's a corresponding row with the same values in the
+key columns in the other dataframe. The missing side will have its columns populated with NA
+when the rows are missing.</p>
+
+<p><strong>Examples:</strong></p>
+    
+      <p>left dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  |
+| 1  | a  |
+| 2  | b  |
+</code></pre></div></td></tr></table></div>
+<p>right dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | C  |
+| 1  | c  |
+| 3  | d  |
+</code></pre></div></td></tr></table></div>
+<p>result (key columns=["A"])::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  | C  |
+| 1  | a  | c  |
+| 2  | b  | NA |
+| 3  | NA | d  |
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>named_input_left</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the left side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input_right</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the right side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_left</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_right</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the right data frame).
+If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>suffixes</code></td>
+        <td></td>
+        <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
+result data frame for those columns that have the same name (and are not key columns).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">OuterJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style left join operation on two data frames.</span>
+
+<span class="sd">    A join involves two data frames left_df &lt;join&gt; right_df with the result performing a</span>
+<span class="sd">    database style join or a merge of the two, with the resulting columns coming from both</span>
+<span class="sd">    dataframes.</span>
+<span class="sd">    For example, if the left dataframe has two columns A, B and the right dataframe has two</span>
+<span class="sd">    column A, C, and assuming A is the key column the result will have three columns A, B, C.</span>
+<span class="sd">    The rows that have the same value in the key column A will be merged on the same row in the</span>
+<span class="sd">    result dataframe.</span>
+
+<span class="sd">    An outer join specifies that all the rows in the both left and right dataframes will be present</span>
+<span class="sd">    in the result, irrespective of whether there&#39;s a corresponding row with the same values in the</span>
+<span class="sd">    key columns in the other dataframe. The missing side will have its columns populated with NA</span>
+<span class="sd">    when the rows are missing.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    left dataframe::</span>
+
+<span class="sd">        | A  | B  |</span>
+<span class="sd">        | 1  | a  |</span>
+<span class="sd">        | 2  | b  |</span>
+
+<span class="sd">    right dataframe::</span>
+
+<span class="sd">        | A  | C  |</span>
+<span class="sd">        | 1  | c  |</span>
+<span class="sd">        | 3  | d  |</span>
+
+<span class="sd">    result (key columns=[&quot;A&quot;])::</span>
+
+<span class="sd">        | A  | B  | C  |</span>
+<span class="sd">        | 1  | a  | c  |</span>
+<span class="sd">        | 2  | b  | NA |</span>
+<span class="sd">        | 3  | NA | d  |</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
+<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
+
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;outer&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.joins.RightJoinRule" class="doc doc-heading">
+        <code>
+RightJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.joins.RightJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Performs a database-style left join operation on two data frames.</p>
+<p>A join involves two data frames left_df <join> right_df with the result performing a
+database style join or a merge of the two, with the resulting columns coming from both
+dataframes.
+For example, if the left dataframe has two columns A, B and the right dataframe has two
+column A, C, and assuming A is the key column the result will have three columns A, B, C.
+The rows that have the same value in the key column A will be merged on the same row in the
+result dataframe.</p>
+<p>A right join specifies that all the rows in the right dataframe will be present in the result,
+irrespective of whether there's a corresponding row with the same values in the key columns in
+the left dataframe. The left columns will be populated with NA when there is no
+corresponding row on the left.</p>
+
+<p><strong>Examples:</strong></p>
+    
+      <p>left dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  |
+| 1  | a  |
+| 2  | b  |
+</code></pre></div></td></tr></table></div>
+<p>right dataframe::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | C  |
+| 1  | c  |
+| 3  | d  |
+</code></pre></div></td></tr></table></div>
+<p>result (key columns=["A"])::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A  | B  | C  |
+| 1  | a  | c  |
+| 3  | NA | d  |
+</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A right join is equivalent to a left join with the dataframes inverted, ie:
+left_df <left_join> right_df
+is equivalent to
+right_df <right_join> left_df
+although the order of the rows will be different.</p>
+</div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>named_input_left</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the left side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input_right</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input on the right side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_left</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>key_columns_right</code></td>
+        <td></td>
+        <td><p>A list or tuple of column names to join on (columns in the right data frame).
+If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>suffixes</code></td>
+        <td></td>
+        <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
+result data frame for those columns that have the same name (and are not key columns).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RightJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style left join operation on two data frames.</span>
+
+<span class="sd">    A join involves two data frames left_df &lt;join&gt; right_df with the result performing a</span>
+<span class="sd">    database style join or a merge of the two, with the resulting columns coming from both</span>
+<span class="sd">    dataframes.</span>
+<span class="sd">    For example, if the left dataframe has two columns A, B and the right dataframe has two</span>
+<span class="sd">    column A, C, and assuming A is the key column the result will have three columns A, B, C.</span>
+<span class="sd">    The rows that have the same value in the key column A will be merged on the same row in the</span>
+<span class="sd">    result dataframe.</span>
+
+<span class="sd">    A right join specifies that all the rows in the right dataframe will be present in the result,</span>
+<span class="sd">    irrespective of whether there&#39;s a corresponding row with the same values in the key columns in</span>
+<span class="sd">    the left dataframe. The left columns will be populated with NA when there is no</span>
+<span class="sd">    corresponding row on the left.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    left dataframe::</span>
+
+<span class="sd">        | A  | B  |</span>
+<span class="sd">        | 1  | a  |</span>
+<span class="sd">        | 2  | b  |</span>
+
+<span class="sd">    right dataframe::</span>
+
+<span class="sd">        | A  | C  |</span>
+<span class="sd">        | 1  | c  |</span>
+<span class="sd">        | 3  | d  |</span>
+
+<span class="sd">    result (key columns=[&quot;A&quot;])::</span>
+
+<span class="sd">        | A  | B  | C  |</span>
+<span class="sd">        | 1  | a  | c  |</span>
+<span class="sd">        | 3  | NA | d  |</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        A right join is equivalent to a left join with the dataframes inverted, ie:</span>
+<span class="sd">        left_df &lt;left_join&gt; right_df</span>
+<span class="sd">        is equivalent to</span>
+<span class="sd">        right_df &lt;right_join&gt; left_df</span>
+<span class="sd">        although the order of the rows will be different.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
+<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
+
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.pandas.types" class="doc doc-heading">
+        <code>types</code>
+
+
+
+<a href="#finrules.backends.pandas.types" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.types.TypeConversionRule" class="doc doc-heading">
+        <code>
+TypeConversionRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.types.TypeConversionRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Converts the type of a given set of columns to other types.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mapper</code></td>
+        <td></td>
+        <td><p>A dict with columns names as keys and the new types as values.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/types.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TypeConversionRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts the type of a given set of columns to other types.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mapper: A dict with columns names as keys and the new types as values.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumn is raised when a column specified in the mapper doesn&#39;t exist in the input data frame.</span>
+<span class="sd">        UnsupportedType is raised when an unknown type is speified in the values of the mapper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SUPPORTED_TYPES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;int32&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;int64&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;float64&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;str&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;mapper needs to be a dict {column_name:type}&quot;</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="s2">&quot;mapper needs to be a dict {column_name:type} where the names are str&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">columns_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">column_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns_set</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MissingColumn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is missing in the data frame. Available columns: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">columns_set</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">type_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">UnsupportedType</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type &#39;</span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="s2">&#39; for column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is not currently supported.&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">type_str</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="finrules.exceptions" class="doc doc-heading">
+        <code>exceptions</code>
+
+
+
+<a href="#finrules.exceptions" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="finrules.exceptions.MissingColumn" class="doc doc-heading">
+        <code>
+MissingColumn            (<span title="Exception">Exception</span>)
+        </code>
+
+
+
+<a href="#finrules.exceptions.MissingColumn" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>An operation is being applied to a column that is not present in the input data frame. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MissingColumn</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; An operation is being applied to a column that is not present in the input data frame. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="finrules.exceptions.UnsupportedType" class="doc doc-heading">
+        <code>
+UnsupportedType            (<span title="Exception">Exception</span>)
+        </code>
+
+
+
+<a href="#finrules.exceptions.UnsupportedType" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A type conversion is attempted to a type that is not supported. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">UnsupportedType</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A type conversion is attempted to a type that is not supported. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="finrules.rule" class="doc doc-heading">
+        <code>rule</code>
+
+
+
+<a href="#finrules.rule" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="finrules.rule.BinaryOpBaseRule" class="doc doc-heading">
+        <code>
+BinaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>)
+        </code>
+
+
+
+<a href="#finrules.rule.BinaryOpBaseRule" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Base class for binary operation rules (ie operations taking two data frames as input). </p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/rule.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BinaryOpBaseRule</span><span class="p">(</span><span class="n">BaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Base class for binary operation rules (ie operations taking two data frames as input). &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">named_input_left</span><span class="p">,</span> <span class="n">named_input_right</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">named_input_left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">named_input_left</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">named_input_left</span>
+        <span class="k">assert</span> <span class="n">named_input_right</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">named_input_right</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">named_input_right</span>
+        <span class="k">assert</span> <span class="n">named_input_left</span> <span class="o">!=</span> <span class="n">named_input_right</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">named_input_left</span> <span class="o">=</span> <span class="n">named_input_left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span> <span class="o">=</span> <span class="n">named_input_right</span>
+
+    <span class="k">def</span> <span class="nf">_get_input_df_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input_left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_main_output</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_input_left</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_input_df_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_main_output</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="finrules.rule.UnaryOpBaseRule" class="doc doc-heading">
+        <code>
+UnaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>)
+        </code>
+
+
+
+<a href="#finrules.rule.UnaryOpBaseRule" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Base class for unary operation rules (ie operations taking a single data frame as input). </p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/rule.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">UnaryOpBaseRule</span><span class="p">(</span><span class="n">BaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Base class for unary operation rules (ie operations taking a single data frame as input). &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">named_input</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">named_input</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">named_input</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">named_input</span> <span class="o">=</span> <span class="n">named_input</span>
+
+    <span class="k">def</span> <span class="nf">_get_input_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_main_output</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_input</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../usage/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Usage" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Usage
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../contributing/" class="md-footer__link md-footer__link--next" aria-label="Next: Contributing" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Contributing
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="http://www.jieyu.ai" target="_blank" rel="noopener" title="Tweet" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    <a href="http://www.jieyu.ai" target="_blank" rel="noopener" title="Facebook" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://github.com/ciprianmiclaus/finrules" target="_blank" rel="noopener" title="Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:ciprianm@gmail.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.tabs", "navigation.instant", "navigation.tabs.sticky"], "search": "../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e87a5f81.min.js"></script>
+      
+    
+  </body>
+</html>
