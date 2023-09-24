@@ -507,6 +507,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.concat" class="md-nav__link">
+    concat
+  </a>
+  
+    <nav class="md-nav" aria-label="concat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.concat.VConcatRule" class="md-nav__link">
+    VConcatRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#finrules.backends.pandas.fill" class="md-nav__link">
     fill
   </a>
@@ -649,6 +669,13 @@
           <li class="md-nav__item">
   <a href="#finrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.exceptions.SchemaError" class="md-nav__link">
+    SchemaError
   </a>
   
 </li>
@@ -867,6 +894,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.concat" class="md-nav__link">
+    concat
+  </a>
+  
+    <nav class="md-nav" aria-label="concat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.concat.VConcatRule" class="md-nav__link">
+    VConcatRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#finrules.backends.pandas.fill" class="md-nav__link">
     fill
   </a>
@@ -1009,6 +1056,13 @@
           <li class="md-nav__item">
   <a href="#finrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finrules.exceptions.SchemaError" class="md-nav__link">
+    SchemaError
   </a>
   
 </li>
@@ -1967,6 +2021,263 @@ For any rows that have the same value in the first column, the second column is 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ascending</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.pandas.concat" class="doc doc-heading">
+        <code>concat</code>
+
+
+
+<a href="#finrules.backends.pandas.concat" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.concat.VConcatRule" class="doc doc-heading">
+        <code>
+VConcatRule            (<a title="finrules.rule.BinaryOpBaseRule" href="#finrules.rule.BinaryOpBaseRule">BinaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.concat.VConcatRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Vertically concatenates two dataframe with the result having the rows from the left dataframe followed by the rows from the right dataframe.</p>
+<p>Example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>Left dataframe:
+| A   | B  |
+| a   | 1  |
+| b   | 2  |
+| c   | 3  |
+
+Right dataframe:
+| A   | B  |
+| d   | 4  |
+| e   | 5  |
+| f   | 6  |
+</code></pre></div></td></tr></table></div>
+<p>After a concat(left, right), the result will look like::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| a   | 1  |
+| b   | 2  |
+| c   | 3  |
+| d   | 4  |
+| e   | 5  |
+| f   | 6  |
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>named_input_left</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input on the left side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input_right</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input on the right side of the join.
+When set to None, the input is taken from the main output of the previous rule.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>subset_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A subset list of columns available in both dataframes.
+Only these columns will be concated.
+The effect is similar to doing a ProjectRule(subset_columns) on both dataframes before the concat.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/concat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">VConcatRule</span><span class="p">(</span><span class="n">BinaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Vertically concatenates two dataframe with the result having the rows from the left dataframe followed by the rows from the right dataframe.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        Left dataframe:</span>
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | 1  |</span>
+<span class="sd">        | b   | 2  |</span>
+<span class="sd">        | c   | 3  |</span>
+
+<span class="sd">        Right dataframe:</span>
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | d   | 4  |</span>
+<span class="sd">        | e   | 5  |</span>
+<span class="sd">        | f   | 6  |  </span>
+
+<span class="sd">    After a concat(left, right), the result will look like::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | a   | 1  |</span>
+<span class="sd">        | b   | 2  |</span>
+<span class="sd">        | c   | 3  |</span>
+<span class="sd">        | d   | 4  |</span>
+<span class="sd">        | e   | 5  |</span>
+<span class="sd">        | f   | 6  |</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        subset_columns: A subset list of columns available in both dataframes.</span>
+<span class="sd">            Only these columns will be concated.</span>
+<span class="sd">            The effect is similar to doing a ProjectRule(subset_columns) on both dataframes before the concat.</span>
+
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError is raised if any subset columns specified are missing from any of the dataframe.</span>
+<span class="sd">        SchemaError is raised in strict mode only if the columns differ between the two dataframes and subset_columns is not specified.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">named_input_left</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">named_input_right</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">subset_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input_left</span><span class="o">=</span><span class="n">named_input_left</span><span class="p">,</span> <span class="n">named_input_right</span><span class="o">=</span><span class="n">named_input_right</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">subset_columns</span><span class="p">]</span> <span class="k">if</span> <span class="n">subset_columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">left_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df_left</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">right_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df_right</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">left_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing columns in the left dataframe of the concat operation: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">left_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">right_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing columns in the right dataframe of the concat operation: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">right_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">left_df</span> <span class="o">=</span> <span class="n">left_df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">]</span>
+            <span class="n">right_df</span> <span class="o">=</span> <span class="n">right_df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">subset_columns</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">left_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">right_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">SchemaError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Concat needs both dataframe have the same schema. Missing columns in the right df: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">right_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">left_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">. Missing columns in the left df: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">left_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">right_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -3958,6 +4269,37 @@ MissingColumnError            (<span title="Exception">Exception</span>)
           <summary>Source code in <code>finrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MissingColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; An operation is being applied to a column that is not present in the input data frame. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="finrules.exceptions.SchemaError" class="doc doc-heading">
+        <code>
+SchemaError            (<span title="Exception">Exception</span>)
+        </code>
+
+
+
+<a href="#finrules.exceptions.SchemaError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>An operation needs a certain schema for the dataframe which is not present. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SchemaError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; An operation needs a certain schema for the dataframe which is not present. &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 
