@@ -1542,6 +1542,21 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>True</code></td>
       </tr>
   </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised when a column specified to deduplicate on doesn't exist in the input data frame.</p></td>
+      </tr>
+  </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>MissingColumnError is raised in both strict and non-strict modes. This is because the rule cannot operate reliably without a correct set of columns.</p>
@@ -1575,7 +1590,7 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised when a column specified to deduplicate on doesn&#39;t exist in the input data frame.</span>
+<span class="sd">        MissingColumnError: raised when a column specified to deduplicate on doesn&#39;t exist in the input data frame.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        MissingColumnError is raised in both strict and non-strict modes. This is because the rule cannot operate reliably without a correct set of columns.</span>
@@ -1664,14 +1679,14 @@ ProjectRule            (<span title="finrules.backends.common.basic.BaseProjectR
   <tbody>
       <tr>
         <td><code>columns</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>The list of columns to keep or eliminate from the data frame.
 The order of column names will be reflected in the result data frame, so this rule can be used to re-order columns.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>exclude</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the columns in the columns arg will be excluded from the data frame. Boolean. Default: False
 In strict mode, if any column specified in the columns arg doesn't exist in the input data frame, a MissingColumnError exception is raised.
 In non strict mode, the missing columns are ignored.</p></td>
@@ -1679,7 +1694,7 @@ In non strict mode, the missing columns are ignored.</p></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input. Optional.
 When not set, the input is taken from the main output.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -1687,7 +1702,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -1695,23 +1710,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only, if any columns are missing from the input data frame.</p></td>
       </tr>
   </tbody>
 </table>
@@ -1721,26 +1751,26 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Reshapes the data frame to keep, eliminate or re-order the set of columns.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        columns: The list of columns to keep or eliminate from the data frame.</span>
+<span class="sd">        columns (Iterable[str]): The list of columns to keep or eliminate from the data frame.</span>
 <span class="sd">            The order of column names will be reflected in the result data frame, so this rule can be used to re-order columns.</span>
-<span class="sd">        exclude: When set to True, the columns in the columns arg will be excluded from the data frame. Boolean. Default: False</span>
+<span class="sd">        exclude (bool): When set to True, the columns in the columns arg will be excluded from the data frame. Boolean. Default: False</span>
 <span class="sd">            In strict mode, if any column specified in the columns arg doesn&#39;t exist in the input data frame, a MissingColumnError exception is raised.</span>
 <span class="sd">            In non strict mode, the missing columns are ignored.</span>
 
-<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised in strict mode only, if any columns are missing from the input data frame.</span>
+<span class="sd">        MissingColumnError: raised in strict mode only, if any columns are missing from the input data frame.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -1848,6 +1878,21 @@ Together with the name, the description acts as the documentation of the rule.</
       </tr>
   </tbody>
 </table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only, if any columns (keys) are missing from the input data frame.</p></td>
+      </tr>
+  </tbody>
+</table>
         <details class="quote">
           <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RenameRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
@@ -1870,7 +1915,7 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised in strict mode only, if any columns (keys) are missing from the input data frame.</span>
+<span class="sd">        MissingColumnError: raised in strict mode only, if any columns (keys) are missing from the input data frame.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -2163,7 +2208,7 @@ Right dataframe:
   <tbody>
       <tr>
         <td><code>named_input_left</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the left side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -2171,7 +2216,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_input_right</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the right side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -2179,31 +2224,50 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
-        <td><em>required</em></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
-        <td><em>required</em></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
-        <td><em>required</em></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
-        <td><em>required</em></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised if the two dataframes have columns with the same name.</p></td>
+      </tr>
+      <tr>
+        <td><code>SchemaError</code></td>
+        <td><p>raised in strict mode only if the two dataframes have different number of rows.</p></td>
       </tr>
   </tbody>
 </table>
@@ -2254,9 +2318,13 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ColumnAlreadyExistsError is raised if the two dataframes have columns with the same name.</span>
-<span class="sd">        SchemaError is raised in strict mode only if the two dataframes have different number of rows.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised if the two dataframes have columns with the same name.</span>
+<span class="sd">        SchemaError: raised in strict mode only if the two dataframes have different number of rows.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">named_input_left</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">named_input_right</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">subset_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="c1"># This __init__ not really needed but the type annotations are extracted from it</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input_left</span><span class="o">=</span><span class="n">named_input_left</span><span class="p">,</span> <span class="n">named_input_right</span><span class="o">=</span><span class="n">named_input_right</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -2276,6 +2344,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -2416,6 +2485,25 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>True</code></td>
       </tr>
   </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any subset columns specified are missing from any of the dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>SchemaError</code></td>
+        <td><p>raised in strict mode only if the columns differ between the two dataframes and subset_columns is not specified.</p></td>
+      </tr>
+  </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In strict mode, as described above, SchemaError is raised if the columns are not the same (names, types can be inferred).
@@ -2474,8 +2562,8 @@ In non-strict mode, columns are not checked and values are filled with NA when m
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any subset columns specified are missing from any of the dataframe.</span>
-<span class="sd">        SchemaError is raised in strict mode only if the columns differ between the two dataframes and subset_columns is not specified.</span>
+<span class="sd">        MissingColumnError: raised if any subset columns specified are missing from any of the dataframe.</span>
+<span class="sd">        SchemaError: raised in strict mode only if the columns differ between the two dataframes and subset_columns is not specified.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In strict mode, as described above, SchemaError is raised if the columns are not the same (names, types can be inferred).</span>
@@ -2624,27 +2712,27 @@ The "b" group has a non-NA value of 2 but not other NA values, so nothing to fil
   <tbody>
       <tr>
         <td><code>columns</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>The list of columns to replaces NAs for.
 The rest of the columns in the dataframe are not affected.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>sort_by</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>The list of columns to sort by before the fill operation. Optional.
 Given the previous non-NA values are used, sorting can make a difference in the values uses.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>sort_ascending</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When sort_by is specified, True means sort ascending, False sort descending.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>group_by</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>The list of columns to group by before the fill operation. Optional.
 The fill values are only used within a group, other adjacent groups are not filled.
 Useful when you want to copy(fill) data at a certain group level.</p></td>
@@ -2652,7 +2740,7 @@ Useful when you want to copy(fill) data at a certain group level.</p></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input. Optional.
 When not set, the input is taken from the main output.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -2660,7 +2748,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -2668,23 +2756,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</p></td>
       </tr>
   </tbody>
 </table>
@@ -2718,29 +2821,29 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">    The &quot;b&quot; group has a non-NA value of 2 but not other NA values, so nothing to fill.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        columns: The list of columns to replaces NAs for.</span>
+<span class="sd">        columns (Iterable[str]): The list of columns to replaces NAs for.</span>
 <span class="sd">            The rest of the columns in the dataframe are not affected.</span>
-<span class="sd">        sort_by: The list of columns to sort by before the fill operation. Optional.</span>
+<span class="sd">        sort_by (Optional[Iterable[str]]): The list of columns to sort by before the fill operation. Optional.</span>
 <span class="sd">            Given the previous non-NA values are used, sorting can make a difference in the values uses.</span>
-<span class="sd">        sort_ascending: When sort_by is specified, True means sort ascending, False sort descending.</span>
-<span class="sd">        group_by: The list of columns to group by before the fill operation. Optional.</span>
+<span class="sd">        sort_ascending (bool): When sort_by is specified, True means sort ascending, False sort descending.</span>
+<span class="sd">        group_by (Optional[Iterable[str]]): The list of columns to group by before the fill operation. Optional.</span>
 <span class="sd">            The fill values are only used within a group, other adjacent groups are not filled.</span>
 <span class="sd">            Useful when you want to copy(fill) data at a certain group level.</span>
 
-<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</span>
+<span class="sd">        MissingColumnError: raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">FILL_METHOD</span> <span class="o">=</span> <span class="s2">&quot;bfill&quot;</span>
 </code></pre></div>
@@ -2829,27 +2932,27 @@ The "b" group has no non-NA values, so nothing to fill.</p>
   <tbody>
       <tr>
         <td><code>columns</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>The list of columns to replaces NAs for.
 The rest of the columns in the dataframe are not affected.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>sort_by</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>The list of columns to sort by before the fill operation. Optional.
 Given the previous non-NA values are used, sorting can make a difference in the values uses.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>sort_ascending</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When sort_by is specified, True means sort ascending, False sort descending.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>group_by</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>The list of columns to group by before the fill operation. Optional.
 The fill values are only used within a group, other adjacent groups are not filled.
 Useful when you want to copy(fill) data at a certain group level.</p></td>
@@ -2857,7 +2960,7 @@ Useful when you want to copy(fill) data at a certain group level.</p></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input. Optional.
 When not set, the input is taken from the main output.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -2865,7 +2968,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -2873,23 +2976,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</p></td>
       </tr>
   </tbody>
 </table>
@@ -2923,29 +3041,29 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">    The &quot;b&quot; group has no non-NA values, so nothing to fill.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        columns: The list of columns to replaces NAs for.</span>
+<span class="sd">        columns (Iterable[str]): The list of columns to replaces NAs for.</span>
 <span class="sd">            The rest of the columns in the dataframe are not affected.</span>
-<span class="sd">        sort_by: The list of columns to sort by before the fill operation. Optional.</span>
+<span class="sd">        sort_by (Optional[Iterable[str]]): The list of columns to sort by before the fill operation. Optional.</span>
 <span class="sd">            Given the previous non-NA values are used, sorting can make a difference in the values uses.</span>
-<span class="sd">        sort_ascending: When sort_by is specified, True means sort ascending, False sort descending.</span>
-<span class="sd">        group_by: The list of columns to group by before the fill operation. Optional.</span>
+<span class="sd">        sort_ascending (bool): When sort_by is specified, True means sort ascending, False sort descending.</span>
+<span class="sd">        group_by (Optional[Iterable[str]]): The list of columns to group by before the fill operation. Optional.</span>
 <span class="sd">            The fill values are only used within a group, other adjacent groups are not filled.</span>
 <span class="sd">            Useful when you want to copy(fill) data at a certain group level.</span>
 
-<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description Optional[str]: Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</span>
+<span class="sd">        MissingColumnError: raised if any columns specified in either columns, sort_by or group_by are missing from the dataframe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">FILL_METHOD</span> <span class="o">=</span> <span class="s2">&quot;ffill&quot;</span>
 </code></pre></div>
@@ -3073,7 +3191,7 @@ values on the other side (be it left or right) will be dropped from the result.<
   <tbody>
       <tr>
         <td><code>named_input_left</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the left side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3081,7 +3199,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_input_right</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the right side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3089,27 +3207,27 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>key_columns_left</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>key_columns_right</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the right data frame).
 If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>suffixes</code></td>
-        <td></td>
+        <td><code>Iterable[Optional[str]]</code></td>
         <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
 result data frame for those columns that have the same name (and are not key columns).</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -3117,23 +3235,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any columns (keys) are missing from any of the two input data frames.</p></td>
       </tr>
   </tbody>
 </table>
@@ -3174,29 +3307,29 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        | 1  | a  | c  |</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">        named_input_left (Optional[str]): Which dataframe to use as the input on the left side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">        named_input_right (Optional[str]): Which dataframe to use as the input on the right side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
-<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">        key_columns_left (Iterable[str]): A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right (Optional[Iterable[str]]): A list or tuple of column names to join on (columns in the right data frame).</span>
 <span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
-<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">        suffixes (Iterable[Optional[str]]): A list or tuple of two values which will be set as suffixes for the columns in the</span>
 <span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
 
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">        MissingColumnError: raised if any columns (keys) are missing from any of the two input data frames.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span>
@@ -3291,7 +3424,7 @@ corresponding row on the right.</p>
   <tbody>
       <tr>
         <td><code>named_input_left</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the left side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3299,7 +3432,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_input_right</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the right side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3307,27 +3440,27 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>key_columns_left</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>key_columns_right</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the right data frame).
 If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>suffixes</code></td>
-        <td></td>
+        <td><code>Iterable[Optional[str]]</code></td>
         <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
 result data frame for those columns that have the same name (and are not key columns).</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -3335,23 +3468,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any columns (keys) are missing from any of the two input data frames.</p></td>
       </tr>
   </tbody>
 </table>
@@ -3394,29 +3542,29 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        | 2  | b  | NA |</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">        named_input_left (Optional[str]): Which dataframe to use as the input on the left side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">        named_input_right (Optional[str]): Which dataframe to use as the input on the right side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
-<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">        key_columns_left (Iterable[str]): A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right (Optional[Iterable[str]]): A list or tuple of column names to join on (columns in the right data frame).</span>
 <span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
-<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">        suffixes (Iterable[Optional[str]]): A list or tuple of two values which will be set as suffixes for the columns in the</span>
 <span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
 
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">        MissingColumnError: raised if any columns (keys) are missing from any of the two input data frames.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
@@ -3513,7 +3661,7 @@ when the rows are missing.</p>
   <tbody>
       <tr>
         <td><code>named_input_left</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the left side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3521,7 +3669,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_input_right</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the right side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3529,27 +3677,27 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>key_columns_left</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>key_columns_right</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the right data frame).
 If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>suffixes</code></td>
-        <td></td>
+        <td><code>Iterable[Optional[str]]</code></td>
         <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
 result data frame for those columns that have the same name (and are not key columns).</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -3557,23 +3705,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any columns (keys) are missing from any of the two input data frames.</p></td>
       </tr>
   </tbody>
 </table>
@@ -3617,29 +3780,29 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        | 3  | NA | d  |</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">        named_input_left (Optional[str]): Which dataframe to use as the input on the left side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">        named_input_right (Optional[str]): Which dataframe to use as the input on the right side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
-<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">        key_columns_left (Iterable[str]): A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right (Optional[Iterable[str]]): A list or tuple of column names to join on (columns in the right data frame).</span>
 <span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
-<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">        suffixes (Iterable[Optional[str]]): A list or tuple of two values which will be set as suffixes for the columns in the</span>
 <span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
 
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">        MissingColumnError: raised if any columns (keys) are missing from any of the two input data frames.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;outer&quot;</span>
@@ -3742,7 +3905,7 @@ although the order of the rows will be different.</p>
   <tbody>
       <tr>
         <td><code>named_input_left</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the left side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3750,7 +3913,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_input_right</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input on the right side of the join.
 When set to None, the input is taken from the main output of the previous rule.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -3758,27 +3921,27 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>key_columns_left</code></td>
-        <td></td>
+        <td><code>Iterable[str]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the left data frame)</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>key_columns_right</code></td>
-        <td></td>
+        <td><code>Optional[Iterable[str]]</code></td>
         <td><p>A list or tuple of column names to join on (columns in the right data frame).
 If not set or set to None, the key_columns_left is used on the right dataframe too.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>suffixes</code></td>
-        <td></td>
+        <td><code>Iterable[Optional[str]]</code></td>
         <td><p>A list or tuple of two values which will be set as suffixes for the columns in the
 result data frame for those columns that have the same name (and are not key columns).</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -3786,23 +3949,38 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if any columns (keys) are missing from any of the two input data frames.</p></td>
       </tr>
   </tbody>
 </table>
@@ -3852,29 +4030,29 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        although the order of the rows will be different.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        named_input_left: Which dataframe to use as the input on the left side of the join.</span>
+<span class="sd">        named_input_left (Optional[str]): Which dataframe to use as the input on the left side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_input_right: Which dataframe to use as the input on the right side of the join.</span>
+<span class="sd">        named_input_right (Optional[str]): Which dataframe to use as the input on the right side of the join.</span>
 <span class="sd">            When set to None, the input is taken from the main output of the previous rule.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        key_columns_left: A list or tuple of column names to join on (columns in the left data frame)</span>
-<span class="sd">        key_columns_right: A list or tuple of column names to join on (columns in the right data frame).</span>
+<span class="sd">        key_columns_left (Iterable[str]): A list or tuple of column names to join on (columns in the left data frame)</span>
+<span class="sd">        key_columns_right (Optional[Iterable[str]]): A list or tuple of column names to join on (columns in the right data frame).</span>
 <span class="sd">            If not set or set to None, the key_columns_left is used on the right dataframe too.</span>
-<span class="sd">        suffixes: A list or tuple of two values which will be set as suffixes for the columns in the</span>
+<span class="sd">        suffixes (Iterable[Optional[str]]): A list or tuple of two values which will be set as suffixes for the columns in the</span>
 <span class="sd">            result data frame for those columns that have the same name (and are not key columns).</span>
 
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised if any columns (keys) are missing from any of the two input data frames.</span>
+<span class="sd">        MissingColumnError: raised if any columns (keys) are missing from any of the two input data frames.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">JOIN_TYPE</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
@@ -3992,8 +4170,8 @@ AddNewColumnRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#fin
   </thead>
   <tbody>
       <tr>
-        <td><code>column_nae</code></td>
-        <td></td>
+        <td><code>column_name</code></td>
+        <td><code>str</code></td>
         <td><p>The name of the new column to be added.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -4041,6 +4219,37 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>True</code></td>
       </tr>
   </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if a column with the same name already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>AddNewColumnSyntaxError</code></td>
+        <td><p>raised if the column expression has a Python syntax error.</p></td>
+      </tr>
+      <tr>
+        <td><code>TypeError</code></td>
+        <td><p>raised if an operation is not supported between the types involved</p></td>
+      </tr>
+      <tr>
+        <td><code>NameError</code></td>
+        <td><p>raised if an unknown variable is used</p></td>
+      </tr>
+      <tr>
+        <td><code>KeyError</code></td>
+        <td><p>raised if you try to use an unknown column (i.e. df['ANY_UNKNOWN_COLUMN'])</p></td>
+      </tr>
+  </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The implementation will try to use dataframe operations for performance, but when those are not supported it
@@ -4077,7 +4286,7 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 <span class="sd">        | 3   | 4  | 7   |</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        column_nae: The name of the new column to be added.</span>
+<span class="sd">        column_name: The name of the new column to be added.</span>
 <span class="sd">        column_expression: An expression that gets evaluated and produces the value for the new column.</span>
 <span class="sd">            The syntax: df[&quot;EXISTING_COL&quot;] can be used in the expression to refer to other columns in the dataframe.</span>
 
@@ -4094,12 +4303,11 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ColumnAlreadyExistsError is raised in strict mode only if a column with the same name already exists in the dataframe.</span>
-<span class="sd">        AddNewColumnSyntaxError is raised if the column expression has a Python syntax error.</span>
-<span class="sd">        A variety of Python exceptions can be raised when evaluating the expression, e.g.:</span>
-<span class="sd">            - TypeError is raised if an operation is not supported between the types involved</span>
-<span class="sd">            - NameError is raised if an unknown variable is used</span>
-<span class="sd">            - KeyError is raised if you try to use an unknown column (i.e. df[&#39;ANY_UNKNOWN_COLUMN&#39;])</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if a column with the same name already exists in the dataframe.</span>
+<span class="sd">        AddNewColumnSyntaxError: raised if the column expression has a Python syntax error.</span>
+<span class="sd">        TypeError: raised if an operation is not supported between the types involved</span>
+<span class="sd">        NameError: raised if an unknown variable is used</span>
+<span class="sd">        KeyError: raised if you try to use an unknown column (i.e. df[&#39;ANY_UNKNOWN_COLUMN&#39;])</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        The implementation will try to use dataframe operations for performance, but when those are not supported it</span>
@@ -4114,7 +4322,7 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 
     <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_ast_expr&#39;</span><span class="p">,</span> <span class="s1">&#39;_compiled_expr&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">column_name</span> <span class="o">=</span> <span class="n">column_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span> <span class="o">=</span> <span class="n">column_expression</span>
@@ -4274,6 +4482,25 @@ Together with the name, the description acts as the documentation of the rule.</
       </tr>
   </tbody>
 </table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>is raised when a column specified in the mapper doesn't exist in the input data frame.</p></td>
+      </tr>
+      <tr>
+        <td><code>UnsupportedTypeError</code></td>
+        <td><p>is raised when an unknown type is speified in the values of the mapper.</p></td>
+      </tr>
+  </tbody>
+</table>
         <details class="quote">
           <summary>Source code in <code>finrules/backends/pandas/types.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TypeConversionRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
@@ -4295,8 +4522,8 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError is raised when a column specified in the mapper doesn&#39;t exist in the input data frame.</span>
-<span class="sd">        UnsupportedTypeError is raised when an unknown type is speified in the values of the mapper.</span>
+<span class="sd">        MissingColumnError: is raised when a column specified in the mapper doesn&#39;t exist in the input data frame.</span>
+<span class="sd">        UnsupportedTypeError: is raised when an unknown type is speified in the values of the mapper.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">SUPPORTED_TYPES</span> <span class="o">=</span> <span class="p">{</span>
