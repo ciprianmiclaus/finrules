@@ -466,6 +466,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.aggregate" class="md-nav__link">
+    aggregate
+  </a>
+  
+    <nav class="md-nav" aria-label="aggregate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.aggregate.AggregateRule" class="md-nav__link">
+    AggregateRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#finrules.backends.pandas.basic" class="md-nav__link">
     basic
   </a>
@@ -660,15 +680,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.AddNewColumnSyntaxError" class="md-nav__link">
-    AddNewColumnSyntaxError
+  <a href="#finrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
+    ColumnAlreadyExistsError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
-    ColumnAlreadyExistsError
+  <a href="#finrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
+    ExpressionSyntaxError
   </a>
   
 </li>
@@ -860,6 +880,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.aggregate" class="md-nav__link">
+    aggregate
+  </a>
+  
+    <nav class="md-nav" aria-label="aggregate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finrules.backends.pandas.aggregate.AggregateRule" class="md-nav__link">
+    AggregateRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#finrules.backends.pandas.basic" class="md-nav__link">
     basic
   </a>
@@ -1054,15 +1094,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.AddNewColumnSyntaxError" class="md-nav__link">
-    AddNewColumnSyntaxError
+  <a href="#finrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
+    ColumnAlreadyExistsError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
-    ColumnAlreadyExistsError
+  <a href="#finrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
+    ExpressionSyntaxError
   </a>
   
 </li>
@@ -1433,6 +1473,363 @@ Any named outputs in the block are not exposed to the rules outside of the block
 
 
 
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="finrules.backends.pandas.aggregate" class="doc doc-heading">
+        <code>aggregate</code>
+
+
+
+<a href="#finrules.backends.pandas.aggregate" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="finrules.backends.pandas.aggregate.AggregateRule" class="doc doc-heading">
+        <code>
+AggregateRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#finrules.backends.pandas.aggregate.AggregateRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Performs a SQL-like groupby and aggregation.</p>
+<p>It takes a list of columns to group by and the result will have one row for each unique combination
+of values in the group_by columns.
+The rest of the columns (not in the group_by) can be aggregated using either pre-defined aggregations
+or using custom python expressions.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>group_by</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of columns to group the result by</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>aggregations</code></td>
+        <td><code>Optional[Mapping[str, str]]</code></td>
+        <td><p>A mapping {column_name: aggregation_function} which specifies how to aggregate 
+columns which are not in the group_by list.
+The following list of aggregation functions are supported::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>min: minimum of the values in the group
+max: minimum of the values in the group
+mean: The mathematical mean value in the group
+count: How many values are in the group, including NA
+countNoNA: How many values are in the group, excluding NA
+sum: The sum of the values in the group
+first: The first value in the group
+last: The last value in the group
+list: Produces a python list with all the values in the group, excluding NA
+tuple: Like list above but produces a tuple
+csv: Produces a comma separated string of values, exluding NA
+</code></pre></div></td></tr></table></div></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>aggregation_expressions</code></td>
+        <td><code>Optional[Mapping[str, str]]</code></td>
+        <td><p>A mapping {column_name: aggregation_expression} which specifies how to aggregate 
+columns which are not in the group_by list.
+The aggregation expression is a string representing a valid Python expression which gets evaluated.
+The input will be in a variable <code>values</code>. <code>isnull</code> can be used to filter out NA.</p>
+<p>Example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>{&quot;C&quot;: &quot;&#39;;&#39;.join(str(v) for v in values if not isnull(v))&quot;}
+
+The above aggregates the column C by producing a ; separated string of values in the group, excluding NA.
+</code></pre></div></td></tr></table></div></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised if a column appears in multiple places in group_by/aggregations/aggregation_expressions.</p></td>
+      </tr>
+      <tr>
+        <td><code>ExpressionSyntaxError</code></td>
+        <td><p>raised if any aggregation expression (if any are passed in) has a Python syntax error.</p></td>
+      </tr>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column specified in aggregations or aggregation_expressions 
+is missing from the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if a column in aggregations is trying to be aggregated using an unknown aggregate function</p></td>
+      </tr>
+      <tr>
+        <td><code>TypeError</code></td>
+        <td><p>raised if an operation is not supported between the types involved</p></td>
+      </tr>
+      <tr>
+        <td><code>NameError</code></td>
+        <td><p>raised if an unknown variable is used</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Other Python exceptions can be raised when custom aggregation expressions are used, depending on what the expression is doing.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any columns not in the group_by list and not present in either aggregations or aggregation_expressions will be dropped from the result.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/backends/pandas/aggregate.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AggregateRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a SQL-like groupby and aggregation.</span>
+
+<span class="sd">    It takes a list of columns to group by and the result will have one row for each unique combination</span>
+<span class="sd">    of values in the group_by columns.</span>
+<span class="sd">    The rest of the columns (not in the group_by) can be aggregated using either pre-defined aggregations</span>
+<span class="sd">    or using custom python expressions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        group_by: A list of columns to group the result by</span>
+<span class="sd">        aggregations: A mapping {column_name: aggregation_function} which specifies how to aggregate </span>
+<span class="sd">            columns which are not in the group_by list.</span>
+<span class="sd">            The following list of aggregation functions are supported::</span>
+
+<span class="sd">                min: minimum of the values in the group</span>
+<span class="sd">                max: minimum of the values in the group</span>
+<span class="sd">                mean: The mathematical mean value in the group</span>
+<span class="sd">                count: How many values are in the group, including NA</span>
+<span class="sd">                countNoNA: How many values are in the group, excluding NA</span>
+<span class="sd">                sum: The sum of the values in the group</span>
+<span class="sd">                first: The first value in the group</span>
+<span class="sd">                last: The last value in the group</span>
+<span class="sd">                list: Produces a python list with all the values in the group, excluding NA</span>
+<span class="sd">                tuple: Like list above but produces a tuple</span>
+<span class="sd">                csv: Produces a comma separated string of values, exluding NA</span>
+
+<span class="sd">        aggregation_expressions: A mapping {column_name: aggregation_expression} which specifies how to aggregate </span>
+<span class="sd">            columns which are not in the group_by list.</span>
+<span class="sd">            The aggregation expression is a string representing a valid Python expression which gets evaluated.</span>
+<span class="sd">            The input will be in a variable `values`. `isnull` can be used to filter out NA.</span>
+
+<span class="sd">            Example::</span>
+
+<span class="sd">                {&quot;C&quot;: &quot;&#39;;&#39;.join(str(v) for v in values if not isnull(v))&quot;}</span>
+
+<span class="sd">                The above aggregates the column C by producing a ; separated string of values in the group, excluding NA.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ColumnAlreadyExistsError: raised if a column appears in multiple places in group_by/aggregations/aggregation_expressions.</span>
+<span class="sd">        ExpressionSyntaxError: raised if any aggregation expression (if any are passed in) has a Python syntax error.</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column specified in aggregations or aggregation_expressions </span>
+<span class="sd">            is missing from the input dataframe.</span>
+<span class="sd">        ValueError: raised if a column in aggregations is trying to be aggregated using an unknown aggregate function</span>
+<span class="sd">        TypeError: raised if an operation is not supported between the types involved</span>
+<span class="sd">        NameError: raised if an unknown variable is used</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Other Python exceptions can be raised when custom aggregation expressions are used, depending on what the expression is doing.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Any columns not in the group_by list and not present in either aggregations or aggregation_expressions will be dropped from the result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">AGGREGATIONS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="s2">&quot;size&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;countNoNA&quot;</span><span class="p">:</span> <span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sum&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;first&quot;</span><span class="p">:</span> <span class="s2">&quot;first&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;last&quot;</span><span class="p">:</span> <span class="s2">&quot;last&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;list&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">values</span><span class="p">:</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">isnull</span><span class="p">(</span><span class="n">value</span><span class="p">)],</span>
+        <span class="s2">&quot;tuple&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">values</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">isnull</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
+        <span class="s2">&quot;csv&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">values</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">isnull</span><span class="p">(</span><span class="n">elem</span><span class="p">)),</span>
+    <span class="p">}</span>
+
+    <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_aggs&#39;</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_by</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">aggregations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">aggregation_expressions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_by</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">group_by</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">aggregations</span> <span class="ow">or</span> <span class="n">aggregation_expressions</span><span class="p">,</span> <span class="s2">&quot;aggregations or aggregation_expressions must be specified.&quot;</span>
+        <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">agg_func</span> <span class="ow">in</span> <span class="p">(</span><span class="n">aggregations</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_by</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ColumnAlreadyExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> appears in group_by and cannot be aggregated.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">agg_func</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">AGGREGATIONS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">agg_func</span><span class="si">}</span><span class="s2">&#39; is not a supported aggregation function.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregations</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">agg_func</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">agg_func</span> <span class="ow">in</span> <span class="p">(</span><span class="n">aggregations</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregation_expressions</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">aggregation_expressions</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregations</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">AGGREGATIONS</span><span class="p">[</span><span class="n">agg_func</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">agg_func</span> <span class="ow">in</span> <span class="p">(</span><span class="n">aggregations</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregation_expressions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">agg_expr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregation_expressions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_by</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ColumnAlreadyExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> appears in group_by and cannot be aggregated.&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ColumnAlreadyExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> is already being aggregated.&quot;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_ast_expr</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span>
+                        <span class="n">agg_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">_expression.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span>
+                    <span class="p">)</span>
+                    <span class="n">_compiled_expr</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">_ast_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">_expression.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">values</span><span class="p">,</span> <span class="n">bound_compiled_expr</span><span class="o">=</span><span class="n">_compiled_expr</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">bound_compiled_expr</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;isnull&#39;</span><span class="p">:</span> <span class="n">isnull</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">})</span>
+                <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ExpressionSyntaxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in aggregation expression for column &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39;: &#39;</span><span class="si">{</span><span class="n">agg_expr</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df_columns_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">df_columns_set</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missimg columns to aggregate by: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df_columns_set</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">aggs</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">agg</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">agg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_columns_set</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">aggs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">group_by</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">aggs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
@@ -4234,7 +4631,7 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column with the same name already exists in the dataframe.</p></td>
       </tr>
       <tr>
-        <td><code>AddNewColumnSyntaxError</code></td>
+        <td><code>ExpressionSyntaxError</code></td>
         <td><p>raised if the column expression has a Python syntax error.</p></td>
       </tr>
       <tr>
@@ -4304,7 +4701,7 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if a column with the same name already exists in the dataframe.</span>
-<span class="sd">        AddNewColumnSyntaxError: raised if the column expression has a Python syntax error.</span>
+<span class="sd">        ExpressionSyntaxError: raised if the column expression has a Python syntax error.</span>
 <span class="sd">        TypeError: raised if an operation is not supported between the types involved</span>
 <span class="sd">        NameError: raised if an unknown variable is used</span>
 <span class="sd">        KeyError: raised if you try to use an unknown column (i.e. df[&#39;ANY_UNKNOWN_COLUMN&#39;])</span>
@@ -4332,7 +4729,7 @@ To avoid such behavior, fill the NAs before performing operations.</p>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ast_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="si">}</span><span class="s1">_expression.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">AddNewColumnSyntaxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in expression &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ExpressionSyntaxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in expression &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -4640,37 +5037,6 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h3 id="finrules.exceptions.AddNewColumnSyntaxError" class="doc doc-heading">
-        <code>
-AddNewColumnSyntaxError            (<span title="SyntaxError">SyntaxError</span>)
-        </code>
-
-
-
-<a href="#finrules.exceptions.AddNewColumnSyntaxError" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>A column is created but there is a syntax error in the column expression. </p>
-
-        <details class="quote">
-          <summary>Source code in <code>finrules/exceptions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AddNewColumnSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; A column is created but there is a syntax error in the column expression. &quot;&quot;&quot;</span>
-</code></pre></div>
-        </details>
-
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
 <h3 id="finrules.exceptions.ColumnAlreadyExistsError" class="doc doc-heading">
         <code>
 ColumnAlreadyExistsError            (<span title="Exception">Exception</span>)
@@ -4688,6 +5054,37 @@ ColumnAlreadyExistsError            (<span title="Exception">Exception</span>)
           <summary>Source code in <code>finrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ColumnAlreadyExistsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; An attempt to create a column that already exists in the dataframe. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="finrules.exceptions.ExpressionSyntaxError" class="doc doc-heading">
+        <code>
+ExpressionSyntaxError            (<span title="SyntaxError">SyntaxError</span>)
+        </code>
+
+
+
+<a href="#finrules.exceptions.ExpressionSyntaxError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A Python expression used to create a column, aggregate or other operations has a syntax error. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExpressionSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A Python expression used to create a column, aggregate or other operations has a syntax error. &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 
