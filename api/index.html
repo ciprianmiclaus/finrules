@@ -9,20 +9,22 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.2.6">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>API Reference - Finrules</title>
+        <title>API Reference - ETLrules</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.9d5733d3.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
         
       
+      
+
     
     
     
@@ -37,10 +39,11 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -65,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#finrules" class="md-skip">
+        <a href="#etlrules" class="md-skip">
           Skip to content
         </a>
       
@@ -75,9 +78,7 @@
     </div>
     
       <div data-md-component="outdated" hidden>
-        <aside class="md-banner md-banner--warning">
-          
-        </aside>
+        
       </div>
     
     
@@ -87,20 +88,20 @@
 
 <header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Finrules" class="md-header__button md-logo" aria-label="Finrules" data-md-component="logo">
+    <a href=".." title="ETLrules" class="md-header__button md-logo" aria-label="ETLrules" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Finrules
+            ETLrules
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -117,19 +118,21 @@
         
           
           
+          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
             </label>
           
         
           
           
+          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
             </label>
           
         
@@ -138,7 +141,7 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -146,13 +149,13 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
       
@@ -172,13 +175,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/ciprianmiclaus/finrules" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/ciprianmiclaus/etlrules" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    finrules
+    etlrules
   </div>
 </a>
       </div>
@@ -304,23 +307,23 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Finrules" class="md-nav__button md-logo" aria-label="Finrules" data-md-component="logo">
+    <a href=".." title="ETLrules" class="md-nav__button md-logo" aria-label="ETLrules" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
-    Finrules
+    ETLrules
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/ciprianmiclaus/finrules" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/ciprianmiclaus/etlrules" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    finrules
+    etlrules
   </div>
 </a>
     </div>
@@ -410,14 +413,14 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#finrules" class="md-nav__link">
-    finrules
+  <a href="#etlrules" class="md-nav__link">
+    etlrules
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#finrules.backends" class="md-nav__link">
+  <a href="#etlrules.backends" class="md-nav__link">
     backends
   </a>
   
@@ -425,7 +428,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.common" class="md-nav__link">
+  <a href="#etlrules.backends.common" class="md-nav__link">
     common
   </a>
   
@@ -433,7 +436,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.common.basic" class="md-nav__link">
+  <a href="#etlrules.backends.common.basic" class="md-nav__link">
     basic
   </a>
   
@@ -441,7 +444,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.common.basic.RulesBlock" class="md-nav__link">
+  <a href="#etlrules.backends.common.basic.RulesBlock" class="md-nav__link">
     RulesBlock
   </a>
   
@@ -458,7 +461,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas" class="md-nav__link">
+  <a href="#etlrules.backends.pandas" class="md-nav__link">
     pandas
   </a>
   
@@ -466,7 +469,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.aggregate" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.aggregate" class="md-nav__link">
     aggregate
   </a>
   
@@ -474,7 +477,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.aggregate.AggregateRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.aggregate.AggregateRule" class="md-nav__link">
     AggregateRule
   </a>
   
@@ -486,7 +489,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic" class="md-nav__link">
     basic
   </a>
   
@@ -494,28 +497,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.DedupeRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.DedupeRule" class="md-nav__link">
     DedupeRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.ProjectRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.ProjectRule" class="md-nav__link">
     ProjectRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.RenameRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.RenameRule" class="md-nav__link">
     RenameRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.SortRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.SortRule" class="md-nav__link">
     SortRule
   </a>
   
@@ -527,7 +530,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.concat" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.concat" class="md-nav__link">
     concat
   </a>
   
@@ -535,14 +538,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.concat.HConcatRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.concat.HConcatRule" class="md-nav__link">
     HConcatRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.concat.VConcatRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.concat.VConcatRule" class="md-nav__link">
     VConcatRule
   </a>
   
@@ -554,7 +557,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.fill" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.fill" class="md-nav__link">
     fill
   </a>
   
@@ -562,14 +565,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.fill.BackFillRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.fill.BackFillRule" class="md-nav__link">
     BackFillRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.fill.ForwardFillRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.fill.ForwardFillRule" class="md-nav__link">
     ForwardFillRule
   </a>
   
@@ -581,7 +584,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins" class="md-nav__link">
     joins
   </a>
   
@@ -589,28 +592,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.InnerJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.InnerJoinRule" class="md-nav__link">
     InnerJoinRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.LeftJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.LeftJoinRule" class="md-nav__link">
     LeftJoinRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.OuterJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.OuterJoinRule" class="md-nav__link">
     OuterJoinRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.RightJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.RightJoinRule" class="md-nav__link">
     RightJoinRule
   </a>
   
@@ -622,7 +625,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.newcolumns" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.newcolumns" class="md-nav__link">
     newcolumns
   </a>
   
@@ -630,7 +633,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.newcolumns.AddNewColumnRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.newcolumns.AddNewColumnRule" class="md-nav__link">
     AddNewColumnRule
   </a>
   
@@ -642,7 +645,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.types" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.types" class="md-nav__link">
     types
   </a>
   
@@ -650,7 +653,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.types.TypeConversionRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.types.TypeConversionRule" class="md-nav__link">
     TypeConversionRule
   </a>
   
@@ -672,7 +675,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#finrules.exceptions" class="md-nav__link">
+  <a href="#etlrules.exceptions" class="md-nav__link">
     exceptions
   </a>
   
@@ -680,35 +683,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
+  <a href="#etlrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
     ColumnAlreadyExistsError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
+  <a href="#etlrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
     ExpressionSyntaxError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.MissingColumnError" class="md-nav__link">
+  <a href="#etlrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.SchemaError" class="md-nav__link">
+  <a href="#etlrules.exceptions.SchemaError" class="md-nav__link">
     SchemaError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.UnsupportedTypeError" class="md-nav__link">
+  <a href="#etlrules.exceptions.UnsupportedTypeError" class="md-nav__link">
     UnsupportedTypeError
   </a>
   
@@ -720,7 +723,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#finrules.rule" class="md-nav__link">
+  <a href="#etlrules.rule" class="md-nav__link">
     rule
   </a>
   
@@ -728,14 +731,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.rule.BinaryOpBaseRule" class="md-nav__link">
+  <a href="#etlrules.rule.BinaryOpBaseRule" class="md-nav__link">
     BinaryOpBaseRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.rule.UnaryOpBaseRule" class="md-nav__link">
+  <a href="#etlrules.rule.UnaryOpBaseRule" class="md-nav__link">
     UnaryOpBaseRule
   </a>
   
@@ -824,14 +827,14 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#finrules" class="md-nav__link">
-    finrules
+  <a href="#etlrules" class="md-nav__link">
+    etlrules
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#finrules.backends" class="md-nav__link">
+  <a href="#etlrules.backends" class="md-nav__link">
     backends
   </a>
   
@@ -839,7 +842,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.common" class="md-nav__link">
+  <a href="#etlrules.backends.common" class="md-nav__link">
     common
   </a>
   
@@ -847,7 +850,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.common.basic" class="md-nav__link">
+  <a href="#etlrules.backends.common.basic" class="md-nav__link">
     basic
   </a>
   
@@ -855,7 +858,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.common.basic.RulesBlock" class="md-nav__link">
+  <a href="#etlrules.backends.common.basic.RulesBlock" class="md-nav__link">
     RulesBlock
   </a>
   
@@ -872,7 +875,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas" class="md-nav__link">
+  <a href="#etlrules.backends.pandas" class="md-nav__link">
     pandas
   </a>
   
@@ -880,7 +883,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.aggregate" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.aggregate" class="md-nav__link">
     aggregate
   </a>
   
@@ -888,7 +891,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.aggregate.AggregateRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.aggregate.AggregateRule" class="md-nav__link">
     AggregateRule
   </a>
   
@@ -900,7 +903,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic" class="md-nav__link">
     basic
   </a>
   
@@ -908,28 +911,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.DedupeRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.DedupeRule" class="md-nav__link">
     DedupeRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.ProjectRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.ProjectRule" class="md-nav__link">
     ProjectRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.RenameRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.RenameRule" class="md-nav__link">
     RenameRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.basic.SortRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.basic.SortRule" class="md-nav__link">
     SortRule
   </a>
   
@@ -941,7 +944,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.concat" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.concat" class="md-nav__link">
     concat
   </a>
   
@@ -949,14 +952,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.concat.HConcatRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.concat.HConcatRule" class="md-nav__link">
     HConcatRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.concat.VConcatRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.concat.VConcatRule" class="md-nav__link">
     VConcatRule
   </a>
   
@@ -968,7 +971,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.fill" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.fill" class="md-nav__link">
     fill
   </a>
   
@@ -976,14 +979,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.fill.BackFillRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.fill.BackFillRule" class="md-nav__link">
     BackFillRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.fill.ForwardFillRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.fill.ForwardFillRule" class="md-nav__link">
     ForwardFillRule
   </a>
   
@@ -995,7 +998,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins" class="md-nav__link">
     joins
   </a>
   
@@ -1003,28 +1006,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.InnerJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.InnerJoinRule" class="md-nav__link">
     InnerJoinRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.LeftJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.LeftJoinRule" class="md-nav__link">
     LeftJoinRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.OuterJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.OuterJoinRule" class="md-nav__link">
     OuterJoinRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.joins.RightJoinRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.joins.RightJoinRule" class="md-nav__link">
     RightJoinRule
   </a>
   
@@ -1036,7 +1039,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.newcolumns" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.newcolumns" class="md-nav__link">
     newcolumns
   </a>
   
@@ -1044,7 +1047,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.newcolumns.AddNewColumnRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.newcolumns.AddNewColumnRule" class="md-nav__link">
     AddNewColumnRule
   </a>
   
@@ -1056,7 +1059,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.types" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.types" class="md-nav__link">
     types
   </a>
   
@@ -1064,7 +1067,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.backends.pandas.types.TypeConversionRule" class="md-nav__link">
+  <a href="#etlrules.backends.pandas.types.TypeConversionRule" class="md-nav__link">
     TypeConversionRule
   </a>
   
@@ -1086,7 +1089,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#finrules.exceptions" class="md-nav__link">
+  <a href="#etlrules.exceptions" class="md-nav__link">
     exceptions
   </a>
   
@@ -1094,35 +1097,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
+  <a href="#etlrules.exceptions.ColumnAlreadyExistsError" class="md-nav__link">
     ColumnAlreadyExistsError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
+  <a href="#etlrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
     ExpressionSyntaxError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.MissingColumnError" class="md-nav__link">
+  <a href="#etlrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.SchemaError" class="md-nav__link">
+  <a href="#etlrules.exceptions.SchemaError" class="md-nav__link">
     SchemaError
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.exceptions.UnsupportedTypeError" class="md-nav__link">
+  <a href="#etlrules.exceptions.UnsupportedTypeError" class="md-nav__link">
     UnsupportedTypeError
   </a>
   
@@ -1134,7 +1137,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#finrules.rule" class="md-nav__link">
+  <a href="#etlrules.rule" class="md-nav__link">
     rule
   </a>
   
@@ -1142,14 +1145,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#finrules.rule.BinaryOpBaseRule" class="md-nav__link">
+  <a href="#etlrules.rule.BinaryOpBaseRule" class="md-nav__link">
     BinaryOpBaseRule
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#finrules.rule.UnaryOpBaseRule" class="md-nav__link">
+  <a href="#etlrules.rule.UnaryOpBaseRule" class="md-nav__link">
     UnaryOpBaseRule
   </a>
   
@@ -1168,24 +1171,26 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
-<a href="https://github.com/ciprianmiclaus/finrules/edit/master/docs/api.md" title="Edit this page" class="md-content__button md-icon">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-</a>
+                  
 
+  <a href="https://github.com/ciprianmiclaus/etlrules/edit/master/docs/api.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
 
 
   <h1>API Reference</h1>
 
 <div class="doc doc-object doc-module">
 
-<a id="finrules"></a>
+<a id="etlrules"></a>
     <div class="doc doc-contents first">
 
-      <p>Top-level package for Finrules.</p>
+      <p>Top-level package for ETLrules.</p>
 
 
 
@@ -1207,7 +1212,7 @@
 
 
 
-<h2 id="finrules.backends" class="doc doc-heading">
+<h2 id="etlrules.backends" class="doc doc-heading">
         <code>backends</code>
 
 
@@ -1215,7 +1220,7 @@
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-<a href="#finrules.backends" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#etlrules.backends" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1237,7 +1242,7 @@
 
 
 
-<h3 id="finrules.backends.common" class="doc doc-heading">
+<h3 id="etlrules.backends.common" class="doc doc-heading">
         <code>common</code>
 
 
@@ -1245,7 +1250,7 @@
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-<a href="#finrules.backends.common" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.backends.common" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1267,12 +1272,12 @@
 
 
 
-<h4 id="finrules.backends.common.basic" class="doc doc-heading">
+<h4 id="etlrules.backends.common.basic" class="doc doc-heading">
         <code>basic</code>
 
 
 
-<a href="#finrules.backends.common.basic" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.common.basic" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -1292,14 +1297,14 @@
 
 
 
-<h5 id="finrules.backends.common.basic.RulesBlock" class="doc doc-heading">
+<h5 id="etlrules.backends.common.basic.RulesBlock" class="doc doc-heading">
         <code>
-RulesBlock            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+RulesBlock            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.common.basic.RulesBlock" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.common.basic.RulesBlock" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1319,7 +1324,7 @@ Blocks are reusable and encapsulated to reduce complexity.</p>
   <tbody>
       <tr>
         <td><code>rules</code></td>
-        <td><code>Iterable[finrules.rule.BaseRule]</code></td>
+        <td><code>Iterable[etlrules.rule.BaseRule]</code></td>
         <td><p>An iterable of rules which are part of this block.
 The first rule in the block will take its input from the named_input of the RulesBlock (if any, if not from the main output of the previous rule).
 The last rule in the block will publish the output as the named_output of the RulesBlock (if any, or the main output of the block).
@@ -1341,7 +1346,7 @@ Any named outputs in the block are not exposed to the rules outside of the block
     strict: When set to True, the rule does a stricter valiation. Default: True</p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/common/basic.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/common/basic.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RulesBlock</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Groups rules into encapsulated blocks or units of rules that achieve one thing.</span>
 <span class="sd">    Blocks are reusable and encapsulated to reduce complexity.</span>
@@ -1450,7 +1455,7 @@ Any named outputs in the block are not exposed to the rules outside of the block
 
 
 
-<h3 id="finrules.backends.pandas" class="doc doc-heading">
+<h3 id="etlrules.backends.pandas" class="doc doc-heading">
         <code>pandas</code>
 
 
@@ -1458,7 +1463,7 @@ Any named outputs in the block are not exposed to the rules outside of the block
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-<a href="#finrules.backends.pandas" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.backends.pandas" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1480,12 +1485,12 @@ Any named outputs in the block are not exposed to the rules outside of the block
 
 
 
-<h4 id="finrules.backends.pandas.aggregate" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.aggregate" class="doc doc-heading">
         <code>aggregate</code>
 
 
 
-<a href="#finrules.backends.pandas.aggregate" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.aggregate" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -1504,14 +1509,14 @@ Any named outputs in the block are not exposed to the rules outside of the block
 
 
 
-<h5 id="finrules.backends.pandas.aggregate.AggregateRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.aggregate.AggregateRule" class="doc doc-heading">
         <code>
-AggregateRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+AggregateRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.aggregate.AggregateRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.aggregate.AggregateRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1667,7 +1672,7 @@ is missing from the input dataframe.</p></td>
 </div>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/aggregate.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/aggregate.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AggregateRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a SQL-like groupby and aggregation.</span>
 
@@ -1837,12 +1842,12 @@ is missing from the input dataframe.</p></td>
 
 
 
-<h4 id="finrules.backends.pandas.basic" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.basic" class="doc doc-heading">
         <code>basic</code>
 
 
 
-<a href="#finrules.backends.pandas.basic" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.basic" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -1861,14 +1866,14 @@ is missing from the input dataframe.</p></td>
 
 
 
-<h5 id="finrules.backends.pandas.basic.DedupeRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.basic.DedupeRule" class="doc doc-heading">
         <code>
-DedupeRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+DedupeRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.basic.DedupeRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.basic.DedupeRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1960,7 +1965,7 @@ Together with the name, the description acts as the documentation of the rule.</
 </div>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/basic.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DedupeRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; De-duplicates by dropping duplicates using a set of columns to determine the duplicates.</span>
 
@@ -2050,14 +2055,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.basic.ProjectRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.basic.ProjectRule" class="doc doc-heading">
         <code>
-ProjectRule            (<span title="finrules.backends.common.basic.BaseProjectRule">BaseProjectRule</span>, <span title="finrules.backends.pandas.validation.PandasRuleValidationMixin">PandasRuleValidationMixin</span>)
+ProjectRule            (<span title="etlrules.backends.common.basic.BaseProjectRule">BaseProjectRule</span>, <span title="etlrules.backends.pandas.validation.PandasRuleValidationMixin">PandasRuleValidationMixin</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.basic.ProjectRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.basic.ProjectRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -2143,7 +2148,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/basic.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ProjectRule</span><span class="p">(</span><span class="n">BaseProjectRule</span><span class="p">,</span> <span class="n">PandasRuleValidationMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Reshapes the data frame to keep, eliminate or re-order the set of columns.</span>
 
@@ -2206,14 +2211,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.basic.RenameRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.basic.RenameRule" class="doc doc-heading">
         <code>
-RenameRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+RenameRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.basic.RenameRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.basic.RenameRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -2291,7 +2296,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/basic.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RenameRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Renames a set of columns in the data frame.</span>
 
@@ -2360,14 +2365,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.basic.SortRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.basic.SortRule" class="doc doc-heading">
         <code>
-SortRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+SortRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.basic.SortRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.basic.SortRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -2440,7 +2445,7 @@ For any rows that have the same value in the first column, the second column is 
 </div>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/basic.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/basic.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SortRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Sort the input dataframe by the given columns, either ascending or descending.</span>
 
@@ -2521,12 +2526,12 @@ For any rows that have the same value in the first column, the second column is 
 
 
 
-<h4 id="finrules.backends.pandas.concat" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.concat" class="doc doc-heading">
         <code>concat</code>
 
 
 
-<a href="#finrules.backends.pandas.concat" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.concat" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -2545,14 +2550,14 @@ For any rows that have the same value in the first column, the second column is 
 
 
 
-<h5 id="finrules.backends.pandas.concat.HConcatRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.concat.HConcatRule" class="doc doc-heading">
         <code>
-HConcatRule            (<a title="finrules.rule.BinaryOpBaseRule" href="#finrules.rule.BinaryOpBaseRule">BinaryOpBaseRule</a>)
+HConcatRule            (<a title="etlrules.rule.BinaryOpBaseRule" href="#etlrules.rule.BinaryOpBaseRule">BinaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.concat.HConcatRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.concat.HConcatRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -2669,7 +2674,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/concat.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/concat.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HConcatRule</span><span class="p">(</span><span class="n">BinaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Horizontally concatenates two dataframe with the result having the columns from the left dataframe followed by the columns from the right dataframe.</span>
 
@@ -2766,14 +2771,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.concat.VConcatRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.concat.VConcatRule" class="doc doc-heading">
         <code>
-VConcatRule            (<a title="finrules.rule.BinaryOpBaseRule" href="#finrules.rule.BinaryOpBaseRule">BinaryOpBaseRule</a>)
+VConcatRule            (<a title="etlrules.rule.BinaryOpBaseRule" href="#etlrules.rule.BinaryOpBaseRule">BinaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.concat.VConcatRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.concat.VConcatRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -2908,7 +2913,7 @@ In non-strict mode, columns are not checked and values are filled with NA when m
 </div>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/concat.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/concat.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">VConcatRule</span><span class="p">(</span><span class="n">BinaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Vertically concatenates two dataframe with the result having the rows from the left dataframe followed by the rows from the right dataframe.</span>
 
@@ -3030,12 +3035,12 @@ In non-strict mode, columns are not checked and values are filled with NA when m
 
 
 
-<h4 id="finrules.backends.pandas.fill" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.fill" class="doc doc-heading">
         <code>fill</code>
 
 
 
-<a href="#finrules.backends.pandas.fill" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.fill" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -3054,14 +3059,14 @@ In non-strict mode, columns are not checked and values are filled with NA when m
 
 
 
-<h5 id="finrules.backends.pandas.fill.BackFillRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.fill.BackFillRule" class="doc doc-heading">
         <code>
-BackFillRule            (<span title="finrules.backends.pandas.fill.BaseFillRule">BaseFillRule</span>)
+BackFillRule            (<span title="etlrules.backends.pandas.fill.BaseFillRule">BaseFillRule</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.fill.BackFillRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.fill.BackFillRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -3189,7 +3194,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/fill.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/fill.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BackFillRule</span><span class="p">(</span><span class="n">BaseFillRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Replaces NAs/missing values with the next non-NA value, optionally sorting and grouping the data.</span>
 
@@ -3274,14 +3279,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.fill.ForwardFillRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.fill.ForwardFillRule" class="doc doc-heading">
         <code>
-ForwardFillRule            (<span title="finrules.backends.pandas.fill.BaseFillRule">BaseFillRule</span>)
+ForwardFillRule            (<span title="etlrules.backends.pandas.fill.BaseFillRule">BaseFillRule</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.fill.ForwardFillRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.fill.ForwardFillRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -3409,7 +3414,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/fill.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/fill.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ForwardFillRule</span><span class="p">(</span><span class="n">BaseFillRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Replaces NAs/missing values with the next non-NA value, optionally sorting and grouping the data.</span>
 
@@ -3505,12 +3510,12 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h4 id="finrules.backends.pandas.joins" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.joins" class="doc doc-heading">
         <code>joins</code>
 
 
 
-<a href="#finrules.backends.pandas.joins" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.joins" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -3530,14 +3535,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.joins.InnerJoinRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.joins.InnerJoinRule" class="doc doc-heading">
         <code>
-InnerJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+InnerJoinRule            (<span title="etlrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.joins.InnerJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.joins.InnerJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -3668,7 +3673,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/joins.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">InnerJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style inner join operation on two data frames.</span>
 
@@ -3760,14 +3765,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.joins.LeftJoinRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.joins.LeftJoinRule" class="doc doc-heading">
         <code>
-LeftJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+LeftJoinRule            (<span title="etlrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.joins.LeftJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.joins.LeftJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -3901,7 +3906,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/joins.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">LeftJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style left join operation on two data frames.</span>
 
@@ -3995,14 +4000,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.joins.OuterJoinRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.joins.OuterJoinRule" class="doc doc-heading">
         <code>
-OuterJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+OuterJoinRule            (<span title="etlrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.joins.OuterJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.joins.OuterJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -4138,7 +4143,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/joins.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">OuterJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style left join operation on two data frames.</span>
 
@@ -4233,14 +4238,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.joins.RightJoinRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.joins.RightJoinRule" class="doc doc-heading">
         <code>
-RightJoinRule            (<span title="finrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
+RightJoinRule            (<span title="etlrules.backends.pandas.joins.BaseJoinRule">BaseJoinRule</span>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.joins.RightJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.joins.RightJoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -4382,7 +4387,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/joins.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/joins.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RightJoinRule</span><span class="p">(</span><span class="n">BaseJoinRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Performs a database-style left join operation on two data frames.</span>
 
@@ -4495,12 +4500,12 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h4 id="finrules.backends.pandas.newcolumns" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.newcolumns" class="doc doc-heading">
         <code>newcolumns</code>
 
 
 
-<a href="#finrules.backends.pandas.newcolumns" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.newcolumns" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -4519,14 +4524,14 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h5 id="finrules.backends.pandas.newcolumns.AddNewColumnRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.newcolumns.AddNewColumnRule" class="doc doc-heading">
         <code>
-AddNewColumnRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+AddNewColumnRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.newcolumns.AddNewColumnRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.newcolumns.AddNewColumnRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -4661,7 +4666,7 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 </div>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/newcolumns.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/newcolumns.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AddNewColumnRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Adds a new column and sets it to the value of an evaluated expression.</span>
 
@@ -4787,12 +4792,12 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 
 
 
-<h4 id="finrules.backends.pandas.types" class="doc doc-heading">
+<h4 id="etlrules.backends.pandas.types" class="doc doc-heading">
         <code>types</code>
 
 
 
-<a href="#finrules.backends.pandas.types" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#etlrules.backends.pandas.types" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents ">
 
@@ -4811,14 +4816,14 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 
 
 
-<h5 id="finrules.backends.pandas.types.TypeConversionRule" class="doc doc-heading">
+<h5 id="etlrules.backends.pandas.types.TypeConversionRule" class="doc doc-heading">
         <code>
-TypeConversionRule            (<a title="finrules.rule.UnaryOpBaseRule" href="#finrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+TypeConversionRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
         </code>
 
 
 
-<a href="#finrules.backends.pandas.types.TypeConversionRule" class="headerlink" title="Permanent link">&para;</a></h5>
+<a href="#etlrules.backends.pandas.types.TypeConversionRule" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -4899,7 +4904,7 @@ Together with the name, the description acts as the documentation of the rule.</
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>finrules/backends/pandas/types.py</code></summary>
+          <summary>Source code in <code>etlrules/backends/pandas/types.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TypeConversionRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts the type of a given set of columns to other types.</span>
 
@@ -5013,12 +5018,12 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h2 id="finrules.exceptions" class="doc doc-heading">
+<h2 id="etlrules.exceptions" class="doc doc-heading">
         <code>exceptions</code>
 
 
 
-<a href="#finrules.exceptions" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#etlrules.exceptions" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -5037,21 +5042,21 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-<h3 id="finrules.exceptions.ColumnAlreadyExistsError" class="doc doc-heading">
+<h3 id="etlrules.exceptions.ColumnAlreadyExistsError" class="doc doc-heading">
         <code>
 ColumnAlreadyExistsError            (<span title="Exception">Exception</span>)
         </code>
 
 
 
-<a href="#finrules.exceptions.ColumnAlreadyExistsError" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.exceptions.ColumnAlreadyExistsError" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>An attempt to create a column that already exists in the dataframe. </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ColumnAlreadyExistsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; An attempt to create a column that already exists in the dataframe. &quot;&quot;&quot;</span>
 </code></pre></div>
@@ -5068,21 +5073,21 @@ ColumnAlreadyExistsError            (<span title="Exception">Exception</span>)
 
 
 
-<h3 id="finrules.exceptions.ExpressionSyntaxError" class="doc doc-heading">
+<h3 id="etlrules.exceptions.ExpressionSyntaxError" class="doc doc-heading">
         <code>
 ExpressionSyntaxError            (<span title="SyntaxError">SyntaxError</span>)
         </code>
 
 
 
-<a href="#finrules.exceptions.ExpressionSyntaxError" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.exceptions.ExpressionSyntaxError" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>A Python expression used to create a column, aggregate or other operations has a syntax error. </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExpressionSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; A Python expression used to create a column, aggregate or other operations has a syntax error. &quot;&quot;&quot;</span>
 </code></pre></div>
@@ -5099,21 +5104,21 @@ ExpressionSyntaxError            (<span title="SyntaxError">SyntaxError</span>)
 
 
 
-<h3 id="finrules.exceptions.MissingColumnError" class="doc doc-heading">
+<h3 id="etlrules.exceptions.MissingColumnError" class="doc doc-heading">
         <code>
 MissingColumnError            (<span title="Exception">Exception</span>)
         </code>
 
 
 
-<a href="#finrules.exceptions.MissingColumnError" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.exceptions.MissingColumnError" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>An operation is being applied to a column that is not present in the input data frame. </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MissingColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; An operation is being applied to a column that is not present in the input data frame. &quot;&quot;&quot;</span>
 </code></pre></div>
@@ -5130,21 +5135,21 @@ MissingColumnError            (<span title="Exception">Exception</span>)
 
 
 
-<h3 id="finrules.exceptions.SchemaError" class="doc doc-heading">
+<h3 id="etlrules.exceptions.SchemaError" class="doc doc-heading">
         <code>
 SchemaError            (<span title="Exception">Exception</span>)
         </code>
 
 
 
-<a href="#finrules.exceptions.SchemaError" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.exceptions.SchemaError" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>An operation needs a certain schema for the dataframe which is not present. </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SchemaError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; An operation needs a certain schema for the dataframe which is not present. &quot;&quot;&quot;</span>
 </code></pre></div>
@@ -5161,21 +5166,21 @@ SchemaError            (<span title="Exception">Exception</span>)
 
 
 
-<h3 id="finrules.exceptions.UnsupportedTypeError" class="doc doc-heading">
+<h3 id="etlrules.exceptions.UnsupportedTypeError" class="doc doc-heading">
         <code>
 UnsupportedTypeError            (<span title="Exception">Exception</span>)
         </code>
 
 
 
-<a href="#finrules.exceptions.UnsupportedTypeError" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.exceptions.UnsupportedTypeError" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>A type conversion is attempted to a type that is not supported. </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/exceptions.py</code></summary>
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">UnsupportedTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; A type conversion is attempted to a type that is not supported. &quot;&quot;&quot;</span>
 </code></pre></div>
@@ -5205,12 +5210,12 @@ UnsupportedTypeError            (<span title="Exception">Exception</span>)
 
 
 
-<h2 id="finrules.rule" class="doc doc-heading">
+<h2 id="etlrules.rule" class="doc doc-heading">
         <code>rule</code>
 
 
 
-<a href="#finrules.rule" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#etlrules.rule" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -5230,21 +5235,21 @@ UnsupportedTypeError            (<span title="Exception">Exception</span>)
 
 
 
-<h3 id="finrules.rule.BinaryOpBaseRule" class="doc doc-heading">
+<h3 id="etlrules.rule.BinaryOpBaseRule" class="doc doc-heading">
         <code>
-BinaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>)
+BinaryOpBaseRule            (<span title="etlrules.rule.BaseRule">BaseRule</span>)
         </code>
 
 
 
-<a href="#finrules.rule.BinaryOpBaseRule" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.rule.BinaryOpBaseRule" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>Base class for binary operation rules (ie operations taking two data frames as input). </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/rule.py</code></summary>
+          <summary>Source code in <code>etlrules/rule.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BinaryOpBaseRule</span><span class="p">(</span><span class="n">BaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Base class for binary operation rules (ie operations taking two data frames as input). &quot;&quot;&quot;</span>
 
@@ -5295,21 +5300,21 @@ BinaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span
 
 
 
-<h3 id="finrules.rule.UnaryOpBaseRule" class="doc doc-heading">
+<h3 id="etlrules.rule.UnaryOpBaseRule" class="doc doc-heading">
         <code>
-UnaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>)
+UnaryOpBaseRule            (<span title="etlrules.rule.BaseRule">BaseRule</span>)
         </code>
 
 
 
-<a href="#finrules.rule.UnaryOpBaseRule" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#etlrules.rule.UnaryOpBaseRule" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
       <p>Base class for unary operation rules (ie operations taking a single data frame as input). </p>
 
         <details class="quote">
-          <summary>Source code in <code>finrules/rule.py</code></summary>
+          <summary>Source code in <code>etlrules/rule.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">UnaryOpBaseRule</span><span class="p">(</span><span class="n">BaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Base class for unary operation rules (ie operations taking a single data frame as input). &quot;&quot;&quot;</span>
 
@@ -5367,21 +5372,28 @@ UnaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>
 
   </div>
 
-              
-            </article>
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
         <a href="../usage/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Usage" rel="prev">
           <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
           <div class="md-footer__title">
             <div class="md-ellipsis">
@@ -5405,7 +5417,7 @@ UnaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>
             </div>
           </div>
           <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
           </div>
         </a>
       
@@ -5428,25 +5440,25 @@ UnaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>
     
     
     <a href="http://www.jieyu.ai" target="_blank" rel="noopener" title="Tweet" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
     </a>
   
     
     
     <a href="http://www.jieyu.ai" target="_blank" rel="noopener" title="Facebook" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
     </a>
   
     
     
-    <a href="https://github.com/ciprianmiclaus/finrules" target="_blank" rel="noopener" title="Github" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <a href="https://github.com/ciprianmiclaus/etlrules" target="_blank" rel="noopener" title="Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   
     
     
     <a href="mailto:ciprianm@gmail.com" target="_blank" rel="noopener" title="" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z"/></svg>
     </a>
   
 </div>
@@ -5459,11 +5471,13 @@ UnaryOpBaseRule            (<span title="finrules.rule.BaseRule">BaseRule</span>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.tabs", "navigation.instant", "navigation.tabs.sticky"], "search": "../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.tabs", "navigation.instant", "navigation.tabs.sticky"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.e87a5f81.min.js"></script>
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
+    
     
   </body>
 </html>
