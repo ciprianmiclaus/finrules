@@ -672,6 +672,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings" class="md-nav__link">
+    strings
+  </a>
+  
+    <nav class="md-nav" aria-label="strings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrCapitalizeRule" class="md-nav__link">
+    StrCapitalizeRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrLowerRule" class="md-nav__link">
+    StrLowerRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrUpperRule" class="md-nav__link">
+    StrUpperRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.types" class="md-nav__link">
     types
   </a>
@@ -1103,6 +1137,40 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.numeric.RoundRule" class="md-nav__link">
     RoundRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings" class="md-nav__link">
+    strings
+  </a>
+  
+    <nav class="md-nav" aria-label="strings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrCapitalizeRule" class="md-nav__link">
+    StrCapitalizeRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrLowerRule" class="md-nav__link">
+    StrLowerRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrUpperRule" class="md-nav__link">
+    StrUpperRule
   </a>
   
 </li>
@@ -4885,9 +4953,7 @@ AbsRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rul
       <p>Converts numbers to absolute values.</p>
 <p>Basic usage::</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code># rounds Col_A to 2dps, Col_B to 0dps and Col_C to 4dps
-rule = AbsRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>rule = AbsRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])
 rule.apply(data)
 </code></pre></div></td></tr></table></div>
 
@@ -4957,7 +5023,7 @@ Together with the name, the description acts as the documentation of the rule.</
   <tbody>
       <tr>
         <td><code>MissingColumnError</code></td>
-        <td><p>raised in strict mode only if a column in the mapper doesn't exist in the input dataframe.</p></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
@@ -4972,7 +5038,6 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Basic usage::</span>
 
-<span class="sd">        # rounds Col_A to 2dps, Col_B to 0dps and Col_C to 4dps</span>
 <span class="sd">        rule = AbsRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])</span>
 <span class="sd">        rule.apply(data)</span>
 
@@ -4992,7 +5057,7 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError: raised in strict mode only if a column in the mapper doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In non-strict mode, missing columns are ignored.</span>
@@ -5196,6 +5261,522 @@ Together with the name, the description acts as the documentation of the rule.</
 
   <div class="doc doc-children">
 
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="etlrules.backends.pandas.strings" class="doc doc-heading">
+        <code>strings</code>
+
+
+
+<a href="#etlrules.backends.pandas.strings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrCapitalizeRule" class="doc doc-heading">
+        <code>
+StrCapitalizeRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrCapitalizeRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Converts a set of string columns to capitalize.</p>
+<p>Capitalization will convert the first letter in the string to upper case and the rest of the letters
+to lower case.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>rule = StrCapitalizeRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>A list of string columns to convert to capitalize.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrCapitalizeRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts a set of string columns to capitalize.</span>
+
+<span class="sd">    Capitalization will convert the first letter in the string to upper case and the rest of the letters</span>
+<span class="sd">    to lower case.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        rule = StrCapitalizeRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: A list of string columns to convert to capitalize.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrLowerRule" class="doc doc-heading">
+        <code>
+StrLowerRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrLowerRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Converts a set of string columns to lower case.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>rule = StrLowerRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>A list of string columns to convert to lower case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrLowerRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts a set of string columns to lower case.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        rule = StrLowerRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: A list of string columns to convert to lower case.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrUpperRule" class="doc doc-heading">
+        <code>
+StrUpperRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrUpperRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Converts a set of string columns to upper case.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>rule = StrUpperRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td></td>
+        <td><p>A list of string columns to convert to upper case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrUpperRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts a set of string columns to upper case.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        rule = StrUpperRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns: A list of string columns to convert to upper case.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
 
 
 
