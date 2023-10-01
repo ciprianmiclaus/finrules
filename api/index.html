@@ -694,6 +694,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrPadRule" class="md-nav__link">
+    StrPadRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.strings.StrStripRule" class="md-nav__link">
     StrStripRule
   </a>
@@ -1171,6 +1178,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.strings.StrLowerRule" class="md-nav__link">
     StrLowerRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrPadRule" class="md-nav__link">
+    StrPadRule
   </a>
   
 </li>
@@ -5697,6 +5711,222 @@ Together with the name, the description acts as the documentation of the rule.</
 
   </div>
 
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrPadRule" class="doc doc-heading">
+        <code>
+StrPadRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrPadRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Makes strings of a given width (justifies) by padding left, right or both sides with a fill character.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>rule = StrPadRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], width=8, fill_character=&quot;.&quot;, how=&quot;right&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to convert to upper case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>width</code></td>
+        <td><code>int</code></td>
+        <td><p>Pad with the fill_character to this width.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>fill_character</code></td>
+        <td><code>str</code></td>
+        <td><p>Character to fill with. Defaults to whitespace.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>how</code></td>
+        <td><code>Literal[&#39;left&#39;, &#39;right&#39;, &#39;both&#39;]</code></td>
+        <td><p>How should the stripping be done. One of left, right, both.
+Left pads at the beggining of the string, right pads at the end, while both pads at both ends.</p></td>
+        <td><code>&#39;both&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrPadRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Makes strings of a given width (justifies) by padding left, right or both sides with a fill character.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        rule = StrPadRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], width=8, fill_character=&quot;.&quot;, how=&quot;right&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to convert to upper case.</span>
+<span class="sd">        width: Pad with the fill_character to this width.</span>
+<span class="sd">        fill_character: Character to fill with. Defaults to whitespace.</span>
+<span class="sd">        how: How should the stripping be done. One of left, right, both.</span>
+<span class="sd">            Left pads at the beggining of the string, right pads at the end, while both pads at both ends.</span>
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PAD_LEFT</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
+    <span class="n">PAD_RIGHT</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
+    <span class="n">PAD_BOTH</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">fill_character</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">how</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="n">PAD_LEFT</span><span class="p">,</span> <span class="n">PAD_RIGHT</span><span class="p">,</span> <span class="n">PAD_BOTH</span><span class="p">]</span><span class="o">=</span><span class="n">PAD_BOTH</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="o">=</span><span class="n">output_columns</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> 
+                         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">how</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PAD_LEFT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PAD_RIGHT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PAD_BOTH</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Unknown how parameter </span><span class="si">{</span><span class="n">how</span><span class="si">}</span><span class="s2">. It must be one of: </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PAD_LEFT</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">PAD_RIGHT</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">PAD_BOTH</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">how</span> <span class="o">=</span> <span class="n">how</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill_character</span> <span class="o">=</span> <span class="n">fill_character</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">how</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">PAD_RIGHT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fill_character</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">how</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">PAD_LEFT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fill_character</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fill_character</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
