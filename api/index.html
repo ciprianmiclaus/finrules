@@ -4941,7 +4941,7 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 
 <h5 id="etlrules.backends.pandas.numeric.AbsRule" class="doc doc-heading">
         <code>
-AbsRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+AbsRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>, <span title="etlrules.backends.pandas.validation.ColumnsInOutMixin">ColumnsInOutMixin</span>)
         </code>
 
 
@@ -4973,6 +4973,15 @@ rule.apply(data)
         <td><code>Iterable[str]</code></td>
         <td><p>A list of numeric columns to convert to absolute values.</p></td>
         <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the absolute values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the absolute values.
+If not provided, the result is updated in place.</p></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
@@ -5025,6 +5034,10 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>MissingColumnError</code></td>
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5033,7 +5046,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/numeric.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AbsRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AbsRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">,</span> <span class="n">ColumnsInOutMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts numbers to absolute values.</span>
 
 <span class="sd">    Basic usage::</span>
@@ -5043,6 +5056,10 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Args:</span>
 <span class="sd">        columns: A list of numeric columns to convert to absolute values.</span>
+<span class="sd">        output_columns: A list of new names for the columns with the absolute values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the absolute values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -5058,26 +5075,22 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In non-strict mode, missing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_col</span> <span class="k">for</span> <span class="n">out_col</span> <span class="ow">in</span> <span class="n">output_columns</span><span class="p">]</span> <span class="k">if</span> <span class="n">output_columns</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="n">df_cols_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">df_cols_set</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column(s) </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df_cols_set</span><span class="si">}</span><span class="s2"> are missing from the input dataframe.&quot;</span><span class="p">)</span>
-            <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_cols_set</span><span class="p">]</span>
+        <span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_columns_in_out</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">)</span>
         <span class="n">abs_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">abs_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">})</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">output_col</span><span class="p">:</span> <span class="n">abs_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">output_col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">)})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -5360,6 +5373,15 @@ rule.apply(data)
         <td><em>required</em></td>
       </tr>
       <tr>
+        <td><code>output_columns</code></td>
+        <td></td>
+        <td><p>A list of new names for the columns with the capitalized values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the capitalized values.
+If not provided, the result is updated in place.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
         <td><code>named_input</code></td>
         <td></td>
         <td><p>Which dataframe to use as the input. Optional.
@@ -5410,6 +5432,10 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>MissingColumnError</code></td>
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5431,6 +5457,10 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Args:</span>
 <span class="sd">        columns: A list of string columns to convert to capitalize.</span>
+<span class="sd">        output_columns: A list of new names for the columns with the capitalized values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the capitalized values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -5446,6 +5476,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In non-strict mode, missing columns are ignored.</span>
@@ -5520,6 +5551,15 @@ rule.apply(data)
         <td><em>required</em></td>
       </tr>
       <tr>
+        <td><code>output_columns</code></td>
+        <td></td>
+        <td><p>A list of new names for the columns with the lower case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the lower case values.
+If not provided, the result is updated in place.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
         <td><code>named_input</code></td>
         <td></td>
         <td><p>Which dataframe to use as the input. Optional.
@@ -5570,6 +5610,10 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>MissingColumnError</code></td>
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5588,6 +5632,10 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Args:</span>
 <span class="sd">        columns: A list of string columns to convert to lower case.</span>
+<span class="sd">        output_columns: A list of new names for the columns with the lower case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the lower case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -5603,6 +5651,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In non-strict mode, missing columns are ignored.</span>
@@ -5681,6 +5730,15 @@ rule.apply(data)
         <td><em>required</em></td>
       </tr>
       <tr>
+        <td><code>output_columns</code></td>
+        <td></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
         <td><code>named_input</code></td>
         <td></td>
         <td><p>Which dataframe to use as the input. Optional.
@@ -5731,6 +5789,10 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>MissingColumnError</code></td>
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5749,6 +5811,10 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Args:</span>
 <span class="sd">        columns: A list of string columns to convert to upper case.</span>
+<span class="sd">        output_columns: A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -5764,6 +5830,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        In non-strict mode, missing columns are ignored.</span>
