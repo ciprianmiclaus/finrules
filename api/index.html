@@ -701,6 +701,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrSplitRejoinRule" class="md-nav__link">
+    StrSplitRejoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrSplitRule" class="md-nav__link">
+    StrSplitRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.strings.StrStripRule" class="md-nav__link">
     StrStripRule
   </a>
@@ -1185,6 +1199,20 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.strings.StrPadRule" class="md-nav__link">
     StrPadRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrSplitRejoinRule" class="md-nav__link">
+    StrSplitRejoinRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrSplitRule" class="md-nav__link">
+    StrSplitRule
   </a>
   
 </li>
@@ -5930,6 +5958,510 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrSplitRejoinRule" class="doc doc-heading">
+        <code>
+StrSplitRejoinRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrSplitRejoinRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Splits a string into an array of substrings based on a string separator or a regular expression, then rejoin with a new separator, optionally sorting the substrings.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The output is an array of substrings which can optionally be limited via the limit parameter to only
+include the first <limit> number of substrings.</p>
+</div>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code># splits col_A, col_B, col_C on ,
+# &quot;b,d;a,c&quot; will be split and rejoined as &quot;b|c|d;a&quot;
+rule = StrSplitRejoinRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], separator=&quot;,&quot;, new_separator=&quot;|&quot;, sort=&quot;ascending&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to convert to upper case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>separator</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>A literal value to split the string by. Optional.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>separator_regex</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>A regular expression to split the string by. Optional
+Note: One and only one of separator or separator_regex must be specified.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>limit</code></td>
+        <td><code>Optional[int]</code></td>
+        <td><p>A limit to the number of substrings. If specified, only the first <limit> substrings are returned
+plus an additional remainder. At most, limit + 1 substrings are returned with the last beind the remainder.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>new_separator</code></td>
+        <td><code>str</code></td>
+        <td><p>A new separator used to rejoin the substrings.</p></td>
+        <td><code>&#39;,&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>sort</code></td>
+        <td><code>Optional[Literal[&#39;ascending&#39;, &#39;descending&#39;]]</code></td>
+        <td><p>Optionally sorts the substrings before rejoining using the new_separator.
+It can be set to either ascending or descending, sorting the substrings accordingly.
+When the value is set to None, there is no sorting.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrSplitRejoinRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Splits a string into an array of substrings based on a string separator or a regular expression, then rejoin with a new separator, optionally sorting the substrings.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The output is an array of substrings which can optionally be limited via the limit parameter to only</span>
+<span class="sd">        include the first &lt;limit&gt; number of substrings.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # splits col_A, col_B, col_C on ,</span>
+<span class="sd">        # &quot;b,d;a,c&quot; will be split and rejoined as &quot;b|c|d;a&quot;</span>
+<span class="sd">        rule = StrSplitRejoinRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], separator=&quot;,&quot;, new_separator=&quot;|&quot;, sort=&quot;ascending&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to convert to upper case.</span>
+<span class="sd">        separator: A literal value to split the string by. Optional.</span>
+<span class="sd">        separator_regex: A regular expression to split the string by. Optional</span>
+<span class="sd">            Note: One and only one of separator or separator_regex must be specified.</span>
+<span class="sd">        limit: A limit to the number of substrings. If specified, only the first &lt;limit&gt; substrings are returned</span>
+<span class="sd">            plus an additional remainder. At most, limit + 1 substrings are returned with the last beind the remainder.</span>
+<span class="sd">        new_separator: A new separator used to rejoin the substrings.</span>
+<span class="sd">        sort: Optionally sorts the substrings before rejoining using the new_separator.</span>
+<span class="sd">            It can be set to either ascending or descending, sorting the substrings accordingly.</span>
+<span class="sd">            When the value is set to None, there is no sorting.</span>
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SORT_ASCENDING</span> <span class="o">=</span> <span class="s2">&quot;ascending&quot;</span>
+    <span class="n">SORT_DESCENDING</span> <span class="o">=</span> <span class="s2">&quot;descending&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">separator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">separator_regex</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">new_separator</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">sort</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="n">SORT_ASCENDING</span><span class="p">,</span> <span class="n">SORT_DESCENDING</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="o">=</span><span class="n">output_columns</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> 
+                         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">bool</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">separator_regex</span><span class="p">),</span> <span class="s2">&quot;One and only one of separator and separator_regex can be specified.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span> <span class="o">=</span> <span class="n">separator_regex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_separator</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">new_separator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_separator</span> <span class="o">=</span> <span class="n">new_separator</span>
+        <span class="k">assert</span> <span class="n">sort</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">SORT_ASCENDING</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">SORT_DESCENDING</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sort</span> <span class="o">=</span> <span class="n">sort</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_col</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_compiled_regex</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_col</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">new_separator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_separator</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">reverse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">SORT_DESCENDING</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">new_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">))</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">nan</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="n">val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">new_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">nan</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">new_col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrSplitRule" class="doc doc-heading">
+        <code>
+StrSplitRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrSplitRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Splits a string into an array of substrings based on a string separator or a regular expression.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The output is an array of substrings which can optionally be limited via the limit parameter to only
+include the first <limit> number of substrings.
+If you need the output to be a string, perhaps joined on a different separator and optionally sorted
+then use the StrSplitRejoinRule rule.</p>
+</div>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code># splits col_A, col_B, col_C on ,
+# &quot;a,b;c,d&quot; will be split as [&quot;a&quot;, &quot;b;c&quot;, &quot;d&quot;]
+rule = StrSplitRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], separator=&quot;,&quot;)
+rule.apply(data)
+
+# splits col_A, col_B, col_C on either , or ;
+# &quot;a,b;c,d&quot; will be split as [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
+rule = StrSplitRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], separator_regex=&quot;,|;&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to convert to upper case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>separator</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>A literal value to split the string by. Optional.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>separator_regex</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>A regular expression to split the string by. Optional
+Note: One and only one of separator or separator_regex must be specified.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>limit</code></td>
+        <td><code>Optional[int]</code></td>
+        <td><p>A limit to the number of substrings. If specified, only the first <limit> substrings are returned
+plus an additional remainder. At most, limit + 1 substrings are returned with the last beind the remainder.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrSplitRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Splits a string into an array of substrings based on a string separator or a regular expression.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The output is an array of substrings which can optionally be limited via the limit parameter to only</span>
+<span class="sd">        include the first &lt;limit&gt; number of substrings.</span>
+<span class="sd">        If you need the output to be a string, perhaps joined on a different separator and optionally sorted</span>
+<span class="sd">        then use the StrSplitRejoinRule rule.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # splits col_A, col_B, col_C on ,</span>
+<span class="sd">        # &quot;a,b;c,d&quot; will be split as [&quot;a&quot;, &quot;b;c&quot;, &quot;d&quot;]</span>
+<span class="sd">        rule = StrSplitRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], separator=&quot;,&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # splits col_A, col_B, col_C on either , or ;</span>
+<span class="sd">        # &quot;a,b;c,d&quot; will be split as [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span>
+<span class="sd">        rule = StrSplitRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], separator_regex=&quot;,|;&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to convert to upper case.</span>
+<span class="sd">        separator: A literal value to split the string by. Optional.</span>
+<span class="sd">        separator_regex: A regular expression to split the string by. Optional</span>
+<span class="sd">            Note: One and only one of separator or separator_regex must be specified.</span>
+<span class="sd">        limit: A limit to the number of substrings. If specified, only the first &lt;limit&gt; substrings are returned</span>
+<span class="sd">            plus an additional remainder. At most, limit + 1 substrings are returned with the last beind the remainder.</span>
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">separator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">separator_regex</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="o">=</span><span class="n">output_columns</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> 
+                         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">bool</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">separator_regex</span><span class="p">),</span> <span class="s2">&quot;One and only one of separator and separator_regex can be specified.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span> <span class="o">=</span> <span class="n">separator_regex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">separator_regex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_compiled_regex</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
