@@ -518,6 +518,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.basic.ReplaceRule" class="md-nav__link">
+    ReplaceRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.basic.SortRule" class="md-nav__link">
     SortRule
   </a>
@@ -1016,6 +1023,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.basic.RenameRule" class="md-nav__link">
     RenameRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.basic.ReplaceRule" class="md-nav__link">
+    ReplaceRule
   </a>
   
 </li>
@@ -2017,6 +2031,7 @@ is missing from the input dataframe.</p></td>
 
 
 
+
   <div class="doc doc-object doc-module">
 
 
@@ -2513,6 +2528,236 @@ Together with the name, the description acts as the documentation of the rule.</
                 <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing columns to rename: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.basic.ReplaceRule" class="doc doc-heading">
+        <code>
+ReplaceRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.basic.ReplaceRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Replaces some some values (or regular expressions) with another set of values (or regular expressions) in a set of columns.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># replaces A with new_A and b with new_b in col_A, col_B and col_C
+rule = ReplaceRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], values=[&quot;A&quot;, &quot;b&quot;], new_values=[&quot;new_A&quot;, &quot;new_b&quot;])
+rule.apply(data)
+
+# replaces 1 with 3 and 2 with 4 in the col_I column
+rule = ReplaceRule([&quot;col_I&quot;], values=[1, 2], new_values=[3, 4])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to convert to upper case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>values</code></td>
+        <td><code>Iterable[Union[int, float, str]]</code></td>
+        <td><p>A sequence of values to replace. Regular expressions can be used to match values more widely,
+in which case, the regex parameter must be set to True.
+Values can be any supported types but they should match the type of the columns.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>new_values</code></td>
+        <td><code>Iterable[Union[int, float, str]]</code></td>
+        <td><p>A sequence of the same length as values. Each value within new_values will replace the
+corresponding value in values (at the same index).
+New values can be any supported types but they should match the type of the columns.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>regex</code></td>
+        <td></td>
+        <td><p>True if all the values and new_values are to be interpreted as regular expressions. Default: False.
+regex=True is only applicable to string columns.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ReplaceRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Replaces some some values (or regular expressions) with another set of values (or regular expressions) in a set of columns.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # replaces A with new_A and b with new_b in col_A, col_B and col_C</span>
+<span class="sd">        rule = ReplaceRule([&quot;col_A&quot;, &quot;col_B&quot;, &quot;col_C&quot;], values=[&quot;A&quot;, &quot;b&quot;], new_values=[&quot;new_A&quot;, &quot;new_b&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # replaces 1 with 3 and 2 with 4 in the col_I column</span>
+<span class="sd">        rule = ReplaceRule([&quot;col_I&quot;], values=[1, 2], new_values=[3, 4])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to convert to upper case.</span>
+<span class="sd">        values: A sequence of values to replace. Regular expressions can be used to match values more widely,</span>
+<span class="sd">            in which case, the regex parameter must be set to True.</span>
+<span class="sd">            Values can be any supported types but they should match the type of the columns.</span>
+<span class="sd">        new_values: A sequence of the same length as values. Each value within new_values will replace the</span>
+<span class="sd">            corresponding value in values (at the same index).</span>
+<span class="sd">            New values can be any supported types but they should match the type of the columns.</span>
+<span class="sd">        regex: True if all the values and new_values are to be interpreted as regular expressions. Default: False.</span>
+<span class="sd">            regex=True is only applicable to string columns.</span>
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">values</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">str</span><span class="p">]],</span> <span class="n">new_values</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">str</span><span class="p">]],</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="o">=</span><span class="n">output_columns</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> 
+                         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">new_values</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_values</span><span class="p">),</span> <span class="s2">&quot;values and new_values must be of the same length.&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;values must not be empty.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regex</span> <span class="o">=</span> <span class="n">regex</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">new_values</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">regex</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -5386,14 +5631,13 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-
   <div class="doc doc-object doc-class">
 
 
 
 <h5 id="etlrules.backends.pandas.strings.StrCapitalizeRule" class="doc doc-heading">
         <code>
-StrCapitalizeRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrCapitalizeRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -5500,7 +5744,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrCapitalizeRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrCapitalizeRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts a set of string columns to capitalize.</span>
 
 <span class="sd">    Capitalization will convert the first letter in the string to upper case and the rest of the letters</span>
@@ -5573,7 +5817,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <h5 id="etlrules.backends.pandas.strings.StrLowerRule" class="doc doc-heading">
         <code>
-StrLowerRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrLowerRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -5678,7 +5922,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrLowerRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrLowerRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts a set of string columns to lower case.</span>
 
 <span class="sd">    Basic usage::</span>
@@ -5747,7 +5991,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <h5 id="etlrules.backends.pandas.strings.StrPadRule" class="doc doc-heading">
         <code>
-StrPadRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrPadRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -5871,7 +6115,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrPadRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrPadRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Makes strings of a given width (justifies) by padding left, right or both sides with a fill character.</span>
 
 <span class="sd">    Basic usage::</span>
@@ -5958,14 +6202,13 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
-
   <div class="doc doc-object doc-class">
 
 
 
 <h5 id="etlrules.backends.pandas.strings.StrSplitRejoinRule" class="doc doc-heading">
         <code>
-StrSplitRejoinRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrSplitRejoinRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -6113,7 +6356,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrSplitRejoinRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrSplitRejoinRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Splits a string into an array of substrings based on a string separator or a regular expression, then rejoin with a new separator, optionally sorting the substrings.</span>
 
 <span class="sd">    Note:</span>
@@ -6226,7 +6469,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <h5 id="etlrules.backends.pandas.strings.StrSplitRule" class="doc doc-heading">
         <code>
-StrSplitRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrSplitRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -6372,7 +6615,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrSplitRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrSplitRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Splits a string into an array of substrings based on a string separator or a regular expression.</span>
 
 <span class="sd">    Note:</span>
@@ -6471,7 +6714,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <h5 id="etlrules.backends.pandas.strings.StrStripRule" class="doc doc-heading">
         <code>
-StrStripRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrStripRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -6590,7 +6833,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrStripRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrStripRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Strips leading, trailing or both whitespaces or other characters from given columns.</span>
 
 <span class="sd">    Basic usage::</span>
@@ -6682,7 +6925,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <h5 id="etlrules.backends.pandas.strings.StrUpperRule" class="doc doc-heading">
         <code>
-StrUpperRule            (<span title="etlrules.backends.pandas.strings.BaseStrRule">BaseStrRule</span>)
+StrUpperRule            (<span title="etlrules.backends.pandas.base.BaseAssignRule">BaseAssignRule</span>)
         </code>
 
 
@@ -6787,7 +7030,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrUpperRule</span><span class="p">(</span><span class="n">BaseStrRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrUpperRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts a set of string columns to upper case.</span>
 
 <span class="sd">    Basic usage::</span>
