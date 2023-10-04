@@ -3588,8 +3588,8 @@ rule.apply(df)
   </thead>
   <tbody>
       <tr>
-        <td><code>condition</code></td>
-        <td></td>
+        <td><code>condition_expression</code></td>
+        <td><code>str</code></td>
         <td><p>An expression as a string. The expression must evaluate to a boolean scalar or a boolean series.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -3722,7 +3722,7 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        | 3   | 4  | B is greater |</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        condition: An expression as a string. The expression must evaluate to a boolean scalar or a boolean series.</span>
+<span class="sd">        condition_expression: An expression as a string. The expression must evaluate to a boolean scalar or a boolean series.</span>
 <span class="sd">        then_value: The value to use if the condition is true.</span>
 <span class="sd">        then_column: Use the value from the then_column if the condition is true.</span>
 <span class="sd">            One and only one of then_value and then_column can be used.</span>
