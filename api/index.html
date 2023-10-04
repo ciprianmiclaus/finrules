@@ -694,6 +694,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrExtractRule" class="md-nav__link">
+    StrExtractRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.strings.StrLowerRule" class="md-nav__link">
     StrLowerRule
   </a>
@@ -1199,6 +1206,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.strings.StrCapitalizeRule" class="md-nav__link">
     StrCapitalizeRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.strings.StrExtractRule" class="md-nav__link">
+    StrExtractRule
   </a>
   
 </li>
@@ -5808,6 +5822,262 @@ Together with the name, the description acts as the documentation of the rule.</
 
   </div>
 
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.strings.StrExtractRule" class="doc doc-heading">
+        <code>
+StrExtractRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>, <span title="etlrules.backends.pandas.validation.ColumnsInOutMixin">ColumnsInOutMixin</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.strings.StrExtractRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Extract substrings from strings columns using regular expressions.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code># extracts the number between start_ and _end
+# ie: for an input value of start_1234_end - will extract 1234 in col_A
+rule = StrExtractRule([&quot;col_A&quot;], regular_expression=r&quot;start_([\d]*)_end&quot;)
+rule.apply(data)
+
+# extracts with multiple groups, extracting the single digit at the end as well
+# for an input value of start_1234_end_9, col_1 will extract 1234, col_2 will extract 9
+rule = StrExtractRule([&quot;col_A&quot;], regular_expression=r&quot;start_([\d]*)_end_([\d])&quot;, output_columns=[&quot;col_1&quot;, &quot;col_2&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to convert to upper case.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>regular_expression</code></td>
+        <td><code>str</code></td>
+        <td><p>The regular expression used to extract data.
+The regular expression must have 1 or more groups - ie sections between brackets.
+The groups do the actual extraction of data.
+If there is a single group, then the column can be modified in place (ie no output_columns are needed) but
+if there are multiple groups, then output_columns must be specified as each group will be extracted in a new
+output column.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>keep_original_value</code></td>
+        <td><code>bool</code></td>
+        <td><p>Only used in case there isn't a match and it specifies if NA should be used in the output or the original value.
+Defaults: True.
+If the regular expression has multiple groups and therefore multiple output_columns, only the first output column
+will keep the original value, the rest will be populated with NA.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, it must have one output_column per regular expression group, for every input columns.
+For example, if input column is ["A"] and the regular expression is "a_([\d])<em>([\d])" with 2 groups, then
+the output columns must have 2 columns (one per group) - for example ["A1_out", "A2_out"].
+If the input columns are ["A", "B"] and the regular expression is "a</em>([\d])_([\d])" with 2 groups, then
+the output columns must have 2 columns (one per group) for every input column - e.g. ["A1_out", "A2_out", "B1_out", "B2_out"].
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place (only possible if the regular expression has a single group).</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/strings.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StrExtractRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">,</span> <span class="n">ColumnsInOutMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot; Extract substrings from strings columns using regular expressions.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # extracts the number between start_ and _end</span>
+<span class="sd">        # ie: for an input value of start_1234_end - will extract 1234 in col_A</span>
+<span class="sd">        rule = StrExtractRule([&quot;col_A&quot;], regular_expression=r&quot;start_([\d]*)_end&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # extracts with multiple groups, extracting the single digit at the end as well</span>
+<span class="sd">        # for an input value of start_1234_end_9, col_1 will extract 1234, col_2 will extract 9</span>
+<span class="sd">        rule = StrExtractRule([&quot;col_A&quot;], regular_expression=r&quot;start_([\d]*)_end_([\d])&quot;, output_columns=[&quot;col_1&quot;, &quot;col_2&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to convert to upper case.</span>
+<span class="sd">        regular_expression: The regular expression used to extract data.</span>
+<span class="sd">            The regular expression must have 1 or more groups - ie sections between brackets.</span>
+<span class="sd">            The groups do the actual extraction of data.</span>
+<span class="sd">            If there is a single group, then the column can be modified in place (ie no output_columns are needed) but</span>
+<span class="sd">            if there are multiple groups, then output_columns must be specified as each group will be extracted in a new</span>
+<span class="sd">            output column.</span>
+<span class="sd">        keep_original_value: Only used in case there isn&#39;t a match and it specifies if NA should be used in the output or the original value.</span>
+<span class="sd">            Defaults: True.</span>
+<span class="sd">            If the regular expression has multiple groups and therefore multiple output_columns, only the first output column</span>
+<span class="sd">            will keep the original value, the rest will be populated with NA.</span>
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, it must have one output_column per regular expression group, for every input columns.</span>
+<span class="sd">            For example, if input column is [&quot;A&quot;] and the regular expression is &quot;a_([\d])_([\d])&quot; with 2 groups, then</span>
+<span class="sd">            the output columns must have 2 columns (one per group) - for example [&quot;A1_out&quot;, &quot;A2_out&quot;].</span>
+<span class="sd">            If the input columns are [&quot;A&quot;, &quot;B&quot;] and the regular expression is &quot;a_([\d])_([\d])&quot; with 2 groups, then</span>
+<span class="sd">            the output columns must have 2 columns (one per group) for every input column - e.g. [&quot;A1_out&quot;, &quot;A2_out&quot;, &quot;B1_out&quot;, &quot;B2_out&quot;].</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place (only possible if the regular expression has a single group).</span>
+
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">regular_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keep_original_value</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> 
+                         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_col</span> <span class="k">for</span> <span class="n">out_col</span> <span class="ow">in</span> <span class="n">output_columns</span><span class="p">]</span> <span class="k">if</span> <span class="n">output_columns</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regular_expression</span> <span class="o">=</span> <span class="n">regular_expression</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">regular_expression</span><span class="p">)</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span><span class="o">.</span><span class="n">groups</span>
+        <span class="k">assert</span> <span class="n">groups</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;The regular expression must have at least 1 group - ie a secstion in () - which gets extracted.&quot;</span>
+        <span class="k">if</span> <span class="n">groups</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="s2">&quot;The regular expression has one group and the output_columns must match 1 to 1 the length of the columns&quot;</span>
+        <span class="k">if</span> <span class="n">groups</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;The regular expression has </span><span class="si">{</span><span class="n">groups</span><span class="si">}</span><span class="s2"> groups in which case the output_columns must be specified.&quot;</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span><span class="p">)</span> <span class="o">==</span> <span class="n">groups</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;The regular expression has </span><span class="si">{</span><span class="n">groups</span><span class="si">}</span><span class="s2"> groups, the output_columns must have </span><span class="si">{</span><span class="n">groups</span><span class="si">}</span><span class="s2"> columns per each input column.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep_original_value</span> <span class="o">=</span> <span class="n">keep_original_value</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_columns_in_out</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">,</span> <span class="n">validate_length</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">new_cols_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span><span class="o">.</span><span class="n">groups</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+            <span class="n">new_col</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_original_value</span><span class="p">:</span>
+                <span class="c1"># only the first new column keeps the value (in case of multiple groups)</span>
+                <span class="n">new_col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">groups</span><span class="p">):</span>
+                <span class="n">new_cols_dict</span><span class="p">[</span><span class="n">output_columns</span><span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="n">groups</span> <span class="o">+</span> <span class="n">group</span><span class="p">]]</span> <span class="o">=</span> <span class="n">new_col</span><span class="p">[</span><span class="n">group</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new_cols_dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
