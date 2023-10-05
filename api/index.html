@@ -572,6 +572,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.conditions.FilterRule" class="md-nav__link">
+    FilterRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.conditions.IfThenElseRule" class="md-nav__link">
     IfThenElseRule
   </a>
@@ -1107,6 +1114,13 @@
   
     <nav class="md-nav" aria-label="conditions">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.conditions.FilterRule" class="md-nav__link">
+    FilterRule
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.conditions.IfThenElseRule" class="md-nav__link">
@@ -1685,6 +1699,7 @@ Any named outputs in the block are not exposed to the rules outside of the block
     </div>
 
   </div>
+
 
 
 
@@ -3537,6 +3552,267 @@ In non-strict mode, columns are not checked and values are filled with NA when m
 
 
 
+<h5 id="etlrules.backends.pandas.conditions.FilterRule" class="doc doc-heading">
+        <code>
+FilterRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.conditions.FilterRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Exclude rows based on a condition.</p>
+<p>Example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>Given df:
+| A   | B  |
+| 1   | 2  |
+| 5   | 3  |
+| 3   | 4  |
+
+rule = FilterRule(&quot;df[&#39;A&#39;] &gt; df[&#39;B&#39;]&quot;)
+rule.apply(df)
+</code></pre></div></td></tr></table></div>
+<p>Result::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| 5   | 3  |
+</code></pre></div></td></tr></table></div>
+<p>Same example using discarded_matching_rows=True::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>rule = FilterRule(&quot;df[&#39;A&#39;] &gt; df[&#39;B&#39;]&quot;, discard_matching_rows=True)
+rule.apply(df)
+</code></pre></div></td></tr></table></div>
+<p>Result::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   | B  |
+| 1   | 2  |
+| 3   | 4  |
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>condition_expression</code></td>
+        <td><code>str</code></td>
+        <td><p>An expression as a string. The expression must evaluate to a boolean scalar or a boolean series.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>discard_matching_rows</code></td>
+        <td><code>bool</code></td>
+        <td><p>By default the rows matching the condition (ie where the condition is True) are kept, the rest of the
+rows being dropped from the result. Setting this parameter to True essentially inverts the condition, so the rows
+matching the condition are discarded and the rest of the rows kept. Default: False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output_discarded</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>A named output for the records being discarded if those need to be kept for further processing.
+Default: None, which doesn't keep track of discarded records.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>output_column</code></td>
+        <td></td>
+        <td><p>The column name of the result column which will be added to the dataframe.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ExpressionSyntaxError</code></td>
+        <td><p>raised if the column expression has a Python syntax error.</p></td>
+      </tr>
+      <tr>
+        <td><code>TypeError</code></td>
+        <td><p>raised if an operation is not supported between the types involved</p></td>
+      </tr>
+      <tr>
+        <td><code>NameError</code></td>
+        <td><p>raised if an unknown variable is used</p></td>
+      </tr>
+      <tr>
+        <td><code>KeyError</code></td>
+        <td><p>raised if you try to use an unknown column (i.e. df['ANY_UNKNOWN_COLUMN'])</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/conditions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">FilterRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Exclude rows based on a condition.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        Given df:</span>
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | 1   | 2  |</span>
+<span class="sd">        | 5   | 3  |</span>
+<span class="sd">        | 3   | 4  |</span>
+
+<span class="sd">        rule = FilterRule(&quot;df[&#39;A&#39;] &gt; df[&#39;B&#39;]&quot;)</span>
+<span class="sd">        rule.apply(df)</span>
+
+<span class="sd">    Result::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | 5   | 3  |</span>
+
+<span class="sd">    Same example using discarded_matching_rows=True::</span>
+
+<span class="sd">        rule = FilterRule(&quot;df[&#39;A&#39;] &gt; df[&#39;B&#39;]&quot;, discard_matching_rows=True)</span>
+<span class="sd">        rule.apply(df)</span>
+
+<span class="sd">    Result::</span>
+
+<span class="sd">        | A   | B  |</span>
+<span class="sd">        | 1   | 2  |</span>
+<span class="sd">        | 3   | 4  |</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        condition_expression: An expression as a string. The expression must evaluate to a boolean scalar or a boolean series.</span>
+<span class="sd">        discard_matching_rows: By default the rows matching the condition (ie where the condition is True) are kept, the rest of the</span>
+<span class="sd">            rows being dropped from the result. Setting this parameter to True essentially inverts the condition, so the rows</span>
+<span class="sd">            matching the condition are discarded and the rest of the rows kept. Default: False.</span>
+<span class="sd">        named_output_discarded: A named output for the records being discarded if those need to be kept for further processing.</span>
+<span class="sd">            Default: None, which doesn&#39;t keep track of discarded records.</span>
+<span class="sd">        output_column: The column name of the result column which will be added to the dataframe.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ExpressionSyntaxError: raised if the column expression has a Python syntax error.</span>
+<span class="sd">        TypeError: raised if an operation is not supported between the types involved</span>
+<span class="sd">        NameError: raised if an unknown variable is used</span>
+<span class="sd">        KeyError: raised if you try to use an unknown column (i.e. df[&#39;ANY_UNKNOWN_COLUMN&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_condition_expression&#39;</span><span class="p">,</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">discard_matching_rows</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">named_output_discarded</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">condition_expression</span><span class="p">,</span> <span class="s2">&quot;condition_expression cannot be empty&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition_expression</span> <span class="o">=</span> <span class="n">condition_expression</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discard_matching_rows</span> <span class="o">=</span> <span class="n">discard_matching_rows</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">named_output_discarded</span> <span class="o">=</span> <span class="n">named_output_discarded</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_condition_expression</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_expression</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;FilterRule.py&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">cond_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condition_expression</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">discard_matching_rows</span><span class="p">:</span>
+            <span class="n">cond_series</span> <span class="o">=</span> <span class="o">~</span><span class="n">cond_series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">cond_series</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_output_discarded</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">set_named_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_output_discarded</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">cond_series</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
 <h5 id="etlrules.backends.pandas.conditions.IfThenElseRule" class="doc doc-heading">
         <code>
 IfThenElseRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
@@ -3752,7 +4028,7 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        KeyError: raised if you try to use an unknown column (i.e. df[&#39;ANY_UNKNOWN_COLUMN&#39;])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_ast_expr&#39;</span><span class="p">,</span> <span class="s1">&#39;_compiled_expr&#39;</span><span class="p">)</span>
+    <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_condition_expression&#39;</span><span class="p">,</span> <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">then_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">bool</span><span class="p">,</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">then_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">else_value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">bool</span><span class="p">,</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">else_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
@@ -3768,13 +4044,7 @@ Together with the name, the description acts as the documentation of the rule.</
         <span class="bp">self</span><span class="o">.</span><span class="n">then_column</span> <span class="o">=</span> <span class="n">then_column</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">else_value</span> <span class="o">=</span> <span class="n">else_value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">else_column</span> <span class="o">=</span> <span class="n">else_column</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ast_expr</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">condition_expression</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_column</span><span class="si">}</span><span class="s1">.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ast_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_column</span><span class="si">}</span><span class="s1">.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ExpressionSyntaxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in expression &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_expression</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_condition_expression</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition_expression</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_column</span><span class="si">}</span><span class="s1">.py&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -3785,12 +4055,7 @@ Together with the name, the description acts as the documentation of the rule.</
             <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">then_column</span><span class="si">}</span><span class="s2"> is missing from the input dataframe.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_columns</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">else_column</span><span class="si">}</span><span class="s2"> is missing from the input dataframe.&quot;</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">cond_series</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s1">&#39;df&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">})</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="c1"># attempt to run a slower apply</span>
-            <span class="n">expr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span>
-            <span class="n">cond_series</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s1">&#39;df&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">}),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cond_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condition_expression</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="n">then_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_value</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">then_column</span><span class="p">]</span>
         <span class="n">else_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_value</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">else_column</span><span class="p">]</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cond_series</span><span class="p">,</span> <span class="n">then_value</span><span class="p">,</span> <span class="n">else_value</span><span class="p">)</span>
@@ -5527,30 +5792,19 @@ To avoid such behavior, fill the NAs before performing operations.</p>
 <span class="sd">        To avoid such behavior, fill the NAs before performing operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_ast_expr&#39;</span><span class="p">,</span> <span class="s1">&#39;_compiled_expr&#39;</span><span class="p">)</span>
+    <span class="n">EXCLUDE_FROM_COMPARE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_column_expression&#39;</span><span class="p">,</span> <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">column_name</span> <span class="o">=</span> <span class="n">column_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span> <span class="o">=</span> <span class="n">column_expression</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ast_expr</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="si">}</span><span class="s1">_expression.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ast_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="si">}</span><span class="s1">_expression.py&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ExpressionSyntaxError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in expression &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_column_expression</span> <span class="o">=</span> <span class="n">Expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">column_expression</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="si">}</span><span class="s1">_expression.py&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_name</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ColumnAlreadyExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="si">}</span><span class="s2"> already exists in the input dataframe.&quot;</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s1">&#39;df&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">})</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="c1"># attempt to run a slower apply</span>
-            <span class="n">expr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_expr</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s1">&#39;df&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">}),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_column_expression</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="p">:</span> <span class="n">result</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </code></pre></div>
