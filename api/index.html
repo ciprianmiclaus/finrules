@@ -3632,12 +3632,6 @@ Default: None, which doesn't keep track of discarded records.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
-        <td><code>output_column</code></td>
-        <td></td>
-        <td><p>The column name of the result column which will be added to the dataframe.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
         <td><code>named_input</code></td>
         <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input. Optional.
@@ -3741,7 +3735,6 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">            matching the condition are discarded and the rest of the rows kept. Default: False.</span>
 <span class="sd">        named_output_discarded: A named output for the records being discarded if those need to be kept for further processing.</span>
 <span class="sd">            Default: None, which doesn&#39;t keep track of discarded records.</span>
-<span class="sd">        output_column: The column name of the result column which will be added to the dataframe.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
