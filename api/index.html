@@ -7533,7 +7533,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <h5 id="etlrules.backends.pandas.numeric.RoundRule" class="doc doc-heading">
         <code>
-RoundRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+RoundRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>, <span title="etlrules.backends.pandas.validation.ColumnsInOutMixin">ColumnsInOutMixin</span>)
         </code>
 
 
@@ -7546,8 +7546,16 @@ RoundRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.r
 <p>Basic usage::</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code># rounds Col_A to 2dps, Col_B to 0dps and Col_C to 4dps
-rule = RoundRule({&quot;Col_A&quot;: 2, &quot;Col_B&quot;: 0, &quot;Col_C&quot;: 4})
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># rounds Col_A, Col_B and Col_C to 2dps
+rule = RoundRule([&quot;Col_A&quot;, &quot;Col_B&quot;, &quot;Col_C&quot;], 2)
+rule.apply(data)
+
+# rounds Col_A to 2dps, Col_B to 0dps and Col_C to 4dps
+rule = RoundRule([&quot;Col_A&quot;, &quot;Col_B&quot;, &quot;Col_C&quot;], [2, 0, 4])
 rule.apply(data)
 </code></pre></div></td></tr></table></div>
 
@@ -7563,11 +7571,27 @@ rule.apply(data)
   </thead>
   <tbody>
       <tr>
-        <td><code>mapper</code></td>
-        <td><code>Mapping[str, int]</code></td>
-        <td><p>A dict {column_name: scale} which specifies to round each column to the
-number of decimal places specified in the scale.</p></td>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of columns to round as per the specified scale.</p></td>
         <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>scale</code></td>
+        <td><code>Union[int, Sequence[int]]</code></td>
+        <td><p>Either an integer specifying a number of decimal places to round to, which applies to all columns,
+or a list/tuple of integers specifying the number of decimal places to round each column.
+In the latter case, the length of the scale list/tuple must match the length of the columns list.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the rounded values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the lower case values.
+If not provided, the result is updated in place.</p></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
@@ -7628,18 +7652,28 @@ Together with the name, the description acts as the documentation of the rule.</
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/numeric.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RoundRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RoundRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">,</span> <span class="n">ColumnsInOutMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Rounds a set of columns to specified decimal places.</span>
 
 <span class="sd">    Basic usage::</span>
 
+<span class="sd">        # rounds Col_A, Col_B and Col_C to 2dps</span>
+<span class="sd">        rule = RoundRule([&quot;Col_A&quot;, &quot;Col_B&quot;, &quot;Col_C&quot;], 2)</span>
+<span class="sd">        rule.apply(data)</span>
+
 <span class="sd">        # rounds Col_A to 2dps, Col_B to 0dps and Col_C to 4dps</span>
-<span class="sd">        rule = RoundRule({&quot;Col_A&quot;: 2, &quot;Col_B&quot;: 0, &quot;Col_C&quot;: 4})</span>
+<span class="sd">        rule = RoundRule([&quot;Col_A&quot;, &quot;Col_B&quot;, &quot;Col_C&quot;], [2, 0, 4])</span>
 <span class="sd">        rule.apply(data)</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mapper: A dict {column_name: scale} which specifies to round each column to the</span>
-<span class="sd">            number of decimal places specified in the scale.</span>
+<span class="sd">        columns: A list of columns to round as per the specified scale.</span>
+<span class="sd">        scale: Either an integer specifying a number of decimal places to round to, which applies to all columns,</span>
+<span class="sd">            or a list/tuple of integers specifying the number of decimal places to round each column.</span>
+<span class="sd">            In the latter case, the length of the scale list/tuple must match the length of the columns list.</span>
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the rounded values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the lower case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -7660,20 +7694,23 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        In non-strict mode, missing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">scale</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">output_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">&quot;Mapper is a </span><span class="si">{</span><span class="n">column_name</span><span class="si">:</span><span class="s2"> precision</span><span class="si">}</span><span class="s2"> where column names are strings and precision is an int or float and &gt;=0.&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_col</span> <span class="k">for</span> <span class="n">out_col</span> <span class="ow">in</span> <span class="n">output_columns</span><span class="p">]</span> <span class="k">if</span> <span class="n">output_columns</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scales</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;The scale parameter must be either an integer or a list/tuple of integers.&quot;</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column(s) </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> are missing from the input dataframe.&quot;</span><span class="p">)</span>
-            <span class="n">mapper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">scale</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mapper</span><span class="p">)</span>
+        <span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_columns_in_out</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">)</span>
+        <span class="n">res_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scales</span><span class="p">)))</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">out_col</span><span class="p">:</span> <span class="n">res_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">out_col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">)})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </code></pre></div>
         </details>
