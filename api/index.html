@@ -5035,7 +5035,7 @@ If not provided, the result is updated in place.</p></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Which dataframe to use as the input. Optional.
 When not set, the input is taken from the main output.
 Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
@@ -5043,7 +5043,7 @@ Set it to a string value, the name of an output dataframe of a previous rule.</p
       </tr>
       <tr>
         <td><code>named_output</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
 When not set, the result of this rule will be available as the main output.
 When set to a name (string), the result will be available as that named output.</p></td>
@@ -5051,21 +5051,21 @@ When set to a name (string), the result will be available as that named output.<
       </tr>
       <tr>
         <td><code>name</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Give the rule a name. Optional.
 Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>description</code></td>
-        <td></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Describe in detail what the rules does, how it does it. Optional.
 Together with the name, the description acts as the documentation of the rule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>strict</code></td>
-        <td></td>
+        <td><code>bool</code></td>
         <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
         <td><em>required</em></td>
       </tr>
@@ -5134,17 +5134,17 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
 <span class="sd">            If not provided, the result is updated in place.</span>
 
-<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">        named_input (Optional[str]): Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
 <span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
-<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
 <span class="sd">            When not set, the result of this rule will be available as the main output.</span>
 <span class="sd">            When set to a name (string), the result will be available as that named output.</span>
-<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
 <span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
-<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
-<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
