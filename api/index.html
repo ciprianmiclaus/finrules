@@ -620,6 +620,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.datetime.DateTimeRoundDownRule" class="md-nav__link">
+    DateTimeRoundDownRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.datetime.DateTimeRoundRule" class="md-nav__link">
+    DateTimeRoundRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.datetime.DateTimeRoundUpRule" class="md-nav__link">
+    DateTimeRoundUpRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.datetime.DateTimeToStrFormatRule" class="md-nav__link">
     DateTimeToStrFormatRule
   </a>
@@ -1207,6 +1228,27 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.datetime.DateTimeLocalNowRule" class="md-nav__link">
     DateTimeLocalNowRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.datetime.DateTimeRoundDownRule" class="md-nav__link">
+    DateTimeRoundDownRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.datetime.DateTimeRoundRule" class="md-nav__link">
+    DateTimeRoundRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.datetime.DateTimeRoundUpRule" class="md-nav__link">
+    DateTimeRoundUpRule
   </a>
   
 </li>
@@ -2853,13 +2895,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -2906,10 +2952,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">values</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">str</span><span class="p">]],</span> <span class="n">new_values</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="nb">str</span><span class="p">]],</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -4279,7 +4326,6 @@ DateTimeExtractComponentRule            (<span title="etlrules.backends.pandas.b
 
 
 
-
   <div class="doc doc-object doc-class">
 
 
@@ -4452,6 +4498,694 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.datetime.DateTimeRoundDownRule" class="doc doc-heading">
+        <code>
+DateTimeRoundDownRule            (<span title="etlrules.backends.pandas.datetime.BaseDateRoundTruncRule">BaseDateRoundTruncRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.datetime.DateTimeRoundDownRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Rounds down (truncates) a set of datetime columns to the specified granularity (day, hour, minute, etc.).</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># rounds the A, B and C column to the nearest second
+rule = DateTimeRoundDownRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;second&quot;)
+rule.apply(data)
+
+# rounds A to days, B to hours, C to seconds
+rule = DateTimeRoundDownRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [&quot;day&quot;, &quot;hour&quot;, &quot;second&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to round according to the granularity specification.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>granularity</code></td>
+        <td><code>Union[str, Sequence[str]]</code></td>
+        <td><p>Specifies the granularity of rounding.
+That is: rounding to the nearest day, hour, minute, etc.
+It's either a string value, in which case it is applied to all columns or a
+list or tuple of different granularity, in which case they need to be the same length
+as the columns iterable and they applied positionally to the columns.</p>
+<p>The supported granularities are:
+    day: removes the hours/minutes/etc.
+    hour: removes the minutes/seconds etc.
+    minute: removes the seconds/etc.
+    second: removes the milliseconds/etc.
+    millisecond: removes the microseconds
+    microsecond: removes nanoseconds (if any)</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/datetime.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DateTimeRoundDownRule</span><span class="p">(</span><span class="n">BaseDateRoundTruncRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Rounds down (truncates) a set of datetime columns to the specified granularity (day, hour, minute, etc.).</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # rounds the A, B and C column to the nearest second</span>
+<span class="sd">        rule = DateTimeRoundDownRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;second&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # rounds A to days, B to hours, C to seconds</span>
+<span class="sd">        rule = DateTimeRoundDownRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [&quot;day&quot;, &quot;hour&quot;, &quot;second&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to round according to the granularity specification.</span>
+<span class="sd">        granularity (Union[str, Sequence[str]]): Specifies the granularity of rounding.</span>
+<span class="sd">            That is: rounding to the nearest day, hour, minute, etc.</span>
+<span class="sd">            It&#39;s either a string value, in which case it is applied to all columns or a</span>
+<span class="sd">            list or tuple of different granularity, in which case they need to be the same length</span>
+<span class="sd">            as the columns iterable and they applied positionally to the columns.</span>
+
+<span class="sd">            The supported granularities are:</span>
+<span class="sd">                day: removes the hours/minutes/etc.</span>
+<span class="sd">                hour: removes the minutes/seconds etc.</span>
+<span class="sd">                minute: removes the seconds/etc.</span>
+<span class="sd">                second: removes the milliseconds/etc.</span>
+<span class="sd">                millisecond: removes the microseconds</span>
+<span class="sd">                microsecond: removes nanoseconds (if any)</span>
+
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">granularity</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span>
+            <span class="n">freq</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GRANULARITIES</span><span class="p">[</span><span class="n">granularity</span><span class="p">],</span>
+            <span class="n">ambiguous</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span>
+            <span class="n">nonexistent</span><span class="o">=</span><span class="s1">&#39;shift_forward&#39;</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.datetime.DateTimeRoundRule" class="doc doc-heading">
+        <code>
+DateTimeRoundRule            (<span title="etlrules.backends.pandas.datetime.BaseDateRoundTruncRule">BaseDateRoundTruncRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.datetime.DateTimeRoundRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Rounds a set of datetime columns to the specified granularity (day, hour, minute, etc.).</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># rounds the A, B and C column to the nearest second
+rule = DateTimeRoundRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;second&quot;)
+rule.apply(data)
+
+# rounds A to days, B to hours, C to seconds
+rule = DateTimeRoundRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [&quot;day&quot;, &quot;hour&quot;, &quot;second&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to round according to the granularity specification.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>granularity</code></td>
+        <td><code>Union[str, Sequence[str]]</code></td>
+        <td><p>Specifies the granularity of rounding.
+That is: rounding to the nearest day, hour, minute, etc.
+It's either a string value, in which case it is applied to all columns or a
+list or tuple of different granularity, in which case they need to be the same length
+as the columns iterable and they applied positionally to the columns.</p>
+<p>The supported granularities are:
+    day: anything up to 12:00:00 rounds down to the current day, after that up to the next day
+    hour: anything up to 30th minute rounds down to the current hour, after that up to the next hour
+    minute: anything up to 30th second rounds down to the current minute, after that up to the next minute
+    second: rounds to the nearest second (if the column has milliseconds)
+    millisecond: rounds to the nearest millisecond (if the column has microseconds)
+    microsecond: rounds to the nearest microsecond
+    nanosecond: rounds to the nearest nanosecond</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/datetime.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DateTimeRoundRule</span><span class="p">(</span><span class="n">BaseDateRoundTruncRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Rounds a set of datetime columns to the specified granularity (day, hour, minute, etc.).</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # rounds the A, B and C column to the nearest second</span>
+<span class="sd">        rule = DateTimeRoundRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;second&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # rounds A to days, B to hours, C to seconds</span>
+<span class="sd">        rule = DateTimeRoundRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [&quot;day&quot;, &quot;hour&quot;, &quot;second&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to round according to the granularity specification.</span>
+<span class="sd">        granularity (Union[str, Sequence[str]]): Specifies the granularity of rounding.</span>
+<span class="sd">            That is: rounding to the nearest day, hour, minute, etc.</span>
+<span class="sd">            It&#39;s either a string value, in which case it is applied to all columns or a</span>
+<span class="sd">            list or tuple of different granularity, in which case they need to be the same length</span>
+<span class="sd">            as the columns iterable and they applied positionally to the columns.</span>
+
+<span class="sd">            The supported granularities are:</span>
+<span class="sd">                day: anything up to 12:00:00 rounds down to the current day, after that up to the next day</span>
+<span class="sd">                hour: anything up to 30th minute rounds down to the current hour, after that up to the next hour</span>
+<span class="sd">                minute: anything up to 30th second rounds down to the current minute, after that up to the next minute</span>
+<span class="sd">                second: rounds to the nearest second (if the column has milliseconds)</span>
+<span class="sd">                millisecond: rounds to the nearest millisecond (if the column has microseconds)</span>
+<span class="sd">                microsecond: rounds to the nearest microsecond</span>
+<span class="sd">                nanosecond: rounds to the nearest nanosecond</span>
+
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">granularity</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+            <span class="n">freq</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GRANULARITIES</span><span class="p">[</span><span class="n">granularity</span><span class="p">],</span>
+            <span class="n">ambiguous</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span>
+            <span class="n">nonexistent</span><span class="o">=</span><span class="s1">&#39;shift_forward&#39;</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.pandas.datetime.DateTimeRoundUpRule" class="doc doc-heading">
+        <code>
+DateTimeRoundUpRule            (<span title="etlrules.backends.pandas.datetime.BaseDateRoundTruncRule">BaseDateRoundTruncRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.datetime.DateTimeRoundUpRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Rounds up a set of datetime columns to the specified granularity (day, hour, minute, etc.).</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># rounds the A, B and C column to the nearest second
+rule = DateTimeRoundUpRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;second&quot;)
+rule.apply(data)
+
+# rounds A to days, B to hours, C to seconds
+rule = DateTimeRoundUpRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [&quot;day&quot;, &quot;hour&quot;, &quot;second&quot;])
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Iterable[str]</code></td>
+        <td><p>A list of string columns to round according to the granularity specification.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>granularity</code></td>
+        <td><code>Union[str, Sequence[str]]</code></td>
+        <td><p>Specifies the granularity of rounding.
+That is: rounding to the nearest day, hour, minute, etc.
+It's either a string value, in which case it is applied to all columns or a
+list or tuple of different granularity, in which case they need to be the same length
+as the columns iterable and they applied positionally to the columns.</p>
+<p>The supported granularities are:
+    day: Rounds up to the next day if there are any hours/minutes/etc.
+    hour: Rounds up to the next hour if there are any minutes/etc.
+    minute: Rounds up to the next minute if there are any seconds/etc.
+    second: Rounds up to the next second if there are any milliseconds/etc.
+    millisecond: Rounds up to the next millisecond if there are any microseconds
+    microsecond: Rounds up to the next microsecond if there are any nanoseconds</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>output_columns</code></td>
+        <td><code>Optional[Iterable[str]]</code></td>
+        <td><p>A list of new names for the columns with the upper case values.
+Optional. If provided, if must have the same length as the columns sequence.
+The existing columns are unchanged, and new columns are created with the upper case values.
+If not provided, the result is updated in place.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/datetime.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DateTimeRoundUpRule</span><span class="p">(</span><span class="n">BaseDateRoundTruncRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Rounds up a set of datetime columns to the specified granularity (day, hour, minute, etc.).</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # rounds the A, B and C column to the nearest second</span>
+<span class="sd">        rule = DateTimeRoundUpRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;second&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # rounds A to days, B to hours, C to seconds</span>
+<span class="sd">        rule = DateTimeRoundUpRule([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], [&quot;day&quot;, &quot;hour&quot;, &quot;second&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        columns (Iterable[str]): A list of string columns to round according to the granularity specification.</span>
+<span class="sd">        granularity (Union[str, Sequence[str]]): Specifies the granularity of rounding.</span>
+<span class="sd">            That is: rounding to the nearest day, hour, minute, etc.</span>
+<span class="sd">            It&#39;s either a string value, in which case it is applied to all columns or a</span>
+<span class="sd">            list or tuple of different granularity, in which case they need to be the same length</span>
+<span class="sd">            as the columns iterable and they applied positionally to the columns.</span>
+
+<span class="sd">            The supported granularities are:</span>
+<span class="sd">                day: Rounds up to the next day if there are any hours/minutes/etc.</span>
+<span class="sd">                hour: Rounds up to the next hour if there are any minutes/etc.</span>
+<span class="sd">                minute: Rounds up to the next minute if there are any seconds/etc.</span>
+<span class="sd">                second: Rounds up to the next second if there are any milliseconds/etc.</span>
+<span class="sd">                millisecond: Rounds up to the next millisecond if there are any microseconds</span>
+<span class="sd">                microsecond: Rounds up to the next microsecond if there are any nanoseconds</span>
+
+<span class="sd">        output_columns (Optional[Iterable[str]]): A list of new names for the columns with the upper case values.</span>
+<span class="sd">            Optional. If provided, if must have the same length as the columns sequence.</span>
+<span class="sd">            The existing columns are unchanged, and new columns are created with the upper case values.</span>
+<span class="sd">            If not provided, the result is updated in place.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">granularity</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span>
+            <span class="n">freq</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GRANULARITIES</span><span class="p">[</span><span class="n">granularity</span><span class="p">],</span>
+            <span class="n">ambiguous</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span>
+            <span class="n">nonexistent</span><span class="o">=</span><span class="s1">&#39;shift_forward&#39;</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
 
 
   <div class="doc doc-object doc-class">
@@ -4469,7 +5203,7 @@ DateTimeToStrFormatRule            (<span title="etlrules.backends.pandas.base.B
 
     <div class="doc doc-contents ">
 
-      <p>Makes strings of a given width (justifies) by padding left, right or both sides with a fill character.</p>
+      <p>Formats a datetime column to a string representation according to a specified format.</p>
 <p>Basic usage::</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4565,19 +5299,23 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
           <summary>Source code in <code>etlrules/backends/pandas/datetime.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DateTimeToStrFormatRule</span><span class="p">(</span><span class="n">BaseAssignRule</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Makes strings of a given width (justifies) by padding left, right or both sides with a fill character.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Formats a datetime column to a string representation according to a specified format.</span>
 
 <span class="sd">    Basic usage::</span>
 
@@ -4610,10 +5348,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -6923,7 +7662,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="s2">&quot;Mapper is a {column_name: precision} where column names are strings and precision is an int or float and &gt;=0.&quot;</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">&quot;Mapper is a </span><span class="si">{</span><span class="n">column_name</span><span class="si">:</span><span class="s2"> precision</span><span class="si">}</span><span class="s2"> where column names are strings and precision is an int or float and &gt;=0.&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -7101,13 +7840,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -7144,10 +7887,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -7315,10 +8059,18 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>MissingColumnError</code></td>
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
+      <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
+      </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -7373,9 +8125,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
+<span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">regular_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keep_original_value</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -7535,13 +8289,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -7575,10 +8333,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -7728,13 +8487,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -7772,10 +8535,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">PAD_LEFT</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
@@ -7969,13 +8733,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -8024,10 +8792,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">SORT_ASCENDING</span> <span class="o">=</span> <span class="s2">&quot;ascending&quot;</span>
@@ -8228,13 +8997,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -8286,10 +9059,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">separator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">separator_regex</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -8446,13 +9220,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -8490,10 +9268,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">STRIP_LEFT</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
@@ -8643,13 +9422,17 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised in strict mode only if a column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>ColumnAlreadyExistsError</code></td>
+        <td><p>raised in strict mode only if an output_column already exists in the dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ValueError</code></td>
         <td><p>raised if output_columns is provided and not the same length as the columns parameter.</p></td>
       </tr>
   </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In non-strict mode, missing columns are ignored.</p>
+<p>In non-strict mode, missing columns or overwriting existing columns are ignored.</p>
 </div>
 
         <details class="quote">
@@ -8683,10 +9466,11 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised in strict mode only if a column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if an output_column already exists in the dataframe.</span>
 <span class="sd">        ValueError: raised if output_columns is provided and not the same length as the columns parameter.</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        In non-strict mode, missing columns are ignored.</span>
+<span class="sd">        In non-strict mode, missing columns or overwriting existing columns are ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
