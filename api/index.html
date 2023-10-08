@@ -4277,6 +4277,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -4328,9 +4329,15 @@ rule.apply(data)
       </tr>
       <tr>
         <td><code>unit_value</code></td>
-        <td><code>int</code></td>
+        <td><code>Union[int,float,str]</code></td>
         <td><p>The number of units to add to the datetime column.
-The unit_value can be negative, in which case this rule performs a substract.</p></td>
+The unit_value can be negative, in which case this rule performs a substract.</p>
+<p>A name of an existing column can be passed into unit_value, in which case, that
+column will be added to the input_column.
+If the column is a timedelta, it will be added as is, if it's a numeric column,
+then it will be interpreted based on the unit parameter (e.g. days/hours/etc.).
+In this case, if the column specified in the unit_value doesn't exist,
+MissingColumnError is raised.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -4402,6 +4409,10 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised if the input_column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if unit_value is a name of a column but it doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ColumnAlreadyExistsError</code></td>
         <td><p>raised in strict mode only if the output_column already exists in the dataframe.</p></td>
       </tr>
@@ -4428,8 +4439,16 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Args:</span>
 <span class="sd">        input_column (str): The name of a datetime column to add to.</span>
-<span class="sd">        unit_value (int): The number of units to add to the datetime column.</span>
+<span class="sd">        unit_value (Union[int,float,str]): The number of units to add to the datetime column.</span>
 <span class="sd">            The unit_value can be negative, in which case this rule performs a substract.</span>
+
+<span class="sd">            A name of an existing column can be passed into unit_value, in which case, that</span>
+<span class="sd">            column will be added to the input_column.</span>
+<span class="sd">            If the column is a timedelta, it will be added as is, if it&#39;s a numeric column,</span>
+<span class="sd">            then it will be interpreted based on the unit parameter (e.g. days/hours/etc.).</span>
+<span class="sd">            In this case, if the column specified in the unit_value doesn&#39;t exist,</span>
+<span class="sd">            MissingColumnError is raised.</span>
+
 <span class="sd">        unit (str): Specifies what unit the unit_value is in. Supported values are:</span>
 <span class="sd">            days, hours, minutes, seconds, microseconds, nanoseconds.</span>
 
@@ -4453,6 +4472,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised if the input_column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        MissingColumnError: raised if unit_value is a name of a column but it doesn&#39;t exist in the input dataframe.</span>
 <span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if the output_column already exists in the dataframe.</span>
 
 <span class="sd">    Note:</span>
@@ -5666,7 +5686,13 @@ rule.apply(data)
         <td><code>unit_value</code></td>
         <td><code>int</code></td>
         <td><p>The number of units to add to the datetime column.
-The unit_value can be negative, in which case this rule performs an addition.</p></td>
+The unit_value can be negative, in which case this rule performs an addition.</p>
+<p>A name of an existing column can be passed into unit_value, in which case, that
+column will be substracted from the input_column.
+If the column is a timedelta, it will be substracted as is, if it's a numeric column,
+then it will be interpreted based on the unit parameter (e.g. days/hours/etc.).
+In this case, if the column specified in the unit_value doesn't exist,
+MissingColumnError is raised.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -5738,6 +5764,10 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><p>raised if the input_column doesn't exist in the input dataframe.</p></td>
       </tr>
       <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if unit_value is a name of a column but it doesn't exist in the input dataframe.</p></td>
+      </tr>
+      <tr>
         <td><code>ColumnAlreadyExistsError</code></td>
         <td><p>raised in strict mode only if the output_column already exists in the dataframe.</p></td>
       </tr>
@@ -5766,6 +5796,14 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        input_column (str): The name of a datetime column to add to.</span>
 <span class="sd">        unit_value (int): The number of units to add to the datetime column.</span>
 <span class="sd">            The unit_value can be negative, in which case this rule performs an addition.</span>
+
+<span class="sd">            A name of an existing column can be passed into unit_value, in which case, that</span>
+<span class="sd">            column will be substracted from the input_column.</span>
+<span class="sd">            If the column is a timedelta, it will be substracted as is, if it&#39;s a numeric column,</span>
+<span class="sd">            then it will be interpreted based on the unit parameter (e.g. days/hours/etc.).</span>
+<span class="sd">            In this case, if the column specified in the unit_value doesn&#39;t exist,</span>
+<span class="sd">            MissingColumnError is raised.</span>
+
 <span class="sd">        unit (str): Specifies what unit the unit_value is in. Supported values are:</span>
 <span class="sd">            days, hours, minutes, seconds, microseconds, nanoseconds.</span>
 
@@ -5789,6 +5827,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 <span class="sd">    Raises:</span>
 <span class="sd">        MissingColumnError: raised if the input_column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">        MissingColumnError: raised if unit_value is a name of a column but it doesn&#39;t exist in the input dataframe.</span>
 <span class="sd">        ColumnAlreadyExistsError: raised in strict mode only if the output_column already exists in the dataframe.</span>
 
 <span class="sd">    Note:</span>
