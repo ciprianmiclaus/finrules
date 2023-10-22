@@ -701,6 +701,54 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io" class="md-nav__link">
+    io
+  </a>
+  
+    <nav class="md-nav" aria-label="io">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files" class="md-nav__link">
+    files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.ReadCSVFileRule" class="md-nav__link">
+    ReadCSVFileRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.ReadParquetFileRule" class="md-nav__link">
+    ReadParquetFileRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.WriteCSVFileRule" class="md-nav__link">
+    WriteCSVFileRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.WriteParquetFileRule" class="md-nav__link">
+    WriteParquetFileRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.joins" class="md-nav__link">
     joins
   </a>
@@ -1328,6 +1376,54 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io" class="md-nav__link">
+    io
+  </a>
+  
+    <nav class="md-nav" aria-label="io">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files" class="md-nav__link">
+    files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.ReadCSVFileRule" class="md-nav__link">
+    ReadCSVFileRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.ReadParquetFileRule" class="md-nav__link">
+    ReadParquetFileRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.WriteCSVFileRule" class="md-nav__link">
+    WriteCSVFileRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.pandas.io.files.WriteParquetFileRule" class="md-nav__link">
+    WriteParquetFileRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.pandas.joins" class="md-nav__link">
     joins
   </a>
@@ -1888,7 +1984,6 @@ Together with the name, the description acts as the documentation of the rule.</
     </div>
 
   </div>
-
 
 
 
@@ -3120,6 +3215,21 @@ Together with the name, the description acts as the documentation of the rule.</
         <td><code>True</code></td>
       </tr>
   </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised when a column in the sort_by doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
 </table>      <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When multiple columns are specified, the first column decides the sort order.
@@ -3147,6 +3257,9 @@ For any rows that have the same value in the first column, the second column is 
 <span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised when a column in the sort_by doesn&#39;t exist in the input dataframe.</span>
+
 <span class="sd">    Note:</span>
 <span class="sd">        When multiple columns are specified, the first column decides the sort order.</span>
 <span class="sd">        For any rows that have the same value in the first column, the second column is used to decide the sort order within that group and so on.</span>
@@ -3154,15 +3267,18 @@ For any rows that have the same value in the first column, the second column is 
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort_by</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">ascending</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sort_by</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span> <span class="o">=</span> <span class="p">[</span><span class="n">sort_by</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sort_by</span><span class="p">]</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ascending</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ascending</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">ascending</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ascending</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">)),</span> <span class="s2">&quot;ascending must be a bool or a list of bool of the same len as sort_by&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ascending</span> <span class="o">=</span> <span class="n">ascending</span>
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column(s) </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> are missing from the input dataframe.&quot;</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_by</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ascending</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </code></pre></div>
@@ -6498,6 +6614,7 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+
   <div class="doc doc-object doc-module">
 
 
@@ -6961,6 +7078,974 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h4 id="etlrules.backends.pandas.io" class="doc doc-heading">
+        <code>io</code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#etlrules.backends.pandas.io" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h5 id="etlrules.backends.pandas.io.files" class="doc doc-heading">
+        <code>files</code>
+
+
+
+<a href="#etlrules.backends.pandas.io.files" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h6 id="etlrules.backends.pandas.io.files.ReadCSVFileRule" class="doc doc-heading">
+        <code>
+ReadCSVFileRule            (<span title="etlrules.backends.pandas.io.files.BaseReadFileRule">BaseReadFileRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.io.files.ReadCSVFileRule" class="headerlink" title="Permanent link">&para;</a></h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Reads one or multiple csv files from a directory and persists it as a dataframe for subsequent rules to operate on.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code># reads a file data.csv and persists it as the main output of the rule
+rule = ReadCSVFileRule(&quot;data.csv&quot;, &quot;/home/myuser/&quot;)
+rule.apply(data)
+
+# reads a file test_data.csv and persists it as the input_data named output
+# other rules can specify input_data as their named_input to operate on it
+rule = ReadCSVFileRule(&quot;test_data.csv&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)
+rule.apply(data)
+
+# extracts all files starting with data followed by 4 digits and concatenate them
+# e.g. data1234.csv, data5678.csv, etc.
+rule = ReadCSVFileRule(&quot;data[0-9]{4}.csv&quot;, &quot;/home/myuser/&quot;, regex=True, named_output=&quot;input_data&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the csv file to load. The format will be inferred from the extension of the file.
+A simple text csv file will be inferred from the .csv extension. The extensions like .zip, .gz, .bz2, .xz
+will extract a single compressed csv file from the given input compressed file.
+file_name can also be a regular expression (specify regex=True in that case).
+The reader will find all the files in the file_dir directory that match the regular expression and extract
+all those csv file and concatenate them into a single dataframe.
+For example, file_name=".*.csv", file_dir=".", regex=True will extract all the files with the .csv extension
+from the current directory.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>file_dir</code></td>
+        <td><code>str</code></td>
+        <td><p>The file directory where the file_name is located. When file_name is a regular expression and 
+the regex parameter is True, file_dir is the directory that is inspected for any files that match the
+regular expression.
+Defaults to . (ie the current directory).</p></td>
+        <td><code>&#39;.&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>regex</code></td>
+        <td><code>bool</code></td>
+        <td><p>When True, the file_name is interpreted as a regular expression. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>separator</code></td>
+        <td><code>str</code></td>
+        <td><p>The single character to be used as separator in the csv file. Defaults to , (comma).</p></td>
+        <td><code>&#39;,&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>header</code></td>
+        <td><code>bool</code></td>
+        <td><p>When True, the first line is interpreted as the header and the column names are extracted from it.
+When False, the first line is part of the data and the columns will have names like 0, 1, 2, etc.
+Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>IOError</code></td>
+        <td><p>raised when the file is not found.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/io/files.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ReadCSVFileRule</span><span class="p">(</span><span class="n">BaseReadFileRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot; Reads one or multiple csv files from a directory and persists it as a dataframe for subsequent rules to operate on.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # reads a file data.csv and persists it as the main output of the rule</span>
+<span class="sd">        rule = ReadCSVFileRule(&quot;data.csv&quot;, &quot;/home/myuser/&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # reads a file test_data.csv and persists it as the input_data named output</span>
+<span class="sd">        # other rules can specify input_data as their named_input to operate on it</span>
+<span class="sd">        rule = ReadCSVFileRule(&quot;test_data.csv&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # extracts all files starting with data followed by 4 digits and concatenate them</span>
+<span class="sd">        # e.g. data1234.csv, data5678.csv, etc.</span>
+<span class="sd">        rule = ReadCSVFileRule(&quot;data[0-9]{4}.csv&quot;, &quot;/home/myuser/&quot;, regex=True, named_output=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_name: The name of the csv file to load. The format will be inferred from the extension of the file.</span>
+<span class="sd">            A simple text csv file will be inferred from the .csv extension. The extensions like .zip, .gz, .bz2, .xz</span>
+<span class="sd">            will extract a single compressed csv file from the given input compressed file.</span>
+<span class="sd">            file_name can also be a regular expression (specify regex=True in that case).</span>
+<span class="sd">            The reader will find all the files in the file_dir directory that match the regular expression and extract</span>
+<span class="sd">            all those csv file and concatenate them into a single dataframe.</span>
+<span class="sd">            For example, file_name=&quot;.*\.csv&quot;, file_dir=&quot;.&quot;, regex=True will extract all the files with the .csv extension</span>
+<span class="sd">            from the current directory.</span>
+<span class="sd">        file_dir: The file directory where the file_name is located. When file_name is a regular expression and </span>
+<span class="sd">            the regex parameter is True, file_dir is the directory that is inspected for any files that match the</span>
+<span class="sd">            regular expression.</span>
+<span class="sd">            Defaults to . (ie the current directory).</span>
+<span class="sd">        regex: When True, the file_name is interpreted as a regular expression. Defaults to False.</span>
+<span class="sd">        separator: The single character to be used as separator in the csv file. Defaults to , (comma).</span>
+<span class="sd">        header: When True, the first line is interpreted as the header and the column names are extracted from it.</span>
+<span class="sd">            When False, the first line is part of the data and the columns will have names like 0, 1, 2, etc.</span>
+<span class="sd">            Defaults to True.</span>
+
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        IOError: raised when the file is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_dir</span><span class="o">=</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="n">regex</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span>
+
+    <span class="k">def</span> <span class="nf">do_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+            <span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h6 id="etlrules.backends.pandas.io.files.ReadParquetFileRule" class="doc doc-heading">
+        <code>
+ReadParquetFileRule            (<span title="etlrules.backends.pandas.io.files.BaseReadFileRule">BaseReadFileRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.io.files.ReadParquetFileRule" class="headerlink" title="Permanent link">&para;</a></h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Reads one or multiple parquet files from a directory and persists it as a dataframe for subsequent rules to operate on.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code># reads a file data.csv and persists it as the main output of the rule
+rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;)
+rule.apply(data)
+
+# reads a file test_data.parquet and persists it as the input_data named output
+# other rules can specify input_data as their named_input to operate on it
+rule = ReadParquetFileRule(&quot;test_data.parquet&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the parquet file to load. The format will be inferred from the extension of the file.
+file_name can also be a regular expression (specify regex=True in that case).
+The reader will find all the files in the file_dir directory that match the regular expression and extract
+all those parquet file and concatenate them into a single dataframe.
+For example, file_name=".*.parquet", file_dir=".", regex=True will extract all the files with the .parquet extension
+from the current directory.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>file_dir</code></td>
+        <td><code>str</code></td>
+        <td><p>The file directory where the file_name is located. When file_name is a regular expression and 
+the regex parameter is True, file_dir is the directory that is inspected for any files that match the
+regular expression.
+Defaults to . (ie the current directory).</p></td>
+        <td><code>&#39;.&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>regex</code></td>
+        <td><code>bool</code></td>
+        <td><p>When True, the file_name is interpreted as a regular expression. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>Optional[Sequence[str]]</code></td>
+        <td><p>A subset of the columns in the parquet file to load.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>filters</code></td>
+        <td><code>Union[List[Tuple], List[List[Tuple]]]</code></td>
+        <td><p>A list of filters to apply to filter the rows returned. Rows which do not match the filter conditions
+will be removed from scanned data.
+When passed as a List[List[Tuple]], the conditions in the inner lists are AND-end together with the top level
+condition OR-ed together. Eg: ((cond1 AND cond2...) OR (cond3 AND cond4...)...)
+When passed as a List[Tuple], the conditions are AND-ed together. E.g.: cond1 AND cond2 AND cond3...
+Each condition is specified as a tuple of 3 elements: (column, operation, value).
+Column is the name of a column in the input dataframe.
+Operation is one of: "==", "=", "&gt;", "&gt;=", "&lt;", "&lt;=", "!=", "in", "not in".
+Value is a scalar value, int, float, string, etc. When the operation is in or not in, the value must be a list, tuple or set of values.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>IOError</code></td>
+        <td><p>raised when the file is not found.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if filters are specified but the format is incorrect.</p></td>
+      </tr>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if a column is specified in columns or filters but it doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The parquet file can be compressed in which case the compression will be inferred from the file.
+The following compression algorithms are supported: "snappy", "gzip", "brotli", "lz4", "zstd".</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/io/files.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ReadParquetFileRule</span><span class="p">(</span><span class="n">BaseReadFileRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot; Reads one or multiple parquet files from a directory and persists it as a dataframe for subsequent rules to operate on.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # reads a file data.csv and persists it as the main output of the rule</span>
+<span class="sd">        rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # reads a file test_data.parquet and persists it as the input_data named output</span>
+<span class="sd">        # other rules can specify input_data as their named_input to operate on it</span>
+<span class="sd">        rule = ReadParquetFileRule(&quot;test_data.parquet&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_name: The name of the parquet file to load. The format will be inferred from the extension of the file.</span>
+<span class="sd">            file_name can also be a regular expression (specify regex=True in that case).</span>
+<span class="sd">            The reader will find all the files in the file_dir directory that match the regular expression and extract</span>
+<span class="sd">            all those parquet file and concatenate them into a single dataframe.</span>
+<span class="sd">            For example, file_name=&quot;.*\.parquet&quot;, file_dir=&quot;.&quot;, regex=True will extract all the files with the .parquet extension</span>
+<span class="sd">            from the current directory.</span>
+<span class="sd">        file_dir: The file directory where the file_name is located. When file_name is a regular expression and </span>
+<span class="sd">            the regex parameter is True, file_dir is the directory that is inspected for any files that match the</span>
+<span class="sd">            regular expression.</span>
+<span class="sd">            Defaults to . (ie the current directory).</span>
+<span class="sd">        regex: When True, the file_name is interpreted as a regular expression. Defaults to False.</span>
+<span class="sd">        columns: A subset of the columns in the parquet file to load.</span>
+<span class="sd">        filters: A list of filters to apply to filter the rows returned. Rows which do not match the filter conditions</span>
+<span class="sd">            will be removed from scanned data.</span>
+<span class="sd">            When passed as a List[List[Tuple]], the conditions in the inner lists are AND-end together with the top level</span>
+<span class="sd">            condition OR-ed together. Eg: ((cond1 AND cond2...) OR (cond3 AND cond4...)...)</span>
+<span class="sd">            When passed as a List[Tuple], the conditions are AND-ed together. E.g.: cond1 AND cond2 AND cond3...</span>
+<span class="sd">            Each condition is specified as a tuple of 3 elements: (column, operation, value).</span>
+<span class="sd">            Column is the name of a column in the input dataframe.</span>
+<span class="sd">            Operation is one of: &quot;==&quot;, &quot;=&quot;, &quot;&gt;&quot;, &quot;&gt;=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;!=&quot;, &quot;in&quot;, &quot;not in&quot;.</span>
+<span class="sd">            Value is a scalar value, int, float, string, etc. When the operation is in or not in, the value must be a list, tuple or set of values.</span>
+
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        IOError: raised when the file is not found.</span>
+<span class="sd">        ValueError: raised if filters are specified but the format is incorrect.</span>
+<span class="sd">        MissingColumnError: raised if a column is specified in columns or filters but it doesn&#39;t exist in the input dataframe.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The parquet file can be compressed in which case the compression will be inferred from the file.</span>
+<span class="sd">        The following compression algorithms are supported: &quot;snappy&quot;, &quot;gzip&quot;, &quot;brotli&quot;, &quot;lz4&quot;, &quot;zstd&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SUPPORTED_FILTERS_OPS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;==&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;!=&quot;</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;not in&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">]]]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">file_name</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_dir</span><span class="o">=</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="n">regex</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_filters</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid filters. It must be a List[Tuple] or List[List[Tuple]] with each Tuple being (column, op, value).&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_valid_filter_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tpl</span><span class="p">):</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">tpl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="n">tpl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_FILTERS_OPS</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">valid</span> <span class="ow">and</span> <span class="n">tpl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;not in&#39;</span><span class="p">):</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">set</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">valid</span>
+
+    <span class="k">def</span> <span class="nf">_is_valid_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">):</span>
+                <span class="c1"># List[List[Tuple]]</span>
+                <span class="k">return</span> <span class="nb">all</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_filter_tuple</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span>
+                    <span class="k">for</span> <span class="n">tpl</span> <span class="ow">in</span> <span class="n">elem</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">):</span>
+                <span class="c1"># List[Tuple]</span>
+                <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_filter_tuple</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span> <span class="k">for</span> <span class="n">tpl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">do_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pyarrow.lib</span> <span class="kn">import</span> <span class="n">ArrowInvalid</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span>
+                <span class="n">file_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filters</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">ArrowInvalid</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h6 id="etlrules.backends.pandas.io.files.WriteCSVFileRule" class="doc doc-heading">
+        <code>
+WriteCSVFileRule            (<span title="etlrules.backends.pandas.io.files.BaseWriteFileRule">BaseWriteFileRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.io.files.WriteCSVFileRule" class="headerlink" title="Permanent link">&para;</a></h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Writes an existing dataframe to a csv file (optionally compressed) on disk.</p>
+<p>The rule is a final rule, which means it produces no additional outputs, it takes any of the existing outputs and writes it to disk.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># writes a file data.csv and persists the main output of the previous rule to it
+rule = WriteCSVFileRule(&quot;data.csv&quot;, &quot;/home/myuser/&quot;)
+rule.apply(data)
+
+# writes a file test_data.csv and persists the dataframe named input_data into it
+rule = WriteCSVFileRule(&quot;test_data.csv&quot;, &quot;/home/myuser/&quot;, named_input=&quot;input_data&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file_name</code></td>
+        <td></td>
+        <td><p>The name of the csv file to write to disk. It will be written in the directory
+specified by the file_dir parameter.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>file_dir</code></td>
+        <td></td>
+        <td><p>The file directory where the file_name should be written.
+Defaults to . (ie the current directory).</p></td>
+        <td><code>&#39;.&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>separator</code></td>
+        <td></td>
+        <td><p>The single character to separate values in the csv file. Defaults to , (comma).</p></td>
+        <td><code>&#39;,&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>header</code></td>
+        <td></td>
+        <td><p>When True, the first line will contain the columns separated by the separator.
+When False, the columns will not be written and the first line contains data.
+Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>compression</code></td>
+        <td></td>
+        <td><p>Compress the csv file using a supported compression algorithms. Optional.
+When the compression is specified, the file_name must end with the extension associate with that
+compression format. The following options are supported:
+zip - file_name must end with .zip (e.g. output.csv.zip), will produced a zipped csv file
+gzip - file_name must end with .gz (e.g. output.csv.gz), will produced a gzipped csv file
+bz2 - file_name must end with .bz2 (e.g. output.csv.bz2), will produced a bzipped csv 
+xz - file_name must end with .xz (e.g. output.csv.xz), will produced a xz-compressed csv file</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Select by name the dataframe to write from the input data.
+Optional. When not specified, the main output of the previous rule will be written.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/io/files.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WriteCSVFileRule</span><span class="p">(</span><span class="n">BaseWriteFileRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Writes an existing dataframe to a csv file (optionally compressed) on disk.</span>
+
+<span class="sd">    The rule is a final rule, which means it produces no additional outputs, it takes any of the existing outputs and writes it to disk.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # writes a file data.csv and persists the main output of the previous rule to it</span>
+<span class="sd">        rule = WriteCSVFileRule(&quot;data.csv&quot;, &quot;/home/myuser/&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # writes a file test_data.csv and persists the dataframe named input_data into it</span>
+<span class="sd">        rule = WriteCSVFileRule(&quot;test_data.csv&quot;, &quot;/home/myuser/&quot;, named_input=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_name: The name of the csv file to write to disk. It will be written in the directory</span>
+<span class="sd">            specified by the file_dir parameter.</span>
+<span class="sd">        file_dir: The file directory where the file_name should be written.</span>
+<span class="sd">            Defaults to . (ie the current directory).</span>
+<span class="sd">        separator: The single character to separate values in the csv file. Defaults to , (comma).</span>
+<span class="sd">        header: When True, the first line will contain the columns separated by the separator.</span>
+<span class="sd">            When False, the columns will not be written and the first line contains data.</span>
+<span class="sd">            Defaults to True.</span>
+<span class="sd">        compression: Compress the csv file using a supported compression algorithms. Optional.</span>
+<span class="sd">            When the compression is specified, the file_name must end with the extension associate with that</span>
+<span class="sd">            compression format. The following options are supported:</span>
+<span class="sd">            zip - file_name must end with .zip (e.g. output.csv.zip), will produced a zipped csv file</span>
+<span class="sd">            gzip - file_name must end with .gz (e.g. output.csv.gz), will produced a gzipped csv file</span>
+<span class="sd">            bz2 - file_name must end with .bz2 (e.g. output.csv.bz2), will produced a bzipped csv </span>
+<span class="sd">            xz - file_name must end with .xz (e.g. output.csv.xz), will produced a xz-compressed csv file</span>
+
+<span class="sd">        named_input (Optional[str]): Select by name the dataframe to write from the input data.</span>
+<span class="sd">            Optional. When not specified, the main output of the previous rule will be written.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">COMPRESSIONS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;zip&#39;</span><span class="p">:</span> <span class="s1">&#39;.zip&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;gzip&#39;</span><span class="p">:</span> <span class="s1">&#39;.gz&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;bz2&#39;</span><span class="p">:</span> <span class="s1">&#39;.bz2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;xz&#39;</span><span class="p">:</span> <span class="s1">&#39;.xz&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">file_dir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">file_name</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_dir</span><span class="o">=</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> 
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span>
+        <span class="k">assert</span> <span class="n">compression</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">compression</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMPRESSIONS</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Unsupported compression &#39;</span><span class="si">{</span><span class="n">compression</span><span class="si">}</span><span class="s2">&#39;. It must be one of: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">COMPRESSIONS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="k">if</span> <span class="n">compression</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">file_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COMPRESSIONS</span><span class="p">[</span><span class="n">compression</span><span class="p">]),</span> <span class="sa">f</span><span class="s2">&quot;The file name </span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2"> must have the extension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">COMPRESSIONS</span><span class="p">[</span><span class="n">compression</span><span class="p">]</span><span class="si">}</span><span class="s2"> when the compression is set to </span><span class="si">{</span><span class="n">compression</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compression</span> <span class="o">=</span> <span class="n">compression</span>
+
+    <span class="k">def</span> <span class="nf">do_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">),</span>
+            <span class="n">sep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span>
+            <span class="n">header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">,</span>
+            <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compression</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h6 id="etlrules.backends.pandas.io.files.WriteParquetFileRule" class="doc doc-heading">
+        <code>
+WriteParquetFileRule            (<span title="etlrules.backends.pandas.io.files.BaseWriteFileRule">BaseWriteFileRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.pandas.io.files.WriteParquetFileRule" class="headerlink" title="Permanent link">&para;</a></h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Writes an existing dataframe to a parquet file on disk.</p>
+<p>The rule is a final rule, which means it produces no additional outputs, it takes any of the existing outputs and writes it to disk.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># writes a file data.parquet and persists the main output of the previous rule to it
+rule = WriteParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;)
+rule.apply(data)
+
+# writes a file test_data.parquet and persists the dataframe named input_data into it
+rule = WriteParquetFileRule(&quot;test_data.parquet&quot;, &quot;/home/myuser/&quot;, named_input=&quot;input_data&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the parquet file to write to disk. It will be written in the directory
+specified by the file_dir parameter.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>file_dir</code></td>
+        <td><code>str</code></td>
+        <td><p>The file directory where the file_name should be written.
+Defaults to . (ie the current directory).</p></td>
+        <td><code>&#39;.&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>compression</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Compress the parquet file using a supported compression algorithms. Optional.
+The following compression algorithms are supported: "snappy", "gzip", "brotli", "lz4", "zstd".</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Select by name the dataframe to write from the input data.
+Optional. When not specified, the main output of the previous rule will be written.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/pandas/io/files.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WriteParquetFileRule</span><span class="p">(</span><span class="n">BaseWriteFileRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Writes an existing dataframe to a parquet file on disk.</span>
+
+<span class="sd">    The rule is a final rule, which means it produces no additional outputs, it takes any of the existing outputs and writes it to disk.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # writes a file data.parquet and persists the main output of the previous rule to it</span>
+<span class="sd">        rule = WriteParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # writes a file test_data.parquet and persists the dataframe named input_data into it</span>
+<span class="sd">        rule = WriteParquetFileRule(&quot;test_data.parquet&quot;, &quot;/home/myuser/&quot;, named_input=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_name: The name of the parquet file to write to disk. It will be written in the directory</span>
+<span class="sd">            specified by the file_dir parameter.</span>
+<span class="sd">        file_dir: The file directory where the file_name should be written.</span>
+<span class="sd">            Defaults to . (ie the current directory).</span>
+<span class="sd">        compression: Compress the parquet file using a supported compression algorithms. Optional.</span>
+<span class="sd">            The following compression algorithms are supported: &quot;snappy&quot;, &quot;gzip&quot;, &quot;brotli&quot;, &quot;lz4&quot;, &quot;zstd&quot;.</span>
+
+<span class="sd">        named_input (Optional[str]): Select by name the dataframe to write from the input data.</span>
+<span class="sd">            Optional. When not specified, the main output of the previous rule will be written.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">COMPRESSIONS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;snappy&quot;</span><span class="p">,</span> <span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="s2">&quot;brotli&quot;</span><span class="p">,</span> <span class="s2">&quot;lz4&quot;</span><span class="p">,</span> <span class="s2">&quot;zstd&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">file_name</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_dir</span><span class="o">=</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> 
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">compression</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">compression</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">COMPRESSIONS</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Unsupported compression &#39;</span><span class="si">{</span><span class="n">compression</span><span class="si">}</span><span class="s2">&#39;. It must be one of: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">COMPRESSIONS</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compression</span> <span class="o">=</span> <span class="n">compression</span>
+
+    <span class="k">def</span> <span class="nf">do_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">),</span>
+            <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span>
+            <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compression</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
@@ -9736,7 +10821,7 @@ Together with the name, the description acts as the documentation of the rule.</
             <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">new_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">))</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">nan</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="n">val</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">new_separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">nan</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="n">val</span>
-        <span class="k">return</span> <span class="n">new_col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -10442,6 +11527,13 @@ TypeConversionRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#e
     <div class="doc doc-contents ">
 
       <p>Converts the type of a given set of columns to other types.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code># converts column A to int64, B to string and C to datetime
+rule = TypeConversionRule({&quot;A&quot;: &quot;int64&quot;, &quot;B&quot;: &quot;string&quot;, &quot;C&quot;: &quot;datetime&quot;})
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -10457,7 +11549,9 @@ TypeConversionRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#e
       <tr>
         <td><code>mapper</code></td>
         <td><code>Mapping[str, str]</code></td>
-        <td><p>A dict with columns names as keys and the new types as values.</p></td>
+        <td><p>A dict with columns names as keys and the new types as values.
+The supported types are: int8, int16, int32, int64, float32, float64,
+string, datetime and object (python object).</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -10522,8 +11616,16 @@ Together with the name, the description acts as the documentation of the rule.</
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TypeConversionRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Converts the type of a given set of columns to other types.</span>
 
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # converts column A to int64, B to string and C to datetime</span>
+<span class="sd">        rule = TypeConversionRule({&quot;A&quot;: &quot;int64&quot;, &quot;B&quot;: &quot;string&quot;, &quot;C&quot;: &quot;datetime&quot;})</span>
+<span class="sd">        rule.apply(data)</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        mapper: A dict with columns names as keys and the new types as values.</span>
+<span class="sd">            The supported types are: int8, int16, int32, int64, float32, float64,</span>
+<span class="sd">            string, datetime and object (python object).</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -10543,14 +11645,15 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">SUPPORTED_TYPES</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;int8&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;int16&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;int32&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;int64&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;float32&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;float64&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;str&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;datetime64&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;int8&#39;</span><span class="p">:</span> <span class="s1">&#39;Int8&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;int16&#39;</span><span class="p">:</span> <span class="s1">&#39;Int16&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;int32&#39;</span><span class="p">:</span> <span class="s1">&#39;Int32&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;int64&#39;</span><span class="p">:</span> <span class="s1">&#39;Int64&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;float32&#39;</span><span class="p">:</span> <span class="s1">&#39;float32&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;float64&#39;</span><span class="p">:</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;string&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;object&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -10566,9 +11669,9 @@ Together with the name, the description acts as the documentation of the rule.</
         <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">column_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns_set</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is missing in the data frame. Available columns: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">columns_set</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">type_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">type_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_TYPES</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type &#39;</span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="s2">&#39; for column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is not currently supported.&quot;</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">column_name</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">type_str</span><span class="p">)</span> <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">column_name</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_TYPES</span><span class="p">[</span><span class="n">type_str</span><span class="p">])</span> <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </code></pre></div>
         </details>
