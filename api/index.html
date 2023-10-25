@@ -958,6 +958,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.exceptions.InvalidPlanError" class="md-nav__link">
+    InvalidPlanError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
   </a>
@@ -974,6 +981,26 @@
           <li class="md-nav__item">
   <a href="#etlrules.exceptions.UnsupportedTypeError" class="md-nav__link">
     UnsupportedTypeError
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etlrules.plan" class="md-nav__link">
+    plan
+  </a>
+  
+    <nav class="md-nav" aria-label="plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.plan.Plan" class="md-nav__link">
+    Plan
   </a>
   
 </li>
@@ -1633,6 +1660,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.exceptions.InvalidPlanError" class="md-nav__link">
+    InvalidPlanError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
   </a>
@@ -1649,6 +1683,26 @@
           <li class="md-nav__item">
   <a href="#etlrules.exceptions.UnsupportedTypeError" class="md-nav__link">
     UnsupportedTypeError
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etlrules.plan" class="md-nav__link">
+    plan
+  </a>
+  
+    <nav class="md-nav" aria-label="plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.plan.Plan" class="md-nav__link">
+    Plan
   </a>
   
 </li>
@@ -7395,20 +7449,46 @@ ReadParquetFileRule            (<span title="etlrules.backends.pandas.io.files.B
 
       <p>Reads one or multiple parquet files from a directory and persists it as a dataframe for subsequent rules to operate on.</p>
 <p>Basic usage::</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code># reads a file data.csv and persists it as the main output of the rule
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code># reads a file data.csv and persists it as the main output of the rule
 rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;)
 rule.apply(data)
 
 # reads a file test_data.parquet and persists it as the input_data named output
 # other rules can specify input_data as their named_input to operate on it
 rule = ReadParquetFileRule(&quot;test_data.parquet&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)
+rule.apply(data)
+
+# reads all the files with the .parquet extension from the home dir of myuser and
+# concatenates them into a single dataframe
+rule = ReadParquetFileRule(&quot;.*\.parquet&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)
+rule.apply(data)
+
+# reads only the A,B,C columns from the file data.csv file
+rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;, columns=[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;])
+rule.apply(data)
+
+# reads only those rows where column A is greater than 10 and column B is True
+rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;, filters=[[&quot;A&quot;, &quot;&gt;=&quot;, 10], [&quot;B&quot;, &quot;==&quot;, True]])
 rule.apply(data)
 </code></pre></div></td></tr></table></div>
 
@@ -7543,6 +7623,19 @@ The following compression algorithms are supported: "snappy", "gzip", "brotli", 
 <span class="sd">        rule = ReadParquetFileRule(&quot;test_data.parquet&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)</span>
 <span class="sd">        rule.apply(data)</span>
 
+<span class="sd">        # reads all the files with the .parquet extension from the home dir of myuser and</span>
+<span class="sd">        # concatenates them into a single dataframe</span>
+<span class="sd">        rule = ReadParquetFileRule(&quot;.*\.parquet&quot;, &quot;/home/myuser/&quot;, named_output=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # reads only the A,B,C columns from the file data.csv file</span>
+<span class="sd">        rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;, columns=[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;])</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # reads only those rows where column A is greater than 10 and column B is True</span>
+<span class="sd">        rule = ReadParquetFileRule(&quot;data.parquet&quot;, &quot;/home/myuser/&quot;, filters=[[&quot;A&quot;, &quot;&gt;=&quot;, 10], [&quot;B&quot;, &quot;==&quot;, True]])</span>
+<span class="sd">        rule.apply(data)</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        file_name: The name of the parquet file to load. The format will be inferred from the extension of the file.</span>
 <span class="sd">            file_name can also be a regular expression (specify regex=True in that case).</span>
@@ -7592,32 +7685,50 @@ The following compression algorithms are supported: "snappy", "gzip", "brotli", 
             <span class="n">file_name</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_dir</span><span class="o">=</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="n">regex</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_filters</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid filters. It must be a List[Tuple] or List[List[Tuple]] with each Tuple being (column, op, value).&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_filters</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span> <span class="k">if</span> <span class="n">filters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">_is_valid_filter_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tpl</span><span class="p">):</span>
-        <span class="n">valid</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">tpl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="n">tpl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_FILTERS_OPS</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="n">valid</span> <span class="ow">and</span> <span class="n">tpl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;not in&#39;</span><span class="p">):</span>
-            <span class="n">valid</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">set</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">valid</span>
+    <span class="k">def</span> <span class="nf">_raise_filters_invalid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid filters. It must be a List[Tuple] or List[List[Tuple]] with each Tuple being (column, op, value): </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_is_valid_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">):</span>
-                <span class="c1"># List[List[Tuple]]</span>
-                <span class="k">return</span> <span class="nb">all</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_filter_tuple</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span>
-                    <span class="k">for</span> <span class="n">tpl</span> <span class="ow">in</span> <span class="n">elem</span>
-                <span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">):</span>
-                <span class="c1"># List[Tuple]</span>
-                <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_valid_filter_tuple</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span> <span class="k">for</span> <span class="n">tpl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">def</span> <span class="nf">_validate_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tpl</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_filters_invalid</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Third level expected a list/tuple (cond, op, value), got: </span><span class="si">{</span><span class="n">tpl</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">op</span> <span class="o">=</span> <span class="n">tpl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_FILTERS_OPS</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_filters_invalid</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid operator </span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">tpl</span><span class="si">}</span><span class="s2">. Must be one of: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_FILTERS_OPS</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">tpl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;not in&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">set</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_raise_filters_invalid</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid value type for </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2"> operand in </span><span class="si">{</span><span class="n">tpl</span><span class="si">}</span><span class="s2">. Must be list/tuple/set.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">tpl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">op</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">filters</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">filter2</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filter2</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">filter2</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filter2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="c1"># List[Tuple] form</span>
+                        <span class="n">tpl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_tuple</span><span class="p">(</span><span class="n">filter2</span><span class="p">)</span>
+                        <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">lst2</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">filter3</span> <span class="ow">in</span> <span class="n">filter2</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filter3</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">filter3</span><span class="p">:</span>
+                                <span class="n">tpl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_tuple</span><span class="p">(</span><span class="n">filter3</span><span class="p">)</span>
+                                <span class="n">lst2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tpl</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_raise_filters_invalid</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Third level expected a list/tuple, got: </span><span class="si">{</span><span class="n">filter3</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                        <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_raise_filters_invalid</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Second level expected a list/tuple, got: </span><span class="si">{</span><span class="n">filter2</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">_raise_filters_invalid</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Top level expected a list/tuple, got: </span><span class="si">{</span><span class="n">filters</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lst</span>
 
     <span class="k">def</span> <span class="nf">do_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">pyarrow.lib</span> <span class="kn">import</span> <span class="n">ArrowInvalid</span>
@@ -11825,6 +11936,37 @@ ExpressionSyntaxError            (<span title="SyntaxError">SyntaxError</span>)
 
 
 
+<h3 id="etlrules.exceptions.InvalidPlanError" class="doc doc-heading">
+        <code>
+InvalidPlanError            (<span title="Exception">Exception</span>)
+        </code>
+
+
+
+<a href="#etlrules.exceptions.InvalidPlanError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The plan failed validation. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">InvalidPlanError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; The plan failed validation. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
 <h3 id="etlrules.exceptions.MissingColumnError" class="doc doc-heading">
         <code>
 MissingColumnError            (<span title="Exception">Exception</span>)
@@ -11924,6 +12066,289 @@ UnsupportedTypeError            (<span title="Exception">Exception</span>)
 
   </div>
 
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="etlrules.plan" class="doc doc-heading">
+        <code>plan</code>
+
+
+
+<a href="#etlrules.plan" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="etlrules.plan.Plan" class="doc doc-heading">
+        <code>
+Plan        </code>
+
+
+
+<a href="#etlrules.plan.Plan" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A plan to manipulate one or multiple dataframes with a set of rules.</p>
+<p>A plan is a blueprint on how to extract one or more dataframes from various sources (e.g. files or
+other data sources), how to transform those dataframes by adding calculated columns, joining
+different dataframe, aggregating, sorting, etc. and ultimately how to load that into a data store
+(files or other data stores).</p>
+<p>A plan can operate in two modes: pipeline or graph. A pipeline graph is a simple type of plan where
+each rule take its input from the previous rule's output. A graph plan is more complex as it allows
+rules to produce named outputs which can then be used by other rules. This ultimately builds a dag
+(directed acyclic graph) of rule dependencies. A graph allows branching and joining back allowing
+complex logic. Rules are executed in the order of dependency and not in the order they are added to
+the plan. By comparison, pipelines implement a single input/single output mode where rules are
+executed in the order they are added to the plan.</p>
+<p>Pipeline example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>plan = Plan()
+plan.add_rule(SortRule([&#39;A&#39;]))
+plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;]))
+plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}))
+</code></pre></div></td></tr></table></div>
+<p>Graph example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>plan = Plan()
+plan.add_rule(SortRule([&#39;A&#39;], named_input=&quot;input&quot;, named_output=&quot;sorted_data&quot;))
+plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;], named_input=&quot;sorted_data&quot;, named_output=&quot;projected_data&quot;))
+plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}, named_input=&quot;projected_data&quot;, named_output=&quot;renamed_data&quot;))
+</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Rules that are used in graph mode should take a named_input and produce a named_output. Rules
+that use the pipeline mode must not used named inputs/outputs. The two type of rules cannot be
+used in the same plan as that leads to ambiguity.</p>
+</div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>A name for the plan. Optional.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>An optional documentation for the plan.
+This can include what the plan does, its purpose and detailed information about how it works.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>A hint about how the plan should be executed.
+When None, then the plan has no hint to provide and its the caller deciding whether to run it
+in a strict mode or not.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>InvalidPlanError</code></td>
+        <td><p>if pipeline mode rules are mixed with graph mode rules</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/plan.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Plan</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A plan to manipulate one or multiple dataframes with a set of rules.</span>
+
+<span class="sd">    A plan is a blueprint on how to extract one or more dataframes from various sources (e.g. files or</span>
+<span class="sd">    other data sources), how to transform those dataframes by adding calculated columns, joining</span>
+<span class="sd">    different dataframe, aggregating, sorting, etc. and ultimately how to load that into a data store</span>
+<span class="sd">    (files or other data stores).</span>
+
+<span class="sd">    A plan can operate in two modes: pipeline or graph. A pipeline graph is a simple type of plan where</span>
+<span class="sd">    each rule take its input from the previous rule&#39;s output. A graph plan is more complex as it allows</span>
+<span class="sd">    rules to produce named outputs which can then be used by other rules. This ultimately builds a dag</span>
+<span class="sd">    (directed acyclic graph) of rule dependencies. A graph allows branching and joining back allowing</span>
+<span class="sd">    complex logic. Rules are executed in the order of dependency and not in the order they are added to</span>
+<span class="sd">    the plan. By comparison, pipelines implement a single input/single output mode where rules are</span>
+<span class="sd">    executed in the order they are added to the plan.</span>
+
+<span class="sd">    Pipeline example::</span>
+
+<span class="sd">        plan = Plan()</span>
+<span class="sd">        plan.add_rule(SortRule([&#39;A&#39;]))</span>
+<span class="sd">        plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;]))</span>
+<span class="sd">        plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}))</span>
+
+<span class="sd">    Graph example::</span>
+
+<span class="sd">        plan = Plan()</span>
+<span class="sd">        plan.add_rule(SortRule([&#39;A&#39;], named_input=&quot;input&quot;, named_output=&quot;sorted_data&quot;))</span>
+<span class="sd">        plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;], named_input=&quot;sorted_data&quot;, named_output=&quot;projected_data&quot;))</span>
+<span class="sd">        plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}, named_input=&quot;projected_data&quot;, named_output=&quot;renamed_data&quot;))</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Rules that are used in graph mode should take a named_input and produce a named_output. Rules</span>
+<span class="sd">        that use the pipeline mode must not used named inputs/outputs. The two type of rules cannot be</span>
+<span class="sd">        used in the same plan as that leads to ambiguity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: A name for the plan. Optional.</span>
+<span class="sd">        description: An optional documentation for the plan.</span>
+<span class="sd">            This can include what the plan does, its purpose and detailed information about how it works.</span>
+<span class="sd">        strict: A hint about how the plan should be executed.</span>
+<span class="sd">            When None, then the plan has no hint to provide and its the caller deciding whether to run it</span>
+<span class="sd">            in a strict mode or not.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidPlanError: if pipeline mode rules are mixed with graph mode rules</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="o">=</span> <span class="n">strict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_check_plan_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+        <span class="n">_plan_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">:</span>
+            <span class="n">_plan_type</span> <span class="o">=</span> <span class="n">plan_type_from_rule</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_plan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">_plan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_new_plan_type</span> <span class="o">=</span> <span class="n">plan_type_from_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_new_plan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_plan_type</span> <span class="o">!=</span> <span class="n">_new_plan_type</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mixing of rules taking named inputs and rules with no named inputs is not supported. (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> vs. </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">BaseRule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_plan_type</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s2">&quot;strict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">,</span>
+            <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="n">rules</span>
+        <span class="p">}</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dct</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
+            <span class="n">strict</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strict&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="p">())</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="n">BaseRule</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">backend</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">instance</span>
+
+    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">yml</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
+        <span class="n">dct</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">yml</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">dct</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">description</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">strict</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">rules</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
