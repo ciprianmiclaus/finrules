@@ -936,6 +936,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#etlrules.engine" class="md-nav__link">
+    engine
+  </a>
+  
+    <nav class="md-nav" aria-label="engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.engine.RuleEngine" class="md-nav__link">
+    RuleEngine
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#etlrules.exceptions" class="md-nav__link">
     exceptions
   </a>
@@ -953,6 +973,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
     ExpressionSyntaxError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.exceptions.GraphRuntimeError" class="md-nav__link">
+    GraphRuntimeError
   </a>
   
 </li>
@@ -1638,6 +1665,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#etlrules.engine" class="md-nav__link">
+    engine
+  </a>
+  
+    <nav class="md-nav" aria-label="engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.engine.RuleEngine" class="md-nav__link">
+    RuleEngine
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#etlrules.exceptions" class="md-nav__link">
     exceptions
   </a>
@@ -1655,6 +1702,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.exceptions.ExpressionSyntaxError" class="md-nav__link">
     ExpressionSyntaxError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.exceptions.GraphRuntimeError" class="md-nav__link">
+    GraphRuntimeError
   </a>
   
 </li>
@@ -11845,6 +11899,190 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="etlrules.engine" class="doc doc-heading">
+        <code>engine</code>
+
+
+
+<a href="#etlrules.engine" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="etlrules.engine.RuleEngine" class="doc doc-heading">
+        <code>
+RuleEngine        </code>
+
+
+
+<a href="#etlrules.engine.RuleEngine" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Run a set of extract/transform/load rules over a dataframe.</p>
+<p>Takes in a plan with the definition of the extract/transform/load rules and it
+runs it over a RuleData instance. The RuleData instance can be optionally pre-populated with
+a input dataframe (in pipeline mode) or a sequence of named inputs (named dataframes).</p>
+<p>The plan can have rules to extract data (ie add more dataframes to the RuleData). It can have
+transform rules which will transform the existing dataframes (either in-place or produce new
+named dataframes). It can also have rules to load data into external systems, e.g. files,
+databases, API connections, etc.</p>
+<p>At the end of a plan run, the RuleData instance passed in will contain the results of the run
+(ie new dataframes/transformed dataframes) which can be inspected/operated on outside of the
+rule engine.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/engine.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RuleEngine</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Run a set of extract/transform/load rules over a dataframe.</span>
+
+<span class="sd">    Takes in a plan with the definition of the extract/transform/load rules and it</span>
+<span class="sd">    runs it over a RuleData instance. The RuleData instance can be optionally pre-populated with</span>
+<span class="sd">    a input dataframe (in pipeline mode) or a sequence of named inputs (named dataframes).</span>
+
+<span class="sd">    The plan can have rules to extract data (ie add more dataframes to the RuleData). It can have</span>
+<span class="sd">    transform rules which will transform the existing dataframes (either in-place or produce new</span>
+<span class="sd">    named dataframes). It can also have rules to load data into external systems, e.g. files,</span>
+<span class="sd">    databases, API connections, etc.</span>
+
+<span class="sd">    At the end of a plan run, the RuleData instance passed in will contain the results of the run</span>
+<span class="sd">    (ie new dataframes/transformed dataframes) which can be inspected/operated on outside of the</span>
+<span class="sd">    rule engine.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">Plan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plan</span> <span class="o">=</span> <span class="n">plan</span>
+
+    <span class="k">def</span> <span class="nf">run_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">:</span>
+            <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">_get_topological_sorter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">graphlib</span><span class="o">.</span><span class="n">TopologicalSorter</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">graphlib</span><span class="o">.</span><span class="n">TopologicalSorter</span><span class="p">()</span>
+        <span class="n">existing_named_outputs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_outputs</span><span class="p">())</span>
+        <span class="n">named_outputs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">has_output</span><span class="p">():</span>
+                <span class="n">named_outputs_lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">get_all_named_outputs</span><span class="p">())</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">named_outputs_lst</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">, index=</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">) has no named outputs.&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">named_output</span> <span class="ow">in</span> <span class="n">named_outputs_lst</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">named_output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">, index=</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">) has empty named output.&quot;</span><span class="p">)</span>
+                    <span class="n">existing_rule</span> <span class="o">=</span> <span class="n">named_outputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">named_output</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">existing_rule</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  
+                        <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Named output &#39;</span><span class="si">{</span><span class="n">named_output</span><span class="si">}</span><span class="s2">&#39; is produced by multiple rules: </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">) and </span><span class="si">{</span><span class="n">existing_rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">existing_rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                    <span class="n">named_outputs</span><span class="p">[</span><span class="n">named_output</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
+        <span class="n">named_output_clashes</span> <span class="o">=</span> <span class="n">existing_named_outputs</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">named_outputs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">named_output_clashes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">GraphRuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Named output clashes. The following named outputs are produced by rules in the plan but they also exist in the input data, leading to ambiguity: </span><span class="si">{</span><span class="n">named_output_clashes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">has_input</span><span class="p">():</span>
+                <span class="n">named_inputs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">get_all_named_inputs</span><span class="p">())</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">named_inputs</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">, index=</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">) has no named inputs.&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">named_input</span> <span class="ow">in</span> <span class="n">named_inputs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">named_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">, index=</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">) has empty named input.&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">named_input</span> <span class="ow">in</span> <span class="n">named_outputs</span><span class="p">:</span>
+                        <span class="n">g</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">named_outputs</span><span class="p">[</span><span class="n">named_input</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">elif</span> <span class="n">named_input</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing_named_outputs</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">GraphRuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">/(name=</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">, index=</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">) requires a named_input=</span><span class="si">{</span><span class="n">named_input</span><span class="si">}</span><span class="s2"> which doesn&#39;t exist in the input data and it&#39;s not produced as a named output by any of the rules in the graph.&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">g</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">g</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">g</span>
+
+    <span class="k">def</span> <span class="nf">run_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_topological_sorter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">g</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">rule_idx</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">get_ready</span><span class="p">():</span>
+                <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">rule_idx</span><span class="p">)</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">g</span><span class="o">.</span><span class="n">done</span><span class="p">(</span><span class="n">rule_idx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_topological_sorter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">InvalidPlanError</span><span class="p">,</span> <span class="n">GraphRuntimeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">RuleData</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="s2">&quot;An empty plan cannot be run.&quot;</span><span class="p">)</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">PlanMode</span><span class="o">.</span><span class="n">PIPELINE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">PlanMode</span><span class="o">.</span><span class="n">GRAPH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_graph</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="s2">&quot;Plan&#39;s mode cannot be determined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
 
   <div class="doc doc-object doc-module">
 
@@ -11922,6 +12160,37 @@ ExpressionSyntaxError            (<span title="SyntaxError">SyntaxError</span>)
           <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExpressionSyntaxError</span><span class="p">(</span><span class="ne">SyntaxError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; A Python expression used to create a column, aggregate or other operations has a syntax error. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="etlrules.exceptions.GraphRuntimeError" class="doc doc-heading">
+        <code>
+GraphRuntimeError            (<span title="RuntimeError">RuntimeError</span>)
+        </code>
+
+
+
+<a href="#etlrules.exceptions.GraphRuntimeError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>There was an error when running a graph-mode plan. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GraphRuntimeError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; There was an error when running a graph-mode plan. &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 
@@ -12241,30 +12510,38 @@ in a strict mode or not.</p></td>
 <span class="sd">        InvalidPlanError: if pipeline mode rules are mixed with graph mode rules</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="n">PlanMode</span><span class="o">.</span><span class="n">PIPELINE</span><span class="p">,</span> <span class="n">PlanMode</span><span class="o">.</span><span class="n">GRAPH</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="o">=</span> <span class="n">strict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">_check_plan_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
-        <span class="n">_plan_type</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">:</span>
-            <span class="n">_plan_type</span> <span class="o">=</span> <span class="n">plan_type_from_rule</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">_plan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">_plan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">_new_plan_type</span> <span class="o">=</span> <span class="n">plan_type_from_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">_new_plan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_plan_type</span> <span class="o">!=</span> <span class="n">_new_plan_type</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mixing of rules taking named inputs and rules with no named inputs is not supported. (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> vs. </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_check_plan_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_new_rule_mode</span> <span class="o">=</span> <span class="n">plan_mode_from_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_new_rule_mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">!=</span> <span class="n">_new_rule_mode</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidPlanError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mixing of rules taking named inputs and rules with no named inputs is not supported. (</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2"> vs. </span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">&#39;s mode </span><span class="si">{</span><span class="n">_new_rule_mode</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">plan_mode_from_rules</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span>
 
     <span class="k">def</span> <span class="nf">add_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">BaseRule</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_plan_type</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_plan_mode</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span>
+
+    <span class="k">def</span> <span class="nf">get_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span>
 
     <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">rules</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">]</span>
@@ -12330,11 +12607,15 @@ in a strict mode or not.</p></td>
 
 
 
+
+
+
   </div>
 
     </div>
 
   </div>
+
 
 
 
@@ -12403,7 +12684,6 @@ BinaryOpBaseRule            (<span title="etlrules.rule.BaseRule">BaseRule</span
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">named_input_left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">named_input_left</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">named_input_left</span>
         <span class="k">assert</span> <span class="n">named_input_right</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">named_input_right</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">named_input_right</span>
-        <span class="k">assert</span> <span class="n">named_input_left</span> <span class="o">!=</span> <span class="n">named_input_right</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">named_input_left</span> <span class="o">=</span> <span class="n">named_input_left</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span> <span class="o">=</span> <span class="n">named_input_right</span>
 
@@ -12416,12 +12696,17 @@ BinaryOpBaseRule            (<span title="etlrules.rule.BaseRule">BaseRule</span
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_main_output</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_all_named_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input_left</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input_right</span>
 </code></pre></div>
         </details>
 
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -12473,12 +12758,16 @@ UnaryOpBaseRule            (<span title="etlrules.rule.BaseRule">BaseRule</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_main_output</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get_named_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_input</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_all_named_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_input</span>
 </code></pre></div>
         </details>
 
 
 
   <div class="doc doc-children">
+
 
 
 
