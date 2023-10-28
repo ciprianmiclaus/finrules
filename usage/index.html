@@ -402,6 +402,53 @@
     Usage
   </a>
   
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-pipeline-mode-example" class="md-nav__link">
+    Basic pipeline mode example
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic pipeline mode example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1---create-a-plan" class="md-nav__link">
+    Step 1 - Create a plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2---prepare-an-input-dataframe" class="md-nav__link">
+    Step 2 - Prepare an input dataframe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3---run-the-plan" class="md-nav__link">
+    Step 3 - Run the plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4---inspect-the-result" class="md-nav__link">
+    Step 4 - Inspect the result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -501,6 +548,53 @@
     Usage
   </a>
   
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-pipeline-mode-example" class="md-nav__link">
+    Basic pipeline mode example
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic pipeline mode example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1---create-a-plan" class="md-nav__link">
+    Step 1 - Create a plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2---prepare-an-input-dataframe" class="md-nav__link">
+    Step 2 - Prepare an input dataframe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3---run-the-plan" class="md-nav__link">
+    Step 3 - Run the plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4---inspect-the-result" class="md-nav__link">
+    Step 4 - Inspect the result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -526,9 +620,132 @@
   <h1>Usage</h1>
 
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>To use ETLrules in a project</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>    import etlrules
+<p>etlrules allows you to extract tabular data (ie a dataframe) from a data source,
+transform it through a set of rules and load the result into another data source.</p>
+<h3 id="basic-pipeline-mode-example">Basic pipeline mode example<a class="headerlink" href="#basic-pipeline-mode-example" title="Permanent link">&para;</a></h3>
+<p>Let's look at an example that runs a basic plan in a pipeline mode.
+A pipeline mode is a simple mode where each rule is executed in the same order they are
+added to the plan, with each rule taking its input from the rule before it and passing the
+output to the rule following it.</p>
+<p>The example below also prepares the input dataframe directly into a RuleData instance.
+Other plans can extract their own data from files, DBs, API endpoints, etc. with the details
+on how to extract the data in the plan itself.
+Similarly, the plan below doesn't load the result anywhere, the result being available in the
+RuleData to be inspected at the end. More complex plans can load (ie write) the result to 
+files, DBs, API endpoints with all the details encapsulated in the plan.</p>
+<h4 id="step-1---create-a-plan">Step 1 - Create a plan<a class="headerlink" href="#step-1---create-a-plan" title="Permanent link">&para;</a></h4>
+<p>The plan is a blueprint for data extractions, data transformations and data loading.
+Below, we're going to create a plan with 3 rules:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules.plan import Plan</span>
+<span class="go">from etlrules.backends.pandas import </span>
+
+<span class="go">plan = Plan()</span>
+<span class="go">plan.add_rule(SortRule([&#39;A&#39;]))</span>
+<span class="go">plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;]))</span>
+<span class="go">plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}))</span>
 </code></pre></div></td></tr></table></div>
+<p>The plan above will:
+    1. Sort the input dataframe by column A
+    2. Project columns A and B (ie only keep columns A and B)
+    3. Rename column A to AA and column B to BB</p>
+<h4 id="step-2---prepare-an-input-dataframe">Step 2 - Prepare an input dataframe<a class="headerlink" href="#step-2---prepare-an-input-dataframe" title="Permanent link">&para;</a></h4>
+<p>We are going to create an input pandas dataframe and wrap it into a RuleData instance.
+RuleData is what the rules engine operates with. RuleData will hold the inputs, outputs
+and any intermediate results/dataframes.</p>
+<p>We're going to work with the following input dataframe:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>n</td>
+<td>True</td>
+</tr>
+<tr>
+<td>1</td>
+<td>m</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>p</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from pandas import DataFrame</span>
+<span class="go">from etlrules.data import RuleData</span>
+
+<span class="go">input_df = DataFrame(data=[</span>
+<span class="go">    {&#39;A&#39;: 2, &#39;B&#39;: &#39;n&#39;, &#39;C&#39;: True},</span>
+<span class="go">    {&#39;A&#39;: 1, &#39;B&#39;: &#39;m&#39;, &#39;C&#39;: False},</span>
+<span class="go">    {&#39;A&#39;: 3, &#39;B&#39;: &#39;p&#39;, &#39;C&#39;: True},</span>
+<span class="go">])</span>
+<span class="go">data = RuleData(input_df)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="step-3---run-the-plan">Step 3 - Run the plan<a class="headerlink" href="#step-3---run-the-plan" title="Permanent link">&para;</a></h4>
+<p>Running the plan will apply the rules in turn over the dataframe.
+We will need to instantiate a RuleEngine and run the plan.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules.engine import RuleEngine</span>
+
+<span class="go">rule_engine = RuleEngine(plan)</span>
+<span class="go">rule_engine.run(data)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="step-4---inspect-the-result">Step 4 - Inspect the result<a class="headerlink" href="#step-4---inspect-the-result" title="Permanent link">&para;</a></h4>
+<p>The RuleData will contain the result.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">result = data.get_main_output()</span>
+<span class="go">print(result)</span>
+</code></pre></div></td></tr></table></div>
+<p>The example should produce the following transformed dataframe:</p>
+<table>
+<thead>
+<tr>
+<th>AA</th>
+<th>BB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>n</td>
+</tr>
+<tr>
+<td>1</td>
+<td>m</td>
+</tr>
+<tr>
+<td>3</td>
+<td>p</td>
+</tr>
+</tbody>
+</table>
+<p>We've just completed our first etlrules application.
+We can also serialize our plan to yaml, save it to a file, a repo for version control or a database.
+We can add names and extensive descriptions to all the rules as a form of documentation for the plan.</p>
 
 
 
