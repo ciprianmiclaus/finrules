@@ -446,6 +446,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#basic-graph-mode-example" class="md-nav__link">
+    Basic graph mode example
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic graph mode example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1---create-a-plan_1" class="md-nav__link">
+    Step 1 - Create a plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2---prepare-an-input-dataframe_1" class="md-nav__link">
+    Step 2 - Prepare an input dataframe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3---run-the-plan_1" class="md-nav__link">
+    Step 3 - Run the plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4---inspect-the-result_1" class="md-nav__link">
+    Step 4 - Inspect the result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -592,6 +633,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#basic-graph-mode-example" class="md-nav__link">
+    Basic graph mode example
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic graph mode example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1---create-a-plan_1" class="md-nav__link">
+    Step 1 - Create a plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2---prepare-an-input-dataframe_1" class="md-nav__link">
+    Step 2 - Prepare an input dataframe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3---run-the-plan_1" class="md-nav__link">
+    Step 3 - Run the plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4---inspect-the-result_1" class="md-nav__link">
+    Step 4 - Inspect the result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -642,8 +724,8 @@ Below, we're going to create a plan with 3 rules:</p>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules.plan import Plan</span>
-<span class="go">from etlrules.backends.pandas import </span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules import Plan</span>
+<span class="go">from etlrules.backends.pandas import ProjectRule, RenameRule, SortRule</span>
 
 <span class="go">plan = Plan()</span>
 <span class="go">plan.add_rule(SortRule([&#39;A&#39;]))</span>
@@ -694,7 +776,7 @@ and any intermediate results/dataframes.</p>
 <span class="normal">7</span>
 <span class="normal">8</span>
 <span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from pandas import DataFrame</span>
-<span class="go">from etlrules.data import RuleData</span>
+<span class="go">from etlrules import RuleData</span>
 
 <span class="go">input_df = DataFrame(data=[</span>
 <span class="go">    {&#39;A&#39;: 2, &#39;B&#39;: &#39;n&#39;, &#39;C&#39;: True},</span>
@@ -709,7 +791,7 @@ We will need to instantiate a RuleEngine and run the plan.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules.engine import RuleEngine</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules import RuleEngine</span>
 
 <span class="go">rule_engine = RuleEngine(plan)</span>
 <span class="go">rule_engine.run(data)</span>
@@ -746,6 +828,99 @@ We will need to instantiate a RuleEngine and run the plan.</p>
 <p>We've just completed our first etlrules application.
 We can also serialize our plan to yaml, save it to a file, a repo for version control or a database.
 We can add names and extensive descriptions to all the rules as a form of documentation for the plan.</p>
+<h3 id="basic-graph-mode-example">Basic graph mode example<a class="headerlink" href="#basic-graph-mode-example" title="Permanent link">&para;</a></h3>
+<h4 id="step-1---create-a-plan_1">Step 1 - Create a plan<a class="headerlink" href="#step-1---create-a-plan_1" title="Permanent link">&para;</a></h4>
+<p>We'll use the same plan from the pipeline example; the only difference being the named inputs/outputs are used.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules import Plan</span>
+<span class="go">from etlrules.backends.pandas import ProjectRule, RenameRule, SortRule</span>
+
+<span class="go">plan = Plan()</span>
+<span class="go">plan.add_rule(SortRule([&#39;A&#39;], named_input=&quot;input&quot;, named_output=&quot;sorted_data&quot;))</span>
+<span class="go">plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;]), named_input=&quot;sorted_data&quot;, named_output=&quot;projected_data&quot;)</span>
+<span class="go">plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}), named_input=&quot;projected_data&quot;, named_output=&quot;result&quot;)</span>
+</code></pre></div></td></tr></table></div>
+<p>Note::
+    Because the rules specify what inputs they need and what outputs they produce, the order they are
+    added to the plan is irrelevant. They will be executed in the order of dependency.</p>
+<p>As such, we can also add the rules to the plan in a different order, e.g.:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">plan.add_rule(RenameRule({&#39;A&#39;: &#39;AA&#39;, &#39;B&#39;: &#39;BB&#39;}), named_input=&quot;projected_data&quot;, named_output=&quot;result&quot;)</span>
+<span class="go">plan.add_rule(SortRule([&#39;A&#39;], named_input=&quot;input&quot;, named_output=&quot;sorted_data&quot;))</span>
+<span class="go">plan.add_rule(ProjectRule([&#39;A&#39;, &#39;B&#39;]), named_input=&quot;sorted_data&quot;, named_output=&quot;projected_data&quot;)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="step-2---prepare-an-input-dataframe_1">Step 2 - Prepare an input dataframe<a class="headerlink" href="#step-2---prepare-an-input-dataframe_1" title="Permanent link">&para;</a></h4>
+<p>In the plan above, the single input is a named input called "input".
+We will use the same dataframe as in the pipeline example, but name it as "input" in the RuleData.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from pandas import DataFrame</span>
+<span class="go">from etlrules import RuleData</span>
+
+<span class="go">input_df = DataFrame(data=[</span>
+<span class="go">    {&#39;A&#39;: 2, &#39;B&#39;: &#39;n&#39;, &#39;C&#39;: True},</span>
+<span class="go">    {&#39;A&#39;: 1, &#39;B&#39;: &#39;m&#39;, &#39;C&#39;: False},</span>
+<span class="go">    {&#39;A&#39;: 3, &#39;B&#39;: &#39;p&#39;, &#39;C&#39;: True},</span>
+<span class="go">])</span>
+<span class="go">data = RuleData(named_inputs={&quot;input&quot;: input_df})</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="step-3---run-the-plan_1">Step 3 - Run the plan<a class="headerlink" href="#step-3---run-the-plan_1" title="Permanent link">&para;</a></h4>
+<p>Running the plan is no different in graph mode to the pipeline mode.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">from etlrules import RuleEngine</span>
+
+<span class="go">rule_engine = RuleEngine(plan)</span>
+<span class="go">rule_engine.run(data)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="step-4---inspect-the-result_1">Step 4 - Inspect the result<a class="headerlink" href="#step-4---inspect-the-result_1" title="Permanent link">&para;</a></h4>
+<p>The RuleData will contain the result, named as "result" since the last rule, the RenameRule
+produces a named output called "result".</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">result = data.get_named_output(&quot;result&quot;)</span>
+<span class="go">print(result)</span>
+</code></pre></div></td></tr></table></div>
+<p>The example should produce the following transformed dataframe:</p>
+<table>
+<thead>
+<tr>
+<th>AA</th>
+<th>BB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>n</td>
+</tr>
+<tr>
+<td>1</td>
+<td>m</td>
+</tr>
+<tr>
+<td>3</td>
+<td>p</td>
+</tr>
+</tbody>
+</table>
+<p>The other intermediary dataframe can also be inspected.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="go">sorted_data = data.get_named_output(&quot;sorted_data&quot;)</span>
+<span class="go">print(sorted_data)</span>
+</code></pre></div></td></tr></table></div>
 
 
 

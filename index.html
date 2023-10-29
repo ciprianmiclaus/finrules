@@ -376,6 +376,54 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#high-level-concepts" class="md-nav__link">
+    High level concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="High level concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan" class="md-nav__link">
+    Plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule" class="md-nav__link">
+    Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-engine" class="md-nav__link">
+    Rule engine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-data" class="md-nav__link">
+    Rule data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    Backend
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#documentation" class="md-nav__link">
     Documentation
   </a>
@@ -525,6 +573,54 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#high-level-concepts" class="md-nav__link">
+    High level concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="High level concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan" class="md-nav__link">
+    Plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule" class="md-nav__link">
+    Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-engine" class="md-nav__link">
+    Rule engine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-data" class="md-nav__link">
+    Rule data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    Backend
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#documentation" class="md-nav__link">
     Documentation
   </a>
@@ -604,6 +700,27 @@ extensive description acting as an embedded documentation as to what the rule is
 automate various problems without the need to code. Workflows for managing change and version control can be put in place
 around the plans, allowing technical and non-technical users to collaborate on data transformations that can be scheduled to
 run periodically for solving real business problems.</p>
+<h3 id="high-level-concepts">High level concepts<a class="headerlink" href="#high-level-concepts" title="Permanent link">&para;</a></h3>
+<h4 id="plan">Plan<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h4>
+<p>A plan is a blueprint of how to perform extractions of tabular data, transformations of the data and how to load (ie write)
+the transformed data to its final destination.</p>
+<p>A plan is a collection of rules, each of which operate on a dataframe (tabular data).</p>
+<h4 id="rule">Rule<a class="headerlink" href="#rule" title="Permanent link">&para;</a></h4>
+<p>A rule is an operation performed on a dataframe. There are three types of rules:
+    * Extract rules (aka read rules)
+        - They will read an external data source (ie files, DBs, APIs endpoints) and bring the data into memory for processing
+    * Transform rules
+        - They will perform a transformation of the data (ie add a new column, modify an existing column, join columns, aggregate)
+    * Load rules (aka write rules)
+        - They will write the output into an external storage (ie files, DBs, APIs endpoints)</p>
+<h4 id="rule-engine">Rule engine<a class="headerlink" href="#rule-engine" title="Permanent link">&para;</a></h4>
+<p>The component that takes a plan and executes it (rule by rule) based on an input.</p>
+<h4 id="rule-data">Rule data<a class="headerlink" href="#rule-data" title="Permanent link">&para;</a></h4>
+<p>The structure that holds together any input dataframes, temporary results and the final output of a rule engine execution of a plan.
+The rule data can have some input dataframes or they can start as empty canvases, with the plan performing extractions/reading of data that it needs.</p>
+<h4 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h4>
+<p>The underlying dataframe library to use for executing the plan. For example: pandas, vaex, polars, etc.
+At the moment, only pandas is supported.</p>
 <h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
 <p><a href="https://ciprianmiclaus.github.io/etlrules/">https://ciprianmiclaus.github.io/etlrules/</a></p>
 <h3 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h3>
