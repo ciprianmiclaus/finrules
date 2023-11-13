@@ -2080,12 +2080,12 @@ The above aggregates the column C by producing a ; separated string of values in
         <td><code>None</code></td>
       </tr>
       <tr>
-        <td><code>aggregations_types</code></td>
-        <td></td>
+        <td><code>aggregation_types</code></td>
+        <td><code>Optional[Mapping[str, str]]</code></td>
         <td><p>An optional mapping of {column_name: column_type} which converts the respective output
 column to the given type. The supported types are: int8, int16, int32, int64, float32, float64,
 string, datetime and timedelta.</p></td>
-        <td><em>required</em></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>named_input</code></td>
@@ -2213,7 +2213,7 @@ in the aggregation_types is missing from the input dataframe.</p></td>
 
 <span class="sd">                The above aggregates the column C by producing a ; separated string of values in the group, excluding NA.</span>
 
-<span class="sd">        aggregations_types: An optional mapping of {column_name: column_type} which converts the respective output</span>
+<span class="sd">        aggregation_types: An optional mapping of {column_name: column_type} which converts the respective output</span>
 <span class="sd">            column to the given type. The supported types are: int8, int16, int32, int64, float32, float64,</span>
 <span class="sd">            string, datetime and timedelta.</span>
 
