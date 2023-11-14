@@ -2311,7 +2311,7 @@ in the aggregation_types is missing from the input dataframe.</p></td>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">continue</span>
                 <span class="k">if</span> <span class="n">col_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported type </span><span class="si">{</span><span class="n">col_type</span><span class="si">}</span><span class="s2"> for column &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported type &#39;</span><span class="si">{</span><span class="n">col_type</span><span class="si">}</span><span class="s2">&#39; for column &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">aggregation_types</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">col_type</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">aggregation_types</span> <span class="o">=</span> <span class="kc">None</span>
