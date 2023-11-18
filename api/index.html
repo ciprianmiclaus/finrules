@@ -471,6 +471,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.common.basic.ExplodeValuesRule" class="md-nav__link">
+    ExplodeValuesRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.common.basic.ProjectRule" class="md-nav__link">
     ProjectRule
   </a>
@@ -1238,6 +1245,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.backends.common.basic.DedupeRule" class="md-nav__link">
     DedupeRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.common.basic.ExplodeValuesRule" class="md-nav__link">
+    ExplodeValuesRule
   </a>
   
 </li>
@@ -2587,6 +2601,217 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h5 id="etlrules.backends.common.basic.ExplodeValuesRule" class="doc doc-heading">
+        <code>
+ExplodeValuesRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>, <span title="etlrules.rule.ColumnsInOutMixin">ColumnsInOutMixin</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.common.basic.ExplodeValuesRule" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Explode a list of values into multiple rows with each value on a separate row</p>
+<p>Example::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>Given df:
+| A         |
+|-----------|
+| [1, 2, 3] |
+| [4, 5]    |
+| [6]       |
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>ExplodeValuesRule("A").apply(df)</p>
+</blockquote>
+<p>Result::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>| A   |
+|-----|
+| 1   |
+| 2   |
+| 3   |
+| 4   |
+| 5   |
+| 6   |
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>input_column</code></td>
+        <td><code>str</code></td>
+        <td><p>A column with values to round as per the specified scale.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>column_type</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>An optional string with the type of the resulting exploded column. When not specified, the
+column_type is backend implementation specific.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Which dataframe to use as the input. Optional.
+When not set, the input is taken from the main output.
+Set it to a string value, the name of an output dataframe of a previous rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>MissingColumnError</code></td>
+        <td><p>raised if the input column doesn't exist in the input dataframe.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/common/basic.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExplodeValuesRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">,</span> <span class="n">ColumnsInOutMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Explode a list of values into multiple rows with each value on a separate row</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        Given df:</span>
+<span class="sd">        | A         |</span>
+<span class="sd">        |-----------|</span>
+<span class="sd">        | [1, 2, 3] |</span>
+<span class="sd">        | [4, 5]    |</span>
+<span class="sd">        | [6]       |</span>
+
+<span class="sd">    &gt; ExplodeValuesRule(&quot;A&quot;).apply(df)</span>
+
+<span class="sd">    Result::</span>
+
+<span class="sd">        | A   |</span>
+<span class="sd">        |-----|</span>
+<span class="sd">        | 1   |</span>
+<span class="sd">        | 2   |</span>
+<span class="sd">        | 3   |</span>
+<span class="sd">        | 4   |</span>
+<span class="sd">        | 5   |</span>
+<span class="sd">        | 6   |</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input_column: A column with values to round as per the specified scale.</span>
+<span class="sd">        column_type: An optional string with the type of the resulting exploded column. When not specified, the</span>
+<span class="sd">            column_type is backend implementation specific.</span>
+
+<span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
+<span class="sd">            When not set, the input is taken from the main output.</span>
+<span class="sd">            Set it to a string value, the name of an output dataframe of a previous rule.</span>
+<span class="sd">        named_output: Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name: Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description: Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        MissingColumnError: raised if the input column doesn&#39;t exist in the input dataframe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_column</span> <span class="o">=</span> <span class="n">input_column</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_type</span> <span class="o">=</span> <span class="n">column_type</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">column_type</span><span class="si">}</span><span class="s2">&#39; is not supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate_input_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">input_column</span><span class="si">}</span><span class="s2">&#39; is not present in the input dataframe.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
 
 
 
