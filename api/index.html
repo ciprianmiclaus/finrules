@@ -12007,11 +12007,16 @@ Together with the name, the description acts as the documentation of the rule.</
   <tbody>
       <tr>
         <td><code>MissingColumnError</code></td>
-        <td><p>is raised when a column specified in the mapper doesn't exist in the input data frame.</p></td>
+        <td><p>raised when a column specified in the mapper doesn't exist in the input data frame.</p></td>
       </tr>
       <tr>
         <td><code>UnsupportedTypeError</code></td>
-        <td><p>is raised when an unknown type is speified in the values of the mapper.</p></td>
+        <td><p>raised when an unknown type is speified in the values of the mapper.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised in strict mode if a value cannot be converted to the desired type.
+In non strict mode, the exception is not raised and the value is converted to NA.</p></td>
       </tr>
   </tbody>
 </table>
@@ -12044,8 +12049,10 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">        strict: When set to True, the rule does a stricter valiation. Default: True</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        MissingColumnError: is raised when a column specified in the mapper doesn&#39;t exist in the input data frame.</span>
-<span class="sd">        UnsupportedTypeError: is raised when an unknown type is speified in the values of the mapper.</span>
+<span class="sd">        MissingColumnError: raised when a column specified in the mapper doesn&#39;t exist in the input data frame.</span>
+<span class="sd">        UnsupportedTypeError: raised when an unknown type is speified in the values of the mapper.</span>
+<span class="sd">        ValueError: raised in strict mode if a value cannot be converted to the desired type.</span>
+<span class="sd">            In non strict mode, the exception is not raised and the value is converted to NA.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">named_input</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
