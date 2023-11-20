@@ -690,6 +690,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.common.io.db" class="md-nav__link">
+    db
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.common.io.db.ReadSQLQueryRule" class="md-nav__link">
+    ReadSQLQueryRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.common.io.db.WriteSQLTableRule" class="md-nav__link">
+    WriteSQLTableRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.common.io.files" class="md-nav__link">
     files
   </a>
@@ -982,6 +1003,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.exceptions.SQLError" class="md-nav__link">
+    SQLError
   </a>
   
 </li>
@@ -1469,6 +1497,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#etlrules.backends.common.io.db" class="md-nav__link">
+    db
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.common.io.db.ReadSQLQueryRule" class="md-nav__link">
+    ReadSQLQueryRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.backends.common.io.db.WriteSQLTableRule" class="md-nav__link">
+    WriteSQLTableRule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#etlrules.backends.common.io.files" class="md-nav__link">
     files
   </a>
@@ -1761,6 +1810,13 @@
           <li class="md-nav__item">
   <a href="#etlrules.exceptions.MissingColumnError" class="md-nav__link">
     MissingColumnError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.exceptions.SQLError" class="md-nav__link">
+    SQLError
   </a>
   
 </li>
@@ -7460,6 +7516,513 @@ Together with the name, the description acts as the documentation of the rule.</
 
 
 
+<h5 id="etlrules.backends.common.io.db" class="doc doc-heading">
+        <code>db</code>
+
+
+
+<a href="#etlrules.backends.common.io.db" class="headerlink" title="Permanent link">&para;</a></h5>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h6 id="etlrules.backends.common.io.db.ReadSQLQueryRule" class="doc doc-heading">
+        <code>
+ReadSQLQueryRule            (<span title="etlrules.rule.BaseRule">BaseRule</span>)
+        </code>
+
+
+
+<a href="#etlrules.backends.common.io.db.ReadSQLQueryRule" class="headerlink" title="Permanent link">&para;</a></h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Runs a SQL query and reads the results back into a dataframe.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code># reads all the data from a sqlite db called mydb.db, from the table MyTable
+# saves the dataframe as the main output of the rule which subsequent rules can use as their main input
+rule = ReadSQLQueryRule(&quot;sqlite:///mydb.db&quot;, &quot;SELECT * FROM MyTable&quot;)
+rule.apply(data)
+
+# reads all the data from a sqlite db called mydb.db, from the table MyTable
+# saves the dataframe as the a named output called MyData which subsequent rules can use by name
+rule = ReadSQLQueryRule(&quot;sqlite:///mydb.db&quot;, &quot;SELECT * FROM MyTable&quot;, named_output=&quot;MyData&quot;)
+rule.apply(data)
+
+# same as the first example, but uses column types rather than relying on type inferrence
+rule = ReadSQLQueryRule(&quot;sqlite:///mydb.db&quot;, &quot;SELECT * FROM MyTable&quot;, column_types={&quot;ColA&quot;: &quot;int64&quot;, &quot;ColB&quot;: &quot;string&quot;})
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>sql_engine</code></td>
+        <td><code>str</code></td>
+        <td><p>A sqlalchemy engine string. This is typically in the form:
+dialect+driver://username:password@host:port/database
+For more information, please refer to the sqlalchemy documentation here:
+https://docs.sqlalchemy.org/en/20/core/engines.html</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sql_query</code></td>
+        <td><code>str</code></td>
+        <td><p>A SQL SELECT statement that will specify the columns, table and optionally any WHERE, GROUP BY, ORDER BY clauses.
+The SQL statement must be valid for the SQL engine specified in the sql_engine parameter.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>column_types</code></td>
+        <td><code>Optional[Mapping[str, str]]</code></td>
+        <td><p>A mapping of column names and their types. Column types are inferred from the data when this parameter
+is not specified. For empty result sets, this inferrence is not possible, so specifying the column types allows
+the users to control the types in that scenario and not fallback onto backends defaults. </p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>named_output</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the output of this rule a name so it can be used by another rule as a named input. Optional.
+When not set, the result of this rule will be available as the main output.
+When set to a name (string), the result will be available as that named output.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>SQLError</code></td>
+        <td><p>raised if there's an error running the sql statement.</p></td>
+      </tr>
+      <tr>
+        <td><code>UnsupportedTypeError</code></td>
+        <td><p>raised if column_types are specified and any of them are not supported.</p></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The implementation uses sqlalchemy, which must be installed as an optional dependency of etlrules.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/common/io/db.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ReadSQLQueryRule</span><span class="p">(</span><span class="n">BaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Runs a SQL query and reads the results back into a dataframe.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # reads all the data from a sqlite db called mydb.db, from the table MyTable</span>
+<span class="sd">        # saves the dataframe as the main output of the rule which subsequent rules can use as their main input</span>
+<span class="sd">        rule = ReadSQLQueryRule(&quot;sqlite:///mydb.db&quot;, &quot;SELECT * FROM MyTable&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # reads all the data from a sqlite db called mydb.db, from the table MyTable</span>
+<span class="sd">        # saves the dataframe as the a named output called MyData which subsequent rules can use by name</span>
+<span class="sd">        rule = ReadSQLQueryRule(&quot;sqlite:///mydb.db&quot;, &quot;SELECT * FROM MyTable&quot;, named_output=&quot;MyData&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # same as the first example, but uses column types rather than relying on type inferrence</span>
+<span class="sd">        rule = ReadSQLQueryRule(&quot;sqlite:///mydb.db&quot;, &quot;SELECT * FROM MyTable&quot;, column_types={&quot;ColA&quot;: &quot;int64&quot;, &quot;ColB&quot;: &quot;string&quot;})</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sql_engine: A sqlalchemy engine string. This is typically in the form:</span>
+<span class="sd">            dialect+driver://username:password@host:port/database</span>
+<span class="sd">            For more information, please refer to the sqlalchemy documentation here:</span>
+<span class="sd">            https://docs.sqlalchemy.org/en/20/core/engines.html</span>
+<span class="sd">        sql_query: A SQL SELECT statement that will specify the columns, table and optionally any WHERE, GROUP BY, ORDER BY clauses.</span>
+<span class="sd">            The SQL statement must be valid for the SQL engine specified in the sql_engine parameter.</span>
+<span class="sd">        column_types: A mapping of column names and their types. Column types are inferred from the data when this parameter</span>
+<span class="sd">            is not specified. For empty result sets, this inferrence is not possible, so specifying the column types allows</span>
+<span class="sd">            the users to control the types in that scenario and not fallback onto backends defaults. </span>
+
+<span class="sd">        named_output (Optional[str]): Give the output of this rule a name so it can be used by another rule as a named input. Optional.</span>
+<span class="sd">            When not set, the result of this rule will be available as the main output.</span>
+<span class="sd">            When set to a name (string), the result will be available as that named output.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        SQLError: raised if there&#39;s an error running the sql statement.</span>
+<span class="sd">        UnsupportedTypeError: raised if column_types are specified and any of them are not supported.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The implementation uses sqlalchemy, which must be installed as an optional dependency of etlrules.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql_engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sql_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">column_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">named_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span> <span class="o">=</span> <span class="n">sql_engine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql_query</span> <span class="o">=</span> <span class="n">sql_query</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sql_engine parameter must be a non-empty string.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_query</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_query</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sql_query parameter must be a non-empty string.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_types</span> <span class="o">=</span> <span class="n">column_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_column_types</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_validate_column_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_types</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">column_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_types</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">column_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type &#39;</span><span class="si">{</span><span class="n">column_type</span><span class="si">}</span><span class="s2">&#39; for column &#39;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">&#39; is not supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">has_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t instantiate base class.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">SQLAlchemyEngines</span><span class="o">.</span><span class="n">get_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_apply</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">sa</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">SQLAlchemyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">SQLError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_output_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h6 id="etlrules.backends.common.io.db.WriteSQLTableRule" class="doc doc-heading">
+        <code>
+WriteSQLTableRule            (<a title="etlrules.rule.UnaryOpBaseRule" href="#etlrules.rule.UnaryOpBaseRule">UnaryOpBaseRule</a>)
+        </code>
+
+
+
+<a href="#etlrules.backends.common.io.db.WriteSQLTableRule" class="headerlink" title="Permanent link">&para;</a></h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Writes the data from the input dataframe into a SQL table in a database.</p>
+<p>The rule is a final rule, which means it produces no additional outputs, it takes any of the existing
+outputs and writes it to the DB. If the named_input is specified, the input with that name
+is written, otherwise, it takes the main output of the preceding rule.</p>
+<p>Basic usage::</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code># writes the main input to a table called MyTable in a sqlite DB called mydb.db
+# If the table already exists, it replaces it
+rule = WriteSQLTableRule(&quot;sqlite:///mydb.db&quot;, &quot;MyTable&quot;, if_exists=&quot;replace&quot;)
+rule.apply(data)
+
+# writes the dataframe input called &#39;input_data&#39; to a table MyTable in a sqlite DB mydb.db
+# If the table already exists, it appends the data to it
+rule = WriteSQLTableRule(&quot;sqlite:///mydb.db&quot;, &quot;MyTable&quot;, if_exists=&quot;append&quot;, named_input=&quot;input_data&quot;)
+rule.apply(data)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>sql_engine</code></td>
+        <td><code>str</code></td>
+        <td><p>A sqlalchemy engine string. This is typically in the form:
+dialect+driver://username:password@host:port/database
+For more information, please refer to the sqlalchemy documentation here:
+https://docs.sqlalchemy.org/en/20/core/engines.html</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sql_table</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the sql table to write to.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>if_exists</code></td>
+        <td><code>str</code></td>
+        <td><p>Specifies what to do in case the table already exists in the database.
+The options are:
+    - replace: drops all the existing data and inserts the data in the input dataframe
+    - append: adds the data in the input dataframe to the existing data in the table
+    - fail: Raises a ValueError exception
+Default: fail.</p></td>
+        <td><code>&#39;fail&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>named_input</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Select by name the dataframe to write from the input data.
+Optional. When not specified, the main output of the previous rule will be written.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Give the rule a name. Optional.
+Named rules are more descriptive as to what they're trying to do/the intent.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Describe in detail what the rules does, how it does it. Optional.
+Together with the name, the description acts as the documentation of the rule.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>strict</code></td>
+        <td><code>bool</code></td>
+        <td><p>When set to True, the rule does a stricter valiation. Default: True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>raised if the table already exists when the if_exists is fail.
+ValueError is also raised if any of the arguments passed into the rule are not strings or empty strings.</p></td>
+      </tr>
+      <tr>
+        <td><code>SQLError</code></td>
+        <td><p>raised if there's any problem writing the data into the database.
+For example: If the schema doesn't match the schema of the table written to (for existing tables).</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/backends/common/io/db.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WriteSQLTableRule</span><span class="p">(</span><span class="n">UnaryOpBaseRule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Writes the data from the input dataframe into a SQL table in a database.</span>
+
+<span class="sd">    The rule is a final rule, which means it produces no additional outputs, it takes any of the existing</span>
+<span class="sd">    outputs and writes it to the DB. If the named_input is specified, the input with that name</span>
+<span class="sd">    is written, otherwise, it takes the main output of the preceding rule.</span>
+
+<span class="sd">    Basic usage::</span>
+
+<span class="sd">        # writes the main input to a table called MyTable in a sqlite DB called mydb.db</span>
+<span class="sd">        # If the table already exists, it replaces it</span>
+<span class="sd">        rule = WriteSQLTableRule(&quot;sqlite:///mydb.db&quot;, &quot;MyTable&quot;, if_exists=&quot;replace&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">        # writes the dataframe input called &#39;input_data&#39; to a table MyTable in a sqlite DB mydb.db</span>
+<span class="sd">        # If the table already exists, it appends the data to it</span>
+<span class="sd">        rule = WriteSQLTableRule(&quot;sqlite:///mydb.db&quot;, &quot;MyTable&quot;, if_exists=&quot;append&quot;, named_input=&quot;input_data&quot;)</span>
+<span class="sd">        rule.apply(data)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sql_engine: A sqlalchemy engine string. This is typically in the form:</span>
+<span class="sd">            dialect+driver://username:password@host:port/database</span>
+<span class="sd">            For more information, please refer to the sqlalchemy documentation here:</span>
+<span class="sd">            https://docs.sqlalchemy.org/en/20/core/engines.html</span>
+<span class="sd">        sql_table: The name of the sql table to write to.</span>
+<span class="sd">        if_exists: Specifies what to do in case the table already exists in the database.</span>
+<span class="sd">            The options are:</span>
+<span class="sd">                - replace: drops all the existing data and inserts the data in the input dataframe</span>
+<span class="sd">                - append: adds the data in the input dataframe to the existing data in the table</span>
+<span class="sd">                - fail: Raises a ValueError exception</span>
+<span class="sd">            Default: fail.</span>
+
+<span class="sd">        named_input (Optional[str]): Select by name the dataframe to write from the input data.</span>
+<span class="sd">            Optional. When not specified, the main output of the previous rule will be written.</span>
+<span class="sd">        name (Optional[str]): Give the rule a name. Optional.</span>
+<span class="sd">            Named rules are more descriptive as to what they&#39;re trying to do/the intent.</span>
+<span class="sd">        description (Optional[str]): Describe in detail what the rules does, how it does it. Optional.</span>
+<span class="sd">            Together with the name, the description acts as the documentation of the rule.</span>
+<span class="sd">        strict (bool): When set to True, the rule does a stricter valiation. Default: True.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: raised if the table already exists when the if_exists is fail.</span>
+<span class="sd">            ValueError is also raised if any of the arguments passed into the rule are not strings or empty strings.</span>
+<span class="sd">        SQLError: raised if there&#39;s any problem writing the data into the database.</span>
+<span class="sd">            For example: If the schema doesn&#39;t match the schema of the table written to (for existing tables).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">IF_EXISTS_OPTIONS</span><span class="p">:</span>
+        <span class="n">APPEND</span> <span class="o">=</span> <span class="s1">&#39;append&#39;</span>
+        <span class="n">REPLACE</span> <span class="o">=</span> <span class="s1">&#39;replace&#39;</span>
+        <span class="n">FAIL</span> <span class="o">=</span> <span class="s1">&#39;fail&#39;</span>
+
+    <span class="n">ALL_IF_EXISTS_OPTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="n">IF_EXISTS_OPTIONS</span><span class="o">.</span><span class="n">APPEND</span><span class="p">,</span> <span class="n">IF_EXISTS_OPTIONS</span><span class="o">.</span><span class="n">REPLACE</span><span class="p">,</span> <span class="n">IF_EXISTS_OPTIONS</span><span class="o">.</span><span class="n">FAIL</span><span class="p">}</span>
+
+    <span class="n">EXCLUDE_FROM_SERIALIZE</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;named_output&quot;</span><span class="p">,</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql_engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sql_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">if_exists</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;fail&#39;</span><span class="p">,</span> <span class="n">named_input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span> <span class="o">=</span> <span class="n">sql_engine</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sql_engine parameter must be a non-empty string.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sql_table</span> <span class="o">=</span> <span class="n">sql_table</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_table</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_table</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sql_table parameter must be a non-empty string.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">if_exists</span> <span class="o">=</span> <span class="n">if_exists</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">if_exists</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ALL_IF_EXISTS_OPTIONS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">if_exists</span><span class="si">}</span><span class="s2">&#39; is not a valid value for the if_exists parameter. It must be one of: &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ALL_IF_EXISTS_OPTIONS</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">has_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
 <h5 id="etlrules.backends.common.io.files" class="doc doc-heading">
         <code>files</code>
 
@@ -12510,6 +13073,37 @@ MissingColumnError            (<span title="Exception">Exception</span>)
           <summary>Source code in <code>etlrules/exceptions.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MissingColumnError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; An operation is being applied to a column that is not present in the input data frame. &quot;&quot;&quot;</span>
+</code></pre></div>
+        </details>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="etlrules.exceptions.SQLError" class="doc doc-heading">
+        <code>
+SQLError            (<span title="RuntimeError">RuntimeError</span>)
+        </code>
+
+
+
+<a href="#etlrules.exceptions.SQLError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>There was an error during the execution of a sql statement. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>etlrules/exceptions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SQLError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; There was an error during the execution of a sql statement. &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
 
