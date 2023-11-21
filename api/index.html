@@ -7598,7 +7598,14 @@ rule.apply(data)
         <td><p>A sqlalchemy engine string. This is typically in the form:
 dialect+driver://username:password@host:port/database
 For more information, please refer to the sqlalchemy documentation here:
-https://docs.sqlalchemy.org/en/20/core/engines.html</p></td>
+https://docs.sqlalchemy.org/en/20/core/engines.html</p>
+<p>In order to support users and passwords in the sql_engine string, substitutions of environment variables
+is supported using the {env.VARIABLE_NAME} form.
+For example, adding the USER and PASSWORD environment variables in the sql string could be done as:
+    sql_engine = "postgres://{env.USER}:{env.PASSWORD}@{env.DB_HOST}/mydb
+In this example, when you run, env.USER, env.PASSWORD and env.DB_HOST will be replaced with the respective
+environment variables, allowing you to not hardcode them in the plan for security reasons but also for
+configurability. </p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -7695,6 +7702,14 @@ Together with the name, the description acts as the documentation of the rule.</
 <span class="sd">            dialect+driver://username:password@host:port/database</span>
 <span class="sd">            For more information, please refer to the sqlalchemy documentation here:</span>
 <span class="sd">            https://docs.sqlalchemy.org/en/20/core/engines.html</span>
+
+<span class="sd">            In order to support users and passwords in the sql_engine string, substitutions of environment variables</span>
+<span class="sd">            is supported using the {env.VARIABLE_NAME} form.</span>
+<span class="sd">            For example, adding the USER and PASSWORD environment variables in the sql string could be done as:</span>
+<span class="sd">                sql_engine = &quot;postgres://{env.USER}:{env.PASSWORD}@{env.DB_HOST}/mydb</span>
+<span class="sd">            In this example, when you run, env.USER, env.PASSWORD and env.DB_HOST will be replaced with the respective</span>
+<span class="sd">            environment variables, allowing you to not hardcode them in the plan for security reasons but also for</span>
+<span class="sd">            configurability. </span>
 <span class="sd">        sql_query: A SQL SELECT statement that will specify the columns, table and optionally any WHERE, GROUP BY, ORDER BY clauses.</span>
 <span class="sd">            The SQL statement must be valid for the SQL engine specified in the sql_engine parameter.</span>
 <span class="sd">        column_types: A mapping of column names and their types. Column types are inferred from the data when this parameter</span>
@@ -7741,9 +7756,13 @@ Together with the name, the description acts as the documentation of the rule.</
     <span class="k">def</span> <span class="nf">_do_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t instantiate base class.&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_get_sql_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">OSEnvironSubst</span><span class="p">())</span>
+
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="n">engine</span> <span class="o">=</span> <span class="n">SQLAlchemyEngines</span><span class="o">.</span><span class="n">get_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="p">)</span>
+        <span class="n">sql_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sql_engine</span><span class="p">()</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">SQLAlchemyEngines</span><span class="o">.</span><span class="n">get_engine</span><span class="p">(</span><span class="n">sql_engine</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_apply</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
@@ -7835,7 +7854,14 @@ rule.apply(data)
         <td><p>A sqlalchemy engine string. This is typically in the form:
 dialect+driver://username:password@host:port/database
 For more information, please refer to the sqlalchemy documentation here:
-https://docs.sqlalchemy.org/en/20/core/engines.html</p></td>
+https://docs.sqlalchemy.org/en/20/core/engines.html</p>
+<p>In order to support users and passwords in the sql_engine string, substitutions of environment variables
+is supported using the {env.VARIABLE_NAME} form.
+For example, adding the USER and PASSWORD environment variables in the sql string could be done as:
+    sql_engine = "postgres://{env.USER}:{env.PASSWORD}@{env.DB_HOST}/mydb
+In this example, when you run, env.USER, env.PASSWORD and env.DB_HOST will be replaced with the respective
+environment variables, allowing you to not hardcode them in the plan for security reasons but also for
+configurability. </p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -7931,6 +7957,14 @@ For example: If the schema doesn't match the schema of the table written to (for
 <span class="sd">            dialect+driver://username:password@host:port/database</span>
 <span class="sd">            For more information, please refer to the sqlalchemy documentation here:</span>
 <span class="sd">            https://docs.sqlalchemy.org/en/20/core/engines.html</span>
+
+<span class="sd">            In order to support users and passwords in the sql_engine string, substitutions of environment variables</span>
+<span class="sd">            is supported using the {env.VARIABLE_NAME} form.</span>
+<span class="sd">            For example, adding the USER and PASSWORD environment variables in the sql string could be done as:</span>
+<span class="sd">                sql_engine = &quot;postgres://{env.USER}:{env.PASSWORD}@{env.DB_HOST}/mydb</span>
+<span class="sd">            In this example, when you run, env.USER, env.PASSWORD and env.DB_HOST will be replaced with the respective</span>
+<span class="sd">            environment variables, allowing you to not hardcode them in the plan for security reasons but also for</span>
+<span class="sd">            configurability. </span>
 <span class="sd">        sql_table: The name of the sql table to write to.</span>
 <span class="sd">        if_exists: Specifies what to do in case the table already exists in the database.</span>
 <span class="sd">            The options are:</span>
@@ -12450,6 +12484,7 @@ Together with the name, the description acts as the documentation of the rule.</
     </div>
 
   </div>
+
 
 
 
