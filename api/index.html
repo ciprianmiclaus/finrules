@@ -12814,8 +12814,9 @@ rule engine.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">plan</span> <span class="o">=</span> <span class="n">plan</span>
 
     <span class="k">def</span> <span class="nf">run_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">:</span>
-            <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">get_context</span><span class="p">()):</span>
+            <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">:</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="nf">_get_topological_sorter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">graphlib</span><span class="o">.</span><span class="n">TopologicalSorter</span><span class="p">:</span>
@@ -12858,11 +12859,12 @@ rule engine.</p>
     <span class="k">def</span> <span class="nf">run_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_topological_sorter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
-        <span class="k">while</span> <span class="n">g</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">rule_idx</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">get_ready</span><span class="p">():</span>
-                <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">rule_idx</span><span class="p">)</span>
-                <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">done</span><span class="p">(</span><span class="n">rule_idx</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">get_context</span><span class="p">()):</span>
+            <span class="k">while</span> <span class="n">g</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">rule_idx</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">get_ready</span><span class="p">():</span>
+                    <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">rule_idx</span><span class="p">)</span>
+                    <span class="n">rule</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">g</span><span class="o">.</span><span class="n">done</span><span class="p">(</span><span class="n">rule_idx</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="nf">validate_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">RuleData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
@@ -13336,6 +13338,15 @@ This can include what the plan does, its purpose and detailed information about 
         <td><code>None</code></td>
       </tr>
       <tr>
+        <td><code>context</code></td>
+        <td><code>Optional[Mapping[str, Union[str, int, float, bool]]]</code></td>
+        <td><p>An optional key-value mapping which can be used in rules via string substitutions.
+It can be used as arguments into the plan to tweak the running of the plan by providing different
+values for certain arguments with each run.
+The types of the values can be: strings, int, float, boolean (True or False).</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
         <td><code>strict</code></td>
         <td><code>Optional[bool]</code></td>
         <td><p>A hint about how the plan should be executed.
@@ -13408,6 +13419,10 @@ in a strict mode or not.</p></td>
 <span class="sd">        name: A name for the plan. Optional.</span>
 <span class="sd">        description: An optional documentation for the plan.</span>
 <span class="sd">            This can include what the plan does, its purpose and detailed information about how it works.</span>
+<span class="sd">        context: An optional key-value mapping which can be used in rules via string substitutions.</span>
+<span class="sd">            It can be used as arguments into the plan to tweak the running of the plan by providing different</span>
+<span class="sd">            values for certain arguments with each run.</span>
+<span class="sd">            The types of the values can be: strings, int, float, boolean (True or False).</span>
 <span class="sd">        strict: A hint about how the plan should be executed.</span>
 <span class="sd">            When None, then the plan has no hint to provide and its the caller deciding whether to run it</span>
 <span class="sd">            in a strict mode or not.</span>
@@ -13416,10 +13431,18 @@ in a strict mode or not.</p></td>
 <span class="sd">        InvalidPlanError: if pipeline mode rules are mixed with graph mode rules</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;pipeline&#39;</span><span class="p">,</span> <span class="s1">&#39;graph&#39;</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;pipeline&#39;</span><span class="p">,</span> <span class="s1">&#39;graph&#39;</span><span class="p">]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">strict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strict</span> <span class="o">=</span> <span class="n">strict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -13435,6 +13458,9 @@ in a strict mode or not.</p></td>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">plan_mode_from_rules</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span>
+
+    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span>
 
     <span class="k">def</span> <span class="nf">add_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="n">BaseRule</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Add a new rule to the plan.</span>
@@ -13474,6 +13500,7 @@ in a strict mode or not.</p></td>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">,</span>
             <span class="s2">&quot;strict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">,</span>
             <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="n">rules</span>
         <span class="p">}</span>
@@ -13491,7 +13518,8 @@ in a strict mode or not.</p></td>
         <span class="n">instance</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
             <span class="n">description</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
-            <span class="n">strict</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strict&quot;</span><span class="p">)</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;context&quot;</span><span class="p">),</span>
+            <span class="n">strict</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strict&quot;</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="n">rules</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="p">())</span>
         <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
@@ -13682,7 +13710,8 @@ in a strict mode or not.</p></td>
     <span class="n">instance</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
         <span class="n">description</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
-        <span class="n">strict</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strict&quot;</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;context&quot;</span><span class="p">),</span>
+        <span class="n">strict</span><span class="o">=</span><span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strict&quot;</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">rules</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="p">())</span>
     <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
@@ -13773,6 +13802,7 @@ in a strict mode or not.</p></td>
     </div>
 
   </div>
+
 
 
 
@@ -13919,6 +13949,7 @@ in a strict mode or not.</p></td>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
         <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+        <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">,</span>
         <span class="s2">&quot;strict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">strict</span><span class="p">,</span>
         <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="n">rules</span>
     <span class="p">}</span>
