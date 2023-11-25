@@ -2168,7 +2168,7 @@ The above aggregates the column C by producing a ; separated string of values in
         <td><code>Optional[Mapping[str, str]]</code></td>
         <td><p>An optional mapping of {column_name: column_type} which converts the respective output
 column to the given type. The supported types are: int8, int16, int32, int64, uint8, uint16,
-uint32, uint64, float32, float64, string, datetime and timedelta.</p></td>
+uint32, uint64, float32, float64, string, boolean, datetime and timedelta.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
@@ -2299,7 +2299,7 @@ in the aggregation_types is missing from the input dataframe.</p></td>
 
 <span class="sd">        aggregation_types: An optional mapping of {column_name: column_type} which converts the respective output</span>
 <span class="sd">            column to the given type. The supported types are: int8, int16, int32, int64, uint8, uint16,</span>
-<span class="sd">            uint32, uint64, float32, float64, string, datetime and timedelta.</span>
+<span class="sd">            uint32, uint64, float32, float64, string, boolean, datetime and timedelta.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -12553,7 +12553,7 @@ rule.apply(data)
         <td><code>Mapping[str, str]</code></td>
         <td><p>A dict with columns names as keys and the new types as values.
 The supported types are: int8, int16, int32, int64, uint8, uint16,
-uint32, uint64, float32, float64, string, datetime and timedelta.</p></td>
+uint32, uint64, float32, float64, string, boolean, datetime and timedelta.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -12632,7 +12632,7 @@ In non strict mode, the exception is not raised and the value is converted to NA
 <span class="sd">    Args:</span>
 <span class="sd">        mapper: A dict with columns names as keys and the new types as values.</span>
 <span class="sd">            The supported types are: int8, int16, int32, int64, uint8, uint16,</span>
-<span class="sd">            uint32, uint64, float32, float64, string, datetime and timedelta.</span>
+<span class="sd">            uint32, uint64, float32, float64, string, boolean, datetime and timedelta.</span>
 
 <span class="sd">        named_input: Which dataframe to use as the input. Optional.</span>
 <span class="sd">            When not set, the input is taken from the main output.</span>
@@ -12658,6 +12658,10 @@ In non strict mode, the exception is not raised and the value is converted to NA
         <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="s2">&quot;mapper needs to be a dict {column_name:type} where the names are str&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">named_input</span><span class="o">=</span><span class="n">named_input</span><span class="p">,</span> <span class="n">named_output</span><span class="o">=</span><span class="n">named_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="n">strict</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">mapper</span>
+        <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">type_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type &#39;</span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="s2">&#39; for column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is not currently supported.&quot;</span><span class="p">)</span>
+
 
     <span class="k">def</span> <span class="nf">do_type_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Have you imported the rules from etlrules.backends.&lt;your_backend&gt; and not common?&quot;</span><span class="p">)</span>
@@ -12666,11 +12670,9 @@ In non strict mode, the exception is not raised and the value is converted to NA
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_input_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">columns_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">column_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns_set</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">MissingColumnError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is missing in the data frame. Available columns: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">columns_set</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">type_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_TYPES</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">UnsupportedTypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type &#39;</span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="s2">&#39; for column &#39;</span><span class="si">{</span><span class="n">column_name</span><span class="si">}</span><span class="s2">&#39; is not currently supported.&quot;</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assign_do_apply_dict</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">{</span>
             <span class="n">column_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_type_conversion</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">],</span> <span class="n">type_str</span><span class="p">)</span> 
                 <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
