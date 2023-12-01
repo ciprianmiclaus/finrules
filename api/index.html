@@ -1138,6 +1138,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#etlrules.runner" class="md-nav__link">
+    runner
+  </a>
+  
+    <nav class="md-nav" aria-label="runner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.runner.load_plan" class="md-nav__link">
+    load_plan()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.runner.run_plan" class="md-nav__link">
+    run_plan()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1936,6 +1963,33 @@
           <li class="md-nav__item">
   <a href="#etlrules.rule.UnaryOpBaseRule" class="md-nav__link">
     UnaryOpBaseRule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etlrules.runner" class="md-nav__link">
+    runner
+  </a>
+  
+    <nav class="md-nav" aria-label="runner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.runner.load_plan" class="md-nav__link">
+    load_plan()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etlrules.runner.run_plan" class="md-nav__link">
+    run_plan()
   </a>
   
 </li>
@@ -14212,6 +14266,221 @@ UnaryOpBaseRule            (<span title="etlrules.rule.BaseRule">BaseRule</span>
 
   </div>
 
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="etlrules.runner" class="doc doc-heading">
+        <code>runner</code>
+
+
+
+<a href="#etlrules.runner" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="etlrules.runner.load_plan" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">load_plan</span><span class="p">(</span><span class="n">plan_file</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span></code>
+
+
+<a href="#etlrules.runner.load_plan" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Load a plan from a yaml file.</p>
+<p>Basic usage:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>from etlrules import load_plan
+plan = load_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>plan_file</code></td>
+        <td><code>str</code></td>
+        <td><p>A path to a yaml file with the plan definition</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>backend</code></td>
+        <td><code>str</code></td>
+        <td><p>One of the supported backends (e.g. pandas, polars, etc.)</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Plan</code></td>
+      <td><p>A Plan instance deserialized from the yaml file.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/runner.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load_plan</span><span class="p">(</span><span class="n">plan_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Plan</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Load a plan from a yaml file.</span>
+
+<span class="sd">    Basic usage:</span>
+
+<span class="sd">        from etlrules import load_plan</span>
+<span class="sd">        plan = load_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        plan_file: A path to a yaml file with the plan definition</span>
+<span class="sd">        backend: One of the supported backends (e.g. pandas, polars, etc.)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A Plan instance deserialized from the yaml file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">plan_file</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">plan_f</span><span class="p">:</span>
+        <span class="n">contents</span> <span class="o">=</span> <span class="n">plan_f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Plan</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="etlrules.runner.run_plan" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">run_plan</span><span class="p">(</span><span class="n">plan_file</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span></code>
+
+
+<a href="#etlrules.runner.run_plan" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Runs a plan from a yaml file with a given backend.</p>
+<p>Basic usage:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>from etlrules import run_plan
+data = run_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)
+</code></pre></div></td></tr></table></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>plan_file</code></td>
+        <td><code>str</code></td>
+        <td><p>A path to a yaml file with the plan definition</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>backend</code></td>
+        <td><code>str</code></td>
+        <td><p>One of the supported backends (e.g. pandas, polars, etc.)</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>RuleData</code></td>
+      <td><p>A RuleData instance which contains the result dataframe(s).</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>etlrules/runner.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_plan</span><span class="p">(</span><span class="n">plan_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Runs a plan from a yaml file with a given backend.</span>
+
+<span class="sd">    Basic usage:</span>
+
+<span class="sd">        from etlrules import run_plan</span>
+<span class="sd">        data = run_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        plan_file: A path to a yaml file with the plan definition</span>
+<span class="sd">        backend: One of the supported backends (e.g. pandas, polars, etc.)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A RuleData instance which contains the result dataframe(s).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plan</span> <span class="o">=</span> <span class="n">load_plan</span><span class="p">(</span><span class="n">plan_file</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">get_args_parser</span><span class="p">(</span><span class="n">plan</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">RuleData</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">RuleEngine</span><span class="p">(</span><span class="n">plan</span><span class="p">)</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
