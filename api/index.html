@@ -22153,6 +22153,8 @@ plan = load_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)
     <div class="doc doc-contents ">
 
       <p>Runs a plan from a yaml file with a given backend.</p>
+<p>The backend referers to the underlying dataframe library used to run
+the plan.</p>
 <p>Basic usage:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>from etlrules import run_plan
@@ -22179,11 +22181,16 @@ data = run_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)
       <tr>
         <td><code>backend</code></td>
         <td><code>str</code></td>
-        <td><p>One of the supported backends (e.g. pandas, polars, etc.)</p></td>
+        <td><p>One of the supported backends</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
-</table>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The supported backends:
+    pandas, polars, dask (work in progress)</p>
+</div>
+
 <p><strong>Returns:</strong></p>
 <table>
   <thead>
@@ -22204,6 +22211,9 @@ data = run_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_plan</span><span class="p">(</span><span class="n">plan_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Runs a plan from a yaml file with a given backend.</span>
 
+<span class="sd">    The backend referers to the underlying dataframe library used to run</span>
+<span class="sd">    the plan.</span>
+
 <span class="sd">    Basic usage:</span>
 
 <span class="sd">        from etlrules import run_plan</span>
@@ -22211,7 +22221,11 @@ data = run_plan(&quot;/home/someuser/some_plan.yml&quot;, &quot;pandas&quot;)
 
 <span class="sd">    Args:</span>
 <span class="sd">        plan_file: A path to a yaml file with the plan definition</span>
-<span class="sd">        backend: One of the supported backends (e.g. pandas, polars, etc.)</span>
+<span class="sd">        backend: One of the supported backends</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The supported backends:</span>
+<span class="sd">            pandas, polars, dask (work in progress)</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A RuleData instance which contains the result dataframe(s).</span>
