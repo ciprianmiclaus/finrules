@@ -4033,7 +4033,8 @@ The input will be in a variable <code>values</code>. <code>isnull</code> can be 
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>{&quot;C&quot;: &quot;&#39;;&#39;.join(str(v) for v in values if not isnull(v))&quot;}
 
 The above aggregates the column C by producing a ; separated string of values in the group, excluding NA.
-</code></pre></div></td></tr></table></div></td>
+</code></pre></div></td></tr></table></div>
+<p>The dask backend doesn't support aggregation_expressions.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
@@ -4169,6 +4170,8 @@ in the aggregation_types is missing from the input dataframe.</p></td>
 <span class="sd">                {&quot;C&quot;: &quot;&#39;;&#39;.join(str(v) for v in values if not isnull(v))&quot;}</span>
 
 <span class="sd">                The above aggregates the column C by producing a ; separated string of values in the group, excluding NA.</span>
+
+<span class="sd">            The dask backend doesn&#39;t support aggregation_expressions.</span>
 
 <span class="sd">        aggregation_types: An optional mapping of {column_name: column_type} which converts the respective output</span>
 <span class="sd">            column to the given type. The supported types are: int8, int16, int32, int64, uint8, uint16,</span>
@@ -16339,7 +16342,6 @@ from BaseRule and implement the logic of your rule.</p>
 
 
 
-
   <div class="doc doc-object doc-class">
 
 
@@ -16520,6 +16522,7 @@ from BaseRule and implement the logic of your rule.</p>
     </div>
 
   </div>
+
 
 
 
