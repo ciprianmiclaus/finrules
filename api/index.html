@@ -3952,6 +3952,7 @@
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -4241,6 +4242,8 @@ in the aggregation_types is missing from the input dataframe.</p></td>
             <span class="bp">self</span><span class="o">.</span><span class="n">aggregations</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">agg_func</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;csv&#39;</span><span class="p">):</span>
+                <span class="n">perf_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Aggregation &#39;</span><span class="si">%s</span><span class="s2">&#39; in AggregateRule is not vectorized and might hurt the overall performance&quot;</span><span class="p">,</span> <span class="n">agg_func</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
                 <span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">AGGREGATIONS</span><span class="p">[</span><span class="n">agg_func</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">agg_func</span> <span class="ow">in</span> <span class="p">(</span><span class="n">aggregations</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -4253,6 +4256,7 @@ in the aggregation_types is missing from the input dataframe.</p></td>
                 <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">ColumnAlreadyExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> is already being aggregated.&quot;</span><span class="p">)</span>
                 <span class="k">try</span><span class="p">:</span>
+                    <span class="n">perf_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Aggregation expression &#39;</span><span class="si">%s</span><span class="s2">&#39; in AggregateRule is not vectorized and might hurt the overall performance&quot;</span><span class="p">,</span> <span class="n">agg_expr</span><span class="p">)</span>
                     <span class="n">_ast_expr</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">agg_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">_expression.py&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;eval&quot;</span><span class="p">)</span>
                     <span class="n">_compiled_expr</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">_ast_expr</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">_expression.py&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;eval&quot;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_aggs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">values</span><span class="p">,</span> <span class="n">bound_compiled_expr</span><span class="o">=</span><span class="n">_compiled_expr</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span>
@@ -16986,6 +16990,7 @@ from BaseRule and implement the logic of your rule.</p>
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -17553,6 +17558,9 @@ from BaseRule and implement the logic of your rule.</p>
 
 
 
+
+
+
   <div class="doc doc-object doc-class">
 
 
@@ -17733,6 +17741,10 @@ from BaseRule and implement the logic of your rule.</p>
     </div>
 
   </div>
+
+
+
+
 
 
 
@@ -18188,6 +18200,7 @@ from BaseRule and implement the logic of your rule.</p>
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -18778,6 +18791,8 @@ from BaseRule and implement the logic of your rule.</p>
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
@@ -18966,6 +18981,11 @@ from BaseRule and implement the logic of your rule.</p>
     </div>
 
   </div>
+
+
+
+
+
 
 
 
@@ -19414,6 +19434,7 @@ from BaseRule and implement the logic of your rule.</p>
 
 
   <div class="doc doc-children">
+
 
 
 
