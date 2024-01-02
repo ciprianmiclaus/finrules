@@ -50,7 +50,7 @@ class ReplaceRule(ReplaceRuleBase, PolarsMixin):
                 old_val, new_val = self._get_old_new_regex(old_val, new_val)
                 col = col.str.replace(old_val, new_val)
         else:
-            col = col.map_dict(dict(zip(self.values, self.new_values)), default=pl.first())
+            col = col.replace(dict(zip(self.values, self.new_values)))
         return col
 
 

@@ -43,7 +43,7 @@ class WriteCSVFileRule(WriteCSVFileRuleBase):
         df.write_csv(
             os.path.join(file_dir, file_name),
             separator=self.separator,
-            has_header=self.header,
+            include_header=self.header,
         )
 
 
