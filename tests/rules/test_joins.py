@@ -64,6 +64,14 @@ RIGHT_DF_TYPES = {"A": "Int64", "B": "string", "E": "Int64", "G": "string"}
         {"A": 5, "B": "b", "E_y": 7, "G": "three"},
         {"A": 6, "B": "b", "E_y": 8, "G": "four"},
     ]],
+    ["OuterJoinRule", ["A", "B"], ["E", "B"], (None, "_y"), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E": 3},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E": 4},
+        {"A": 3, "B": "b", "C": 10, "D": "test", "E": 5, "A_y": 1, "E_y": 3, "G": "one"},
+        {"A": 4, "B": "b", "C": 10, "D": "test", "E": 6, "A_y": 2, "E_y": 4, "G": "two"},
+        {"B": "b", "A_y": 5, "E_y": 7, "G": "three"},
+        {"B": "b", "A_y": 6, "E_y": 8, "G": "four"},
+    ]],
 ])
 def test_join_scenarios(rule_cls_str, key_columns_left, key_columns_right, suffixes, expected, backend):
     left_df = backend.DataFrame(data=LEFT_DF)
