@@ -15,6 +15,7 @@ class ReadCSVFileRule(ReadCSVFileRuleBase):
     def do_read(self, file_path: str) -> pd.DataFrame:
         return pd.read_csv(
             file_path, sep=self.separator, header='infer' if self.header else None,
+            skiprows=self.skip_header_rows,
             index_col=False
         )
 

@@ -14,7 +14,8 @@ from etlrules.backends.common.io.files import (
 class ReadCSVFileRule(ReadCSVFileRuleBase):
     def do_read(self, file_path: str) -> dd.DataFrame:
         return dd.read_csv(
-            file_path, sep=self.separator, header='infer' if self.header else None,
+            file_path, blocksize=None, sep=self.separator, header='infer' if self.header else None,
+            skiprows=self.skip_header_rows,
             index_col=False
         )
 

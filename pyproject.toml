@@ -33,7 +33,9 @@ polars = [
 ]
 
 dask = [
+    "aiohttp",
     "dask==2023.11.0",
+    "requests"
 ]
 
 test = [

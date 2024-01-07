@@ -1,5 +1,11 @@
 # History
 
+## 0.3.2 (XXXX-XX-XX)
+
+* Add option to skip rows from the top of a csv file for the csv read rule
+* Add support for reading/writing compressed csv files for the polars backend
+* Support reading csv files via http and https
+
 ## 0.3.1 (2023-12-22)
 
 * Remove polars-business dependency and implement vectorized datetime operations for weekdays offsets
