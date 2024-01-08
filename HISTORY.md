@@ -1,10 +1,11 @@
 # History
 
-## 0.3.2 (XXXX-XX-XX)
+## 0.3.2 (2024-01-08)
 
 * Add option to skip rows from the top of a csv file for the csv read rule
 * Add support for reading/writing compressed csv files for the polars backend
 * Support reading csv files via http and https
+* Read csv files in one block in dask
 
 ## 0.3.1 (2023-12-22)
 

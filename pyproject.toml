@@ -1,6 +1,6 @@
 [project]
 name = "etlrules"
-version = "0.3.1"
+version = "0.3.2"
 description = "A python ETL rule engine operating with data frames."
 authors = [{name = "Ciprian Miclaus", email = "ciprianm@gmail.com"}]
 readme = "README.md"
