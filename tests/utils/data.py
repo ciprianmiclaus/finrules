@@ -23,7 +23,7 @@ except:
     dask_assert_frame_equal = None
 try:
     from modin.pandas import DataFrame as modin_DataFrame
-    from modin.pandas.testing import assert_frame_equal as modin_assert_frame_equal
+    from modin.pandas.test.utils import assert_frame_equal as modin_assert_frame_equal
 except:
     modin_DataFrame = None
     modin_assert_frame_equal = None
