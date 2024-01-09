@@ -4,11 +4,8 @@ import logging
 import numpy as np
 from modin.pandas import to_timedelta, isnull, to_datetime
 from modin.pandas import DateOffset
-# todo: FIX this
-from pandas import (
-    is_scalar,
-    is_timedelta64_dtype, is_datetime64_any_dtype
-)
+# TODO: FIX this
+from pandas.api.types import is_scalar, is_timedelta64_dtype, is_datetime64_any_dtype
 
 from .base import PandasMixin
 from etlrules.exceptions import ColumnAlreadyExistsError, MissingColumnError
