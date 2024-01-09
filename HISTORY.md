@@ -1,5 +1,9 @@
 # History
 
+## 0.3.3 (XXXX-XX-XX)
+
+* Fix perf_logger missing in pandas expressions
+
 ## 0.3.2 (2024-01-08)
 
 * Add option to skip rows from the top of a csv file for the csv read rule
