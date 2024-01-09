@@ -2,10 +2,12 @@ import pytest
 import dask.dataframe as dd
 import pandas as pd
 import polars as pl
+import modin.pandas as md
 
 from etlrules.backends import dask as dd_rules
 from etlrules.backends import pandas as pd_rules
 from etlrules.backends import polars as pl_rules
+from etlrules.backends import modin as md_rules
 
 
 TYPE_MAPPING = {
@@ -49,7 +51,7 @@ TYPE_MAPPING = {
         "list_strings": "object",
         "list_int64s": "object",
         "timedelta": "timedelta64[ns]",
-    }
+    },
 }
 
 class BackendFixture:
@@ -83,8 +85,8 @@ class BackendFixture:
                 keys = list(ddata.keys())
             return keys
 
-        if self.impl_pckg == pd:
-            df = pd.DataFrame(data, dtype=TYPE_MAPPING["pd"].get(dtype, dtype))
+        if self.impl_pckg in (pd, md):
+            df = self.impl_pckg.DataFrame(data, dtype=TYPE_MAPPING["pd"].get(dtype, dtype))
             if astype is not None:
                 df = df.astype({k: TYPE_MAPPING["pd"].get(v, v) for k, v in astype.items()})
         elif self.impl_pckg == dd:
@@ -110,12 +112,7 @@ class BackendFixture:
         return df
 
     def astype(self, df, astype):
-        if self.impl_pckg == pd:
-            astype = {
-                col: TYPE_MAPPING["pd"][dtype] for col, dtype in astype.items()
-            }
-            return df.astype(astype)
-        elif self.impl_pckg == dd:
+        if self.impl_pckg in (pd, dd, md):
             astype = {
                 col: TYPE_MAPPING["pd"][dtype] for col, dtype in astype.items()
             }
@@ -132,9 +129,7 @@ class BackendFixture:
         return df.assign(**{column_name: column})
 
     def rename(self, df, rename_dict):
-        if self.impl_pckg == pd:
-            return df.rename(columns=rename_dict)
-        elif self.impl_pckg == dd:
+        if self.impl_pckg in (pd, dd, md):
             return df.rename(columns=rename_dict)
         elif self.impl_pckg == pl:
             columns = list(df.columns)
@@ -146,23 +141,21 @@ class BackendFixture:
         assert False, f"unknown impl_pckg: {self.impl_pckg}"
 
     def hconcat(self, df1, df2):
-        if self.impl_pckg == pd:
-            return pd.concat((df1, df2), axis=1)
-        elif self.impl_pckg == dd:
-            return dd.concat([df1, df2], axis=1)
+        if self.impl_pckg in (pd, dd, md):
+            return self.impl_pckg.concat([df1, df2], axis=1)
         elif self.impl_pckg == pl:
             return df1.hstack(df2, in_place=False)
         assert False, f"unknown impl_pckg: {self.impl_pckg}"
 
     def empty_df(self, df):
-        if self.impl_pckg in (pd, pl):
+        if self.impl_pckg in (pd, pl, md):
             return df[:0]
         elif self.impl_pckg == dd:
             return dd.from_pandas(df.head(0), npartitions=1)
         assert False, f"unknown impl_pckg: {self.impl_pckg}"
 
     def business_day_offset(self, dt_col, offset, strict=True):
-        if self.impl_pckg == pd:
+        if self.impl_pckg in (pd, md):
             from etlrules.backends.pandas.datetime import business_day_offset
             return business_day_offset(dt_col, offset, strict=strict)
         elif self.impl_pckg == dd:
@@ -174,7 +167,7 @@ class BackendFixture:
         assert False, "Not implemented for backend."
 
     def months_offset(self, dt_col, offset, strict=True):
-        if self.impl_pckg == pd:
+        if self.impl_pckg in (pd, md):
             from etlrules.backends.pandas.datetime import months_offset
             return months_offset(dt_col, offset, strict=strict)
         elif self.impl_pckg == dd:
@@ -189,6 +182,7 @@ class BackendFixture:
     ('pandas', pd, pd_rules),
     ('polars', pl, pl_rules),
     ('dask', dd, dd_rules),
+    ('modin', md, md_rules),
 ])
 def backend(request):
     return BackendFixture(*request.param)
