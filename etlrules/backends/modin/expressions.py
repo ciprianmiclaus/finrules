@@ -1,7 +1,11 @@
+import logging
 from modin.pandas import Series
 
 from etlrules.backends.common.expressions import Expression as ExpressionBase
 from etlrules.data import context
+
+
+perf_logger = logging.getLogger("etlrules.perf")
 
 
 class Expression(ExpressionBase):
