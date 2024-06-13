@@ -21,6 +21,12 @@ try:
 except:
     dask_DataFrame = None
     dask_assert_frame_equal = None
+try:
+    from modin.pandas import DataFrame as modin_DataFrame
+    from modin.pandas.test.utils import assert_frame_equal as modin_assert_frame_equal
+except:
+    modin_DataFrame = None
+    modin_assert_frame_equal = None
 import shutil
 
 from etlrules.data import RuleData, context
@@ -57,6 +63,15 @@ def assert_frame_equal(df, df2, ignore_row_ordering=False, ignore_column_orderin
             df = df[sorted(df.columns)]
             df2 = df2[sorted(df2.columns)]
         polars_assert_frame_equal(df, df2)
+    elif modin_DataFrame is not None and isinstance(df, modin_DataFrame) and isinstance(df2, modin_DataFrame):
+        assert modin_assert_frame_equal is not None
+        if ignore_row_ordering:
+            df = df.sort_values(list(df.columns))
+            df2 = df2.sort_values(list(df2.columns))
+        if ignore_column_ordering:
+            df = df[sorted(df.columns)]
+            df2 = df2[sorted(df2.columns)]
+        modin_assert_frame_equal(df, df2)
     else:
         assert False
 
