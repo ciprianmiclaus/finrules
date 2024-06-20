@@ -30,7 +30,7 @@ class WriteSQLTableRule(WriteSQLTableRuleBase):
             df.write_database(
                 self._get_sql_table(),
                 self._get_sql_engine(),
-                if_exists=self.if_exists
+                if_table_exists=self.if_exists
             )
         except sa.exc.SQLAlchemyError as exc:
             raise SQLError(str(exc))

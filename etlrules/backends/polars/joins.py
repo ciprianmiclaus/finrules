@@ -1,3 +1,5 @@
+import polars as pl
+
 from etlrules.backends.common.joins import (
     LeftJoinRule as LeftJoinRuleBase,
     RightJoinRule as RightJoinRuleBase,
@@ -50,6 +52,19 @@ class InnerJoinRule(JoinsMixin, InnerJoinRuleBase):
 
 class OuterJoinRule(JoinsMixin, OuterJoinRuleBase):
     JOIN_TYPE = "outer"
+
+    def do_join(self, left_df, right_df, suffixes):
+        # polars newer versions creates a right suffixed column for key columns (even when they match the left column)
+        df = super().do_join(left_df, right_df, suffixes)
+        left_on, right_on = self._get_key_columns()
+        _, suffix_right = suffixes
+        suffix_right = suffix_right or "_right"
+        cols = [(left, right + suffix_right) for right, left in zip(right_on, left_on) if right == left and (right + suffix_right) in df.columns]
+        if cols:
+            df = df.with_columns(
+                **{left: pl.when(pl.col(left).is_null()).then(pl.col(right)).otherwise(pl.col(left)) for left, right in cols}
+            ).drop([right for _, right in cols])
+        return df
 
 
 class RightJoinRule(JoinsMixin, RightJoinRuleBase):

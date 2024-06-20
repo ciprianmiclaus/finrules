@@ -28,8 +28,8 @@ dependencies = [
 
 [project.optional-dependencies]
 polars = [
-    "polars==0.19.12",
-    #"polars-lts-cpu==0.19.12",
+    "polars>=0.19.12",
+    #"polars-lts-cpu>=0.19.12",
 ]
 
 dask = [
