@@ -34,9 +34,29 @@ RIGHT_DF_TYPES = {"A": "Int64", "B": "string", "E": "Int64", "G": "string"}
         {"A": 3, "B": "b", "C": 10, "D": "test", "E": 5},
         {"A": 4, "B": "b", "C": 10, "D": "test", "E": 6},
     ]],
+    ["LeftJoinRule", ["A", "B"], None, ("_x", "_y"), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E_y": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E_y": 4, "G": "two"},
+        {"A": 3, "B": "b", "C": 10, "D": "test", "E_x": 5},
+        {"A": 4, "B": "b", "C": 10, "D": "test", "E_x": 6},
+    ]],
+    ["LeftJoinRule", ["A", "B"], None, ("_x", None), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E": 4, "G": "two"},
+        {"A": 3, "B": "b", "C": 10, "D": "test", "E_x": 5},
+        {"A": 4, "B": "b", "C": 10, "D": "test", "E_x": 6},
+    ]],
     ["InnerJoinRule", ["A", "B"], None, (None, "_y"), [
         {"A": 1, "B": "b", "C": 10, "D": "test", "E": 3, "E_y": 3, "G": "one"},
         {"A": 2, "B": "b", "C": 10, "D": "test", "E": 4, "E_y": 4, "G": "two"},
+    ]],
+    ["InnerJoinRule", ["A", "B"], None, ("_x", "_y"), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E_y": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E_y": 4, "G": "two"},
+    ]],
+    ["InnerJoinRule", ["A", "B"], None, ("_x", None), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E": 4, "G": "two"},
     ]],
     ["InnerJoinRule", ["A", "B"], ["A", "B"], (None, "_y"), [
         {"A": 1, "B": "b", "C": 10, "D": "test", "E": 3, "E_y": 3, "G": "one"},
@@ -56,6 +76,18 @@ RIGHT_DF_TYPES = {"A": "Int64", "B": "string", "E": "Int64", "G": "string"}
         {"A": 5, "B": "b", "E_y": 7, "G": "three"},
         {"A": 6, "B": "b", "E_y": 8, "G": "four"},
     ]],
+    ["RightJoinRule", ["A", "B"], None, ("_x", "_y"), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E_y": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E_y": 4, "G": "two"},
+        {"A": 5, "B": "b", "E_y": 7, "G": "three"},
+        {"A": 6, "B": "b", "E_y": 8, "G": "four"},
+    ]],
+    ["RightJoinRule", ["A", "B"], None, ("_x", None), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E": 4, "G": "two"},
+        {"A": 5, "B": "b", "E": 7, "G": "three"},
+        {"A": 6, "B": "b", "E": 8, "G": "four"},
+    ]],
     ["OuterJoinRule", ["A", "B"], None, (None, "_y"), [
         {"A": 1, "B": "b", "C": 10, "D": "test", "E": 3, "E_y": 3, "G": "one"},
         {"A": 2, "B": "b", "C": 10, "D": "test", "E": 4, "E_y": 4, "G": "two"},
@@ -63,6 +95,22 @@ RIGHT_DF_TYPES = {"A": "Int64", "B": "string", "E": "Int64", "G": "string"}
         {"A": 4, "B": "b", "C": 10, "D": "test", "E": 6},
         {"A": 5, "B": "b", "E_y": 7, "G": "three"},
         {"A": 6, "B": "b", "E_y": 8, "G": "four"},
+    ]],
+    ["OuterJoinRule", ["A", "B"], None, ("_x", "_y"), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E_y": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E_y": 4, "G": "two"},
+        {"A": 3, "B": "b", "C": 10, "D": "test", "E_x": 5},
+        {"A": 4, "B": "b", "C": 10, "D": "test", "E_x": 6},
+        {"A": 5, "B": "b", "E_y": 7, "G": "three"},
+        {"A": 6, "B": "b", "E_y": 8, "G": "four"},
+    ]],
+    ["OuterJoinRule", ["A", "B"], None, ("_x", None), [
+        {"A": 1, "B": "b", "C": 10, "D": "test", "E_x": 3, "E": 3, "G": "one"},
+        {"A": 2, "B": "b", "C": 10, "D": "test", "E_x": 4, "E": 4, "G": "two"},
+        {"A": 3, "B": "b", "C": 10, "D": "test", "E_x": 5},
+        {"A": 4, "B": "b", "C": 10, "D": "test", "E_x": 6},
+        {"A": 5, "B": "b", "E": 7, "G": "three"},
+        {"A": 6, "B": "b", "E": 8, "G": "four"},
     ]],
 ])
 def test_join_scenarios(rule_cls_str, key_columns_left, key_columns_right, suffixes, expected, backend):

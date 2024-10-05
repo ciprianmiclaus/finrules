@@ -72,12 +72,12 @@ class WriteCSVFileRule(WriteCSVFileRuleBase):
                 with zarch.open(fname_csv, "w") as zf:
                     df.write_csv(zf,
                         separator=self.separator,
-                        has_header=self.header,
+                        include_header=self.header,
                     )
         else:
             df.write_csv(file_path,
                 separator=self.separator,
-                has_header=self.header,
+                include_header=self.header,
             )
 
 

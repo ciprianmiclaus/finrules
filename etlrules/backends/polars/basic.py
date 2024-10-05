@@ -45,12 +45,14 @@ class ReplaceRule(ReplaceRuleBase, PolarsMixin):
         return old_val, new_val
 
     def do_apply(self, df, col):
+        if col.is_empty():
+            return col
         if self.regex:
             for old_val, new_val in zip(self.values, self.new_values):
                 old_val, new_val = self._get_old_new_regex(old_val, new_val)
                 col = col.str.replace(old_val, new_val)
         else:
-            col = col.map_dict(dict(zip(self.values, self.new_values)), default=pl.first())
+            col = col.replace(dict(zip(self.values, self.new_values)))
         return col
 
 

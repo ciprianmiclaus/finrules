@@ -26,6 +26,6 @@ class TypeConversionRule(TypeConversionRuleBase, PolarsMixin):
         if self.strict:
             try:
                 col.cast(MAP_TYPES[dtype], strict=self.strict)
-            except pl.exceptions.ComputeError as exc:
+            except (pl.exceptions.ComputeError, pl.exceptions.InvalidOperationError) as exc:
                 raise ValueError(str(exc))
         return col.cast(MAP_TYPES[dtype], strict=self.strict)

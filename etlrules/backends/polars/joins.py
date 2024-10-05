@@ -1,3 +1,5 @@
+import polars as pl
+
 from etlrules.backends.common.joins import (
     LeftJoinRule as LeftJoinRuleBase,
     RightJoinRule as RightJoinRuleBase,
@@ -7,6 +9,11 @@ from etlrules.backends.common.joins import (
 
 
 class JoinsMixin():
+
+    JOIN_TYPE_MAP = {
+        "outer": "full",
+    }
+
     def do_apply(self, left_df, right_df):
         return self.do_join(left_df, right_df, self.suffixes)
 
@@ -16,7 +23,7 @@ class JoinsMixin():
         common_cols = [col for col in left_df.columns if col in right_df.columns]
         df = left_df.join(
             right_df,
-            how=self.JOIN_TYPE,
+            how=self.JOIN_TYPE_MAP.get(self.JOIN_TYPE, self.JOIN_TYPE),
             left_on=left_on,
             right_on=right_on,
             suffix=suffix_right or "_right"
@@ -50,6 +57,22 @@ class InnerJoinRule(JoinsMixin, InnerJoinRuleBase):
 
 class OuterJoinRule(JoinsMixin, OuterJoinRuleBase):
     JOIN_TYPE = "outer"
+
+    def do_apply(self, left_df, right_df):
+        df = super().do_apply(left_df, right_df)
+        # polars creates two set of columns for the keys
+        # they need to be merged to replicate pandas behavior
+        left_on, right_on = self._get_key_columns()
+        common_keys = [left for left in left_on if left in right_on]
+        if common_keys:
+            suffix_left, suffix_right = self.suffixes
+            suffix_left = suffix_left or ""
+            suffix_right = suffix_right or "_right"
+            df = df.with_columns(
+                *[pl.col(col).fill_null(pl.col(col + suffix_right)) for col in common_keys]
+            )
+            df = df.drop(*[col + suffix_right for col in common_keys])
+        return df
 
 
 class RightJoinRule(JoinsMixin, RightJoinRuleBase):

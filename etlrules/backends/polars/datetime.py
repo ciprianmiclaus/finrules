@@ -33,16 +33,14 @@ class DateTimeRoundRule(PolarsMixin, DateTimeRoundRuleBase):
     def do_apply(self, df, series):
         offset = "-1ns" if self.unit == "microsecond" else "-1us"
         return series.dt.offset_by(offset).dt.round(
-            every=ROUND_TRUNC_UNITS_MAPPED[self.unit],
-            ambiguous='infer'
+            every=ROUND_TRUNC_UNITS_MAPPED[self.unit]
         )
 
 
 class DateTimeRoundDownRule(PolarsMixin, DateTimeRoundDownRuleBase):
     def do_apply(self, df, series):
         return series.dt.truncate(
-            every=ROUND_TRUNC_UNITS_MAPPED[self.unit],
-            ambiguous='earliest'
+            every=ROUND_TRUNC_UNITS_MAPPED[self.unit]
         )
 
 
@@ -50,8 +48,7 @@ class DateTimeRoundUpRule(PolarsMixin, DateTimeRoundUpRuleBase):
 
     def do_apply(self, df, series):
         return series.dt.offset_by(ROUND_TRUNC_UNITS_MAPPED[self.unit]).dt.offset_by("-1us").dt.truncate(
-            every=ROUND_TRUNC_UNITS_MAPPED[self.unit],
-            ambiguous='earliest'
+            every=ROUND_TRUNC_UNITS_MAPPED[self.unit]
         )
 
 
@@ -149,10 +146,10 @@ def dt_adjust_weekends(dt_col, offset, strict=True):
     if not is_scalar(offset):
         offset = offset.cast(pl.Int64).fill_null(0)
         # -1 -> 0 | 0, 1 -> 3
-        offset = ((offset // offset.map_dict({0: 1}, default=offset).abs() + 1) // 2) * 3
-        dt_col_weekend_offset = weekdays.map_dict(FOLL_MONDAY_ADJ_WEEKEND_OFFSETS, default=weekdays) - offset
+        offset = ((offset // offset.replace({0: 1}, default=offset).abs() + 1) // 2) * 3
+        dt_col_weekend_offset = weekdays.replace(FOLL_MONDAY_ADJ_WEEKEND_OFFSETS, default=weekdays) - offset
     else:
-        dt_col_weekend_offset = weekdays.map_dict(FOLL_MONDAY_ADJ_WEEKEND_OFFSETS if offset < 0 else PREV_FRIDAY_ADJ_WEEKEND_OFFSETS, default=weekdays)
+        dt_col_weekend_offset = weekdays.replace(FOLL_MONDAY_ADJ_WEEKEND_OFFSETS if offset < 0 else PREV_FRIDAY_ADJ_WEEKEND_OFFSETS, default=weekdays)
     dt_col_weekend_offset = dt_col_weekend_offset.fill_null(0)
     return dt_col + pl.duration(days=dt_col_weekend_offset)
 
@@ -166,12 +163,7 @@ def business_day_offset(dt_col, offset, strict=True):
     col = (dt_col2.dt.weekday().cast(pl.Int64) - 1).fill_null(0)
     col2 =  col + offset
     col3 = (
-        (col2 // 5) * 7 + (
-            pl.when(col2 < 0).then(
-                pl.when(
-                    col2.mod(5) == 0
-                ).then(0).otherwise(5 + col2.mod(5))
-            ).otherwise(col2.mod(5)))
+        (col2 // 5) * 7 + col2.mod(5)
     ) - col
     return dt_col2 + pl.duration(days=col3)
 
@@ -187,11 +179,7 @@ def months_offset(dt_col, offset, strict=True):
     df = year.to_frame(name="year")
     df = df.with_columns(
         month=(
-            pl.when(offset < 0).then(
-                pl.when(
-                    offset % 12 == 0
-                ).then(0).otherwise(12 + offset % 12)
-            ).otherwise(offset % 12)
+            offset % 12
         ) + 1,
         day=dt_col.dt.day(),
         hour=dt_col.dt.hour(),
@@ -200,7 +188,7 @@ def months_offset(dt_col, offset, strict=True):
         microsecond=dt_col.dt.microsecond(),
     )
     df = df.with_columns(
-        max=df["month"].map_dict({
+        max=df["month"].replace({
             1: 31, 2: 29, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31
         }, default=df["month"]),
     )
@@ -311,12 +299,12 @@ class DateTimeSubstractRule(PolarsMixin, DateTimeSubstractRuleBase):
 class DateTimeDiffRule(PolarsMixin, DateTimeDiffRuleBase):
 
     COMPONENTS = {
-        "days": ("days", None),
-        "hours": ("hours", 24),
-        "minutes": ("minutes", 60),
-        "seconds": ("seconds", 60),
-        "microseconds": ("microseconds", 1000),
-        "total_seconds": ("seconds", None),
+        "days": ("total_days", None),
+        "hours": ("total_hours", 24),
+        "minutes": ("total_minutes", 60),
+        "seconds": ("total_seconds", 60),
+        "microseconds": ("total_microseconds", 1000),
+        "total_seconds": ("total_seconds", None),
     }
 
     def do_apply(self, df, col):

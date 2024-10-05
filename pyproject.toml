@@ -28,13 +28,13 @@ dependencies = [
 
 [project.optional-dependencies]
 polars = [
-    "polars==0.19.12",
-    #"polars-lts-cpu==0.19.12",
+    "polars>1",
+    #"polars-lts-cpu>1",
 ]
 
 dask = [
     "aiohttp",
-    "dask==2023.11.0",
+    "dask",
     "requests"
 ]
 
